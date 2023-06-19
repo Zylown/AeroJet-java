@@ -7,28 +7,29 @@
       >
     <h:head>
         <h:outputStylesheet library="styles" name="style.css"></h:outputStylesheet>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
-        <link rel="shortcut icon" href="resources/img/airplane-black-glyph-icon-flight-2239097-transformed.ico"/>
-        <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-        <title>AeroJet</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
+            <link rel="shortcut icon" href="resources/img/airplane-black-glyph-icon-flight-2239097-transformed.ico"/>
+            <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+            <title>AeroJet</title>
+            <link rel="stylesheet" type="text/css" href="/AeroJet-Java/faces/jsfcrud.css" />
     </h:head>
     <h:body>
         <header>
             <img src="resources/img/logo.png" alt="Logo" class="logo"></img>
-        <nav id="menu-inicio">
-            <a href="#menu-inicio">Inicio</a>
-            <a href="pages/destinos.html">Destinos</a>
-            <a href="pages/checkin.html">Check-in</a>
-            <a href="pages/adm-viajes/admvuelo.html">Administra tus viajes</a>
-            <a href="#contact">Contacto</a>
-        </nav>
-        <a href="pages/loginregister.html" class="login">Iniciar sesión / Registrarse</a>
+            <nav id="menu-inicio">
+                <a href="#menu-inicio">Inicio</a>
+                <a href="/AeroJet-Java/faces/resources/pages/destinos.xhtml">Destinos</a>
+                <a href="pages/checkin.html">Check-in</a>
+                <a href="pages/adm-viajes/admvuelo.html">Administra tus viajes</a>
+                <a href="#contact">Contacto</a>
+            </nav>
+            <a href="/AeroJet-Java/faces/resources/pages/loginregister.xhtml" class="login">Iniciar sesión / Registrarse</a>
         </header>
         <main>
             <div class="search">
                 <h1>Busca tu vuelo</h1>
-            <h:form class="formulario">
+                <h:form class="formulario">
                     <fieldset>
                         <h:selectOneRadio styleClass="input-radio" id="tramo" value="#{bean.tramo}">
                             <f:selectItem  itemValue="Ida y Vuelta" itemLabel="Ida y Vuelta"/>
@@ -39,15 +40,16 @@
                     <div class="contenedor-inputs">
                         <div class="contenedor-filas-search">
                             <div class="filas-search">
-                            <h:selectOneMenu styleClass="" id="seleccion-origen" value="#{aeropuerto_data.init()}">
+                                #{aeropuerto_data.init()}
+                                <h:selectOneMenu styleClass="" id="seleccion-origen" value="#{aeropuerto_data.aeropuertos}">
                                     <f:selectItem itemValue=" " itemLabel="Selecciona un origen" />
                                     <f:selectItems value="#{aeropuerto_data.aeropuertos}" var="aeropuertos" itemValue="#{aeropuertos.id}"
-                                    itemLabel="#{aeropuerto_data.obtenerEtiquetaAeropuerto(aeropuertos)}"/>
-                            </h:selectOneMenu>
-                            <h:selectOneMenu id="seleccion-destino" value="#{bean.destino}">
-                                <f:selectItem itemValue=" " itemLabel="Selecciona un destino"/>
-                                <f:selectItems value="#{bean.listaDestinos}" var="origen" itemValue="#{destino.value}" itemLabel="#{destino.label}" />
-                            </h:selectOneMenu>
+                                                   itemLabel="#{aeropuerto_data.obtenerEtiquetaAeropuerto(aeropuertos)}"/>
+                                </h:selectOneMenu>
+                                <h:selectOneMenu id="seleccion-destino" value="#{bean.destino}">
+                                    <f:selectItem itemValue=" " itemLabel="Selecciona un destino"/>
+                                    <f:selectItems value="#{bean.listaDestinos}" var="origen" itemValue="#{destino.value}" itemLabel="#{destino.label}" />
+                                </h:selectOneMenu>
                             </div>
                             <div class="filas-search">
                                 <p:datePicker styleClass="input-calendario" id="fechaIda" value="#{bean.fechaIda}" placeholder="Fecha de ida" required="true" />
@@ -55,50 +57,50 @@
                                               disabled="#{bean.tramo eq 'Solo Ida'}"/>
                             </div>
                             <div class="filas-search">
-                            <h:selectOneMenu required="true">
+                                <h:selectOneMenu required="true">
                                     <f:selectItem itemLabel="Pasajeros" itemValue="" />
                                     <f:selectItem itemLabel="1" itemValue="1-pasaje" />
                                     <f:selectItem itemLabel="2" itemValue="2-pasaje" />
                                     <f:selectItem itemLabel="3" itemValue="3-pasaje" />
-                            </h:selectOneMenu>
-                            <h:selectOneMenu required="true">
+                                </h:selectOneMenu>
+                                <h:selectOneMenu required="true">
                                     <f:selectItem itemLabel="Selecciona una opción" itemValue="" />
                                     <f:selectItem itemLabel="Clase Económica" itemValue="Clase Económica" />
                                     <f:selectItem itemLabel="Clase Ejecutiva" itemValue="Clase Ejecutiva" />
                                     <f:selectItem itemLabel="Primera Clase" itemValue="Primera Clase" />
-                            </h:selectOneMenu>
+                                </h:selectOneMenu>
                             </div>
                         </div>
                     </div>
-                <div class="filas-search">
-                    <h:commandButton styleClass="btnBuscar" value="Buscar" action="#{bean.buscarVuelo}"/>
-                </div>
-             </h:form>     
+                    <div class="filas-search">
+                        <h:commandButton styleClass="btnBuscar" value="Buscar" action="#{bean.buscarVuelo}"/>
+                    </div>
+                </h:form>     
             </div>
-        <div class="slider-frame">
-            <ul>
-                <li><img class="img1" src="resources/img/slider/PicsArt_lima.jpg" alt=""></img></li>
-                <li><img class="img2" src="resources/img/slider/PicsArt_condor.jpg" alt=""></img></li>
-                <li><img class="img3" src="resources/img/slider/mountain-colorada-5335886_1280.jpg" alt=""></img></li>
-                <li><img class="img4" src="resources/img/slider/pexels-viajante-dibujero.jpg" alt=""></img></li>
-            </ul>
-        </div>
-    </main>
-        
+            <div class="slider-frame">
+                <ul>
+                    <li><img class="img1" src="resources/img/slider/PicsArt_lima.jpg" alt=""></img></li>
+                    <li><img class="img2" src="resources/img/slider/PicsArt_condor.jpg" alt=""></img></li>
+                    <li><img class="img3" src="resources/img/slider/mountain-colorada-5335886_1280.jpg" alt=""></img></li>
+                    <li><img class="img4" src="resources/img/slider/pexels-viajante-dibujero.jpg" alt=""></img></li>
+                </ul>
+            </div>
+        </main>
+
         <section id="promos" class="promociones">
-        <h1>Promociones de Destino</h1>
-        <div class="card1">
-            <div class="content">
-                <h2>Cuzco</h2>
-                <a href="#">Ver Detalles</a>
+            <h1>Promociones de Destino</h1>
+            <div class="card1">
+                <div class="content">
+                    <h2>Cuzco</h2>
+                    <a href="#">Ver Detalles</a>
+                </div>
             </div>
-        </div>
-        <div class="card2">
-            <div class="content">
-                <h2>Trujillo</h2>
-                <a href="#">Ver Detalles</a>
+            <div class="card2">
+                <div class="content">
+                    <h2>Trujillo</h2>
+                    <a href="#">Ver Detalles</a>
+                </div>
             </div>
-        </div>
             <div class="card3">
                 <div class="content">
                     <h2>Máncora</h2>
@@ -107,7 +109,7 @@
             </div>
         </section>
         <div class="metodo-pago">
-                <h2>Métodos de Pago</h2>
+            <h2>Métodos de Pago</h2>
             <div class="debito">
                 <img src="resources/img/promociones/img-medios-de-pago-09.jpg"></img>
                 <small>Tarjetas de Débito</small>
@@ -125,76 +127,76 @@
                 <small>Pago en efectivo</small>
             </div>
         </div>
-        
-    <section class="container">
-        <div id="contact" class="contacto">
-            <h2>Contáctanos</h2>
-            <p>Estamos para ayudarte. Escríbenos un mensaje y te responderemos lo antes posible.</p>
-        </div>
-        <div class="row">
-            <div class="column">
-                <img src="resources/img/social-media.png" alt="Banner"></img>
+
+        <section class="container">
+            <div id="contact" class="contacto">
+                <h2>Contáctanos</h2>
+                <p>Estamos para ayudarte. Escríbenos un mensaje y te responderemos lo antes posible.</p>
             </div>
-            <div class="column">
-                <form id="myForm">
-                    <label for="nombre">Nombre</label>
-                    <p:inputText id="input-formulario-contactanos-nombre" placeholder="Tu nombre"></p:inputText>
-                    
-                    <label for="nombre">Correo electrónico</label>
-                    <p:inputText id="input-formulario-contactanos-correo" placeholder="correo@dominio.com"></p:inputText>
-                    
-                    <label for="nombre">Teléfono</label>
-                    <p:inputText id="input-formulario-contactanos-telefono" placeholder="Tu nombre"
-                                 maxlength="9" title="Ingresa un número de teléfono válido de 10 dígitos."></p:inputText>
-                    
-                    <label for="asunto">Asunto</label>
-                    <h:selectOneMenu id="input-formulario-contactanos-asunto" required="true">
+            <div class="row">
+                <div class="column">
+                    <img src="resources/img/social-media.png" alt="Banner"></img>
+                </div>
+                <div class="column">
+                    <form id="myForm">
+                        <label for="nombre">Nombre</label>
+                        <p:inputText id="input-formulario-contactanos-nombre" placeholder="Tu nombre"></p:inputText>
+
+                            <label for="nombre">Correo electrónico</label>
+                        <p:inputText id="input-formulario-contactanos-correo" placeholder="correo@dominio.com"></p:inputText>
+
+                            <label for="nombre">Teléfono</label>
+                        <p:inputText id="input-formulario-contactanos-telefono" placeholder="Tu nombre"
+                                     maxlength="9" title="Ingresa un número de teléfono válido de 10 dígitos."></p:inputText>
+
+                            <label for="asunto">Asunto</label>
+                        <h:selectOneMenu id="input-formulario-contactanos-asunto" required="true">
                             <f:selectItem itemLabel="Selecciona una opción" itemValue="" />
                             <f:selectItem itemLabel="Aclaraciones" itemValue="option-aclaraciones" />
                             <f:selectItem itemLabel="Facturación" itemValue="option-facturacion" />
                             <f:selectItem itemLabel="Otro" itemValue="option-otro" />
-                    </h:selectOneMenu>
-                    <label for="mensaje">Mensaje</label>
-                    <p:inputTextarea id="input-formulario-contactanos-mensaje" value="#{bean.mensaje}"
-                                     placeholder="Déjanos un mensaje"></p:inputTextarea>
-                    <h:commandButton value="Buscar" action="#{bean.enviarFormulario}"/>
-                </form>
-                <div id="myModal" class="modal">
-                    <div class="modal-content">
-                        <p>Formulario enviado correctamente</p>
-                        <span class="close">U+00D7;</span>
+                        </h:selectOneMenu>
+                        <label for="mensaje">Mensaje</label>
+                        <p:inputTextarea id="input-formulario-contactanos-mensaje" value="#{bean.mensaje}"
+                                         placeholder="Déjanos un mensaje"></p:inputTextarea>
+                        <h:commandButton value="Buscar" action="#{bean.enviarFormulario}"/>
+                    </form>
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <p>Formulario enviado correctamente</p>
+                            <span class="close">U+00D7;</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-        
-     <footer class="pie-pagina">
-        <div class="grupo-1">
-            <div class="box">
-                <figure>
-                    <a href="index.html">
-                        <img src="resources/img/logo.png" alt="Logo de AeroJet"></img>
-                    </a>
-                </figure>
-            </div>
-            <div class="box">
-                <h2>Con Nosotros</h2>
-                <p>Tu mejor opción para vuelos nacionales en Perú, con calidad y atención inigualables.</p>
-                <p>Vuelos nacionales en Perú con estilo, seguridad y servicio excepcional.</p>
-            </div>
-            <div class="box">
-                <h2>Síguenos</h2>
-                <div class="red-social">
-                    <a href="#"><box-icon name='facebook' type='logo' color='#ffffff'></box-icon></a>
-                    <a href="#"><box-icon name='instagram' type='logo' color='#ffffff'></box-icon></a>
-                    <a href="#"><box-icon name='twitter' type='logo' color='#ffffff'></box-icon></a>
+        </section>
+
+        <footer class="pie-pagina">
+            <div class="grupo-1">
+                <div class="box">
+                    <figure>
+                        <a href="index.html">
+                            <img src="resources/img/logo.png" alt="Logo de AeroJet"></img>
+                        </a>
+                    </figure>
+                </div>
+                <div class="box">
+                    <h2>Con Nosotros</h2>
+                    <p>Tu mejor opción para vuelos nacionales en Perú, con calidad y atención inigualables.</p>
+                    <p>Vuelos nacionales en Perú con estilo, seguridad y servicio excepcional.</p>
+                </div>
+                <div class="box">
+                    <h2>Síguenos</h2>
+                    <div class="red-social">
+                        <a href="#"><box-icon name='facebook' type='logo' color='#ffffff'></box-icon></a>
+                        <a href="#"><box-icon name='instagram' type='logo' color='#ffffff'></box-icon></a>
+                        <a href="#"><box-icon name='twitter' type='logo' color='#ffffff'></box-icon></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="grupo-2">
-            <small>&#xa9; 2023 <b>AeroJet</b> - Todos los Derechos Reservados</small>
-        </div>
-    </footer>
+            <div class="grupo-2">
+                <small>&#xa9; 2023 <b>AeroJet</b> - Todos los Derechos Reservados</small>
+            </div>
+        </footer>
     </h:body>
 </html>

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package beans.conexion;
 
 import java.io.Serializable;
@@ -18,10 +14,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author Unknown
- */
 @Entity
 @Table(name = "usuario")
 @NamedQueries({
@@ -45,7 +37,22 @@ public class Usuario implements Serializable {
     private String contraseña;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Cliente cliente;
+/*
+    public Usuario(Integer id, String nombreUsuario, String contraseña, Cliente cliente) {
+        this.id = id;
+        this.nombreUsuario = nombreUsuario;
+        this.contraseña = contraseña;
+        this.cliente = cliente;
+    }*/
 
+    public Usuario(Integer id, String nombreUsuario, String contraseña) {
+        this.id = id;
+        this.nombreUsuario = nombreUsuario;
+        this.contraseña = contraseña;
+    }
+    
+    
+    
     public Usuario() {
     }
 

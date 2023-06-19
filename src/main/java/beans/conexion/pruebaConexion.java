@@ -1,6 +1,7 @@
 package beans.conexion;
 
 import Servicios.AeropuertoService;
+import Servicios.UsuarioService;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import beans.modelo.aeropuerto_data;
+import beans.modelo.usuario_data;
 
 
 public class pruebaConexion {
@@ -17,11 +19,15 @@ public class pruebaConexion {
     private static final String DB_PASSWORD = "";*/
     
     public static void main(String[] args) {
-        aeropuerto_data aeropuertos = new aeropuerto_data();
+        /*aeropuerto_data aeropuertos = new aeropuerto_data();
         
-        aeropuertos.init();
-        aeropuertos.getAeropuertos();
-        aeropuertos.getListadoAeropuerto();
+        
+        aeropuertos.init();*/
+        
+        
+        usuario_data usuarios = new usuario_data();
+        //usuarios.validarCuentaConsola();
+        
     /*AeropuertoService aeropuertoService = new AeropuertoService();
     List<Aeropuerto> aeropuertos = aeropuertoService.getAllAeropuertos();
     

@@ -49,8 +49,8 @@ public class aeropuerto_data implements Serializable{
         return aeropuertos;
     }
 
-    @PostConstruct
-    public void init() {
+@PostConstruct
+public void init() {
         aeropuertoService = new AeropuertoService();
         aeropuertos = aeropuertoService.getAllAeropuertos();
         
@@ -69,9 +69,9 @@ public class aeropuerto_data implements Serializable{
         System.out.println("Capacidad: " + aeropuerto.getCapacidad());
         System.out.println("-----------------------");
     }
-    }
-     
-    public List<Aeropuerto> getListadoAeropuerto(){
+}
+     /*
+public List<Aeropuerto> getListadoAeropuerto(){
         
     for (Aeropuerto aeropuerto : aeropuertos) {
         System.out.println("ID: " + aeropuerto.getId());
@@ -91,5 +91,5 @@ public class aeropuerto_data implements Serializable{
         
         return aeropuertoService.getAllAeropuertos();
         
-    }
+    }*/
 }

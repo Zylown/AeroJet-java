@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package beans.conexion;
 
 import java.io.Serializable;
@@ -22,10 +18,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author Unknown
- */
+
 @Entity
 @Table(name = "cliente")
 @NamedQueries({
@@ -77,6 +70,21 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "clienteID")
     private Collection<Comentarios> comentariosCollection;
 
+    public Cliente(Integer id, String nombre, String apellido, Integer dni, Integer telefono, String genero, Date fechaNacimiento, String nacionalidad, String correoElectronico, Usuario usuario) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.genero = genero;
+        this.fechaNacimiento = fechaNacimiento;
+        this.nacionalidad = nacionalidad;
+        this.correoElectronico = correoElectronico;
+        this.usuario = usuario;
+    }
+
+    
+    
     public Cliente() {
     }
 
