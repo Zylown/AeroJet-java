@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Listado de Usuarios</title>
+        <h:outputStylesheet library="styles" name="prueba.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <h:dataTable value="#{usuarios_data.listadoUsuarios}" var="data" 
+                     styleClass="tabla-usuarios" 
+                     headerClass="header-usuarios"
+                     columnClasses="columna-usuarios"
+                     rowClasses="fila-usuarios"
+                     >
+            <h:column>
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputLabel value="#{data.nombre}"></h:outputLabel>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Correo</f:facet>
+                <h:outputLabel value="#{data.correo}"></h:outputLabel>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Contraseña</f:facet>
+                <h:outputLabel value="#{data.password}"></h:outputLabel>
+            </h:column>
+        </h:dataTable>
+    </h:body>
+</html>
