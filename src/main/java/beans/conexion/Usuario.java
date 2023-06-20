@@ -35,6 +35,10 @@ public class Usuario implements Serializable {
     @Size(max = 50)
     @Column(name = "Contrase\u00f1a")
     private String contraseña;
+    @Size(max = 255)
+    @Column(name = "email")
+    private String email;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Cliente cliente;
 /*
@@ -45,12 +49,12 @@ public class Usuario implements Serializable {
         this.cliente = cliente;
     }*/
 
-    public Usuario(Integer id, String nombreUsuario, String contraseña) {
+    public Usuario(Integer id, String nombreUsuario, String contraseña,String email) {
         this.id = id;
         this.nombreUsuario = nombreUsuario;
         this.contraseña = contraseña;
+        this.email = email;
     }
-    
     
     
     public Usuario() {
@@ -92,6 +96,16 @@ public class Usuario implements Serializable {
         this.cliente = cliente;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -23,9 +23,20 @@ public class pruebaConexion {
         
         
         aeropuertos.init();*/
+        //usuario_data usuarios = new usuario_data();
         
         
-        usuario_data usuarios = new usuario_data();
+        UsuarioService usuarioService = new UsuarioService();
+
+        Usuario usuario = new Usuario();
+        usuario.setNombreUsuario("nombreUsuario");
+        usuario.setContraseña("contraseña");
+        usuario.setEmail("correo@example.com");
+
+        //usuarioService.insertarUsuario(usuario);
+        System.out.println("Usuario insertado correctamente en la base de datos.");
+    
+        //usuarios.init();
         //usuarios.validarCuentaConsola();
         
     /*AeropuertoService aeropuertoService = new AeropuertoService();

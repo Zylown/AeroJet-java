@@ -26,8 +26,9 @@ public class UsuarioService {
             int id = rs.getInt("id");
             String nombreUsuario = rs.getString("nombreUsuario");
             String password = rs.getString("Contraseña");
+            String correo = rs.getString("email");
             
-            Usuario usuario = new Usuario(id, nombreUsuario, password);
+            Usuario usuario = new Usuario(id, nombreUsuario, password,correo);
             usuarios.add(usuario);
         }
         
@@ -38,4 +39,22 @@ public class UsuarioService {
         }
         return usuarios;
     }
+    
+public void insertarUsuario(String nombreUsuario, String contraseña, String email) {
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement stmt = conn.prepareStatement("INSERT INTO usuario (nombreUsuario, Contraseña, email) VALUES (?, ?, ?)")) {
+        
+        stmt.setString(1, nombreUsuario);
+        stmt.setString(2, contraseña);
+        stmt.setString(3, email);
+        
+        stmt.executeUpdate();
+        
+    } catch (SQLException e) {
+        // Manejo de excepciones
+        e.printStackTrace();
+        System.out.println("Error al insertar usuario en la base de datos: " + e.getMessage());
+    }
+}
+    
 }

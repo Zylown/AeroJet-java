@@ -12,7 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-@ManagedBean(name = "usuario_data")
+@ManagedBean(name = "usuario_data", eager = true)
 @ViewScoped
 public class usuario_data implements Serializable{
     
@@ -20,8 +20,10 @@ public class usuario_data implements Serializable{
     private UsuarioService usuarioService;
     private String nombreUsuario;
     private String password;
+    private String email;
     
     public usuario_data() {
+        usuarioService = new UsuarioService();
     }
 
     public List<Usuario> getUsuarios() {
@@ -44,6 +46,15 @@ public class usuario_data implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
 
 public void validarCuenta(String nombreUsuario, String contraseña) throws IOException {
     boolean cuentaValida = false;
@@ -70,6 +81,21 @@ public void validarCuenta(String nombreUsuario, String contraseña) throws IOExc
     }
 }
 
+public void registrar(String nombreUsuario, String contraseña, String email) throws IOException {
+    Usuario nuevoUsuario = new Usuario();
+    nuevoUsuario.setNombreUsuario(nombreUsuario);
+    nuevoUsuario.setContraseña(contraseña);
+    nuevoUsuario.setEmail(email);
+    
+    // Aquí puedes llamar a tu servicio de UsuarioService y utilizar un método para insertar el nuevo usuario en la base de datos
+    usuarioService.insertarUsuario(nombreUsuario, contraseña, email);
+    
+    // Otras acciones después del registro, como mostrar un mensaje de éxito o redirigir a otra página
+    FacesContext.getCurrentInstance().addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro exitoso", null));
+    // Redirigir a otra página
+    // FacesContext.getCurrentInstance().getExternalContext().redirect("otra_pagina.xhtml");
+}
+
 /*
 public void validarCuentaConsola() {
     Scanner scanner = new Scanner(System.in);
@@ -87,11 +113,12 @@ public void init() {
         usuarioService = new UsuarioService();
         usuarios = usuarioService.getAllUsuario();
         
-        for (Usuario usuario : usuarios) {
+        /*for (Usuario usuario : usuarios) {
         System.out.println("ID: " + usuario.getId());
         System.out.println("Nombre: " + usuario.getNombreUsuario());
-        System.out.println("Ciudad: " + usuario.getContraseña());
+        System.out.println("Contraseña: " + usuario.getContraseña());
+        System.out.println("Correo: " + usuario.getEmail());
         System.out.println("-----------------------");
-    }
+    }*/
 }
 }

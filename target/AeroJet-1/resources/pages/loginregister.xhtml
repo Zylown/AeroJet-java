@@ -11,7 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <link rel="shortcut icon" href="resources/img/airplane-black-glyph-icon-flight-2239097-transformed.ico"/>
         <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-        <title>AeroJet</title>
+        <title>AeroJet: Cuentas</title>
     </h:head>
     <h:body>
         <header>
@@ -52,23 +52,23 @@
             <h:form>
                 <div class="input-box">
                     <span class="icon">
-                        <box-icon name='user'></box-icon>
+                        <box-icon type='solid' name='envelope'></box-icon>
                     </span>
-                    <h:inputText required="true"></h:inputText>
-                    <h:outputLabel value="Usuario"></h:outputLabel>
+                    <h:inputText value="#{usuario_data.email}" required="true"></h:inputText>
+                    <h:outputLabel value="Email"></h:outputLabel>
                 </div>
                 <div class="input-box">
                     <span class="icon">
-                        <box-icon type='solid' name='envelope'></box-icon>
+                        <box-icon name='user'></box-icon>
                     </span>
-                    <h:inputText required="true"></h:inputText>
-                    <h:outputLabel value="Email"></h:outputLabel>
+                    <h:inputText value="#{usuario_data.nombreUsuario}" required="true"></h:inputText>
+                    <h:outputLabel value="Usuario"></h:outputLabel>
                 </div>
                 <div class="input-box">
                     <span class="icon">
                         <box-icon type='solid' name='lock-alt'></box-icon>
                     </span>
-                    <h:inputSecret required="true"></h:inputSecret>
+                    <h:inputSecret value="#{usuario_data.password}" required="true"></h:inputSecret>
                     <h:outputLabel value="Contraseña"></h:outputLabel>
                 </div>
                 <div class="terminos">
@@ -77,7 +77,8 @@
                         Acepto los términos y condiciones
                     </label>
                 </div>
-                <h:commandButton value="Registrarse" styleClass="btn-login" />
+                <h:commandButton value="Registrarse" action="#{usuario_data.registrar(usuario_data.nombreUsuario,usuario_data.password,usuario_data.email)}" styleClass="btn-login" />
+                <h:messages styleClass="error-messages"/>
                 <div class="login-register">
                     <p>¿Ya tienes una cuenta?<a href="#" class="login-link"> Iniciar Sesión</a></p>
                 </div>
