@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,13 +43,19 @@ public class UsuarioService {
     
 public void insertarUsuario(String nombreUsuario, String contraseña, String email) {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-         PreparedStatement stmt = conn.prepareStatement("INSERT INTO usuario (nombreUsuario, Contraseña, email) VALUES (?, ?, ?)")) {
+         Statement stmt = conn.createStatement()) {
         
-        stmt.setString(1, nombreUsuario);
-        stmt.setString(2, contraseña);
-        stmt.setString(3, email);
+        ResultSet rs = stmt.executeQuery("SELECT MAX(ID) FROM usuario");
+        int ultimoID = rs.next() ? rs.getInt(1) : 0;
+        int nuevoID = ultimoID + 1;
         
-        stmt.executeUpdate();
+        PreparedStatement pstmt = conn.prepareStatement("INSERT INTO usuario (ID, nombreUsuario, Contraseña, email) VALUES (?, ?, ?, ?)");
+        pstmt.setInt(1, nuevoID);
+        pstmt.setString(2, nombreUsuario);
+        pstmt.setString(3, contraseña);
+        pstmt.setString(4, email);
+        
+        pstmt.executeUpdate();
         
     } catch (SQLException e) {
         // Manejo de excepciones
@@ -56,5 +63,6 @@ public void insertarUsuario(String nombreUsuario, String contraseña, String ema
         System.out.println("Error al insertar usuario en la base de datos: " + e.getMessage());
     }
 }
+
     
 }
