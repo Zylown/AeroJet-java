@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Tabla Bancos</title>
+    </h:head>
+    <h:body>
+        
+        
+        <h:form>
+            <p:commandButton value="Agregar Banco" actionListener="#{bancoControl.limpiarBanco()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+            <p:separator/>
+        </h:form>
+        
+        <h:form id="formListado">
+             <p:dataTable id="tablaBancos" paginator="true" paginatorPosition="bottom" rows="10" var="banco" value="#{bancoControl.listaBancos}" emptyMessage="No existen bancos">
+                            <p:column headerText="ID banco">
+                                <h:outputText value="#{banco.idBanco}" />
+                            </p:column>
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{banco.nombre}" />
+                            </p:column>
+                            
+                            <p:column headerText="MODIFICAR" style="text-align: center">
+                                <p:commandButton icon="ui-icon-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
+                                    <f:setPropertyActionListener target="#{bancoControl.banco}" value="#{banco}"/>
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="ELIMINAR" style="text-align: center">
+                                <p:commandButton icon="ui-icon-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
+                                    <f:setPropertyActionListener target="#{bancoControl.banco}" value="#{banco}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+        </h:form>
+        
+        
+        <h:form id="formAgregar">
+                        <p:dialog id="dlgAgregar" header="Agregar Banco" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+                            <p:panelGrid columns="2" style="margin: 0 auto;">                                
+                                <p:outputLabel value="Banco:"/>
+                                <p:inputText value="#{bancoControl.banco.nombre}"/>
+                            </p:panelGrid>
+                            <p:commandButton  value="Guardar" actionListener="#{bancoControl.agregarBanco()}" update=":formListado:tablaBancos" oncomplete="PF('dialogoAgregar').hide();"/>
+                            <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
+                        </p:dialog>
+        </h:form>
+
+        <h:form id="formModificar">
+                        <p:dialog id="dlgModificar" header="Modificar Banco" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+                            <p:panelGrid columns="2" style="margin: 0 auto;">                                
+                                <p:outputLabel value="Banco:"/>
+                                <p:inputText value="#{bancoControl.banco.nombre}"/>
+                                
+                            </p:panelGrid>
+                            <p:commandButton  value="Guardar" actionListener="#{bancoControl.modificarBanco()}" update=":formListado:tablaBancos" oncomplete="PF('dialogoModificar').hide();"/>
+                            <p:commandButton  value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
+                        </p:dialog>
+        </h:form>
+
+        <h:form id="formEliminar">
+                        <p:dialog id="dlgEliminar" header="Eliminar Banco" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+                            <h:outputText value="Desea eliminar este registro?"/>
+                            <p:commandButton  value="Si" actionListener="#{bancoControl.eliminarBanco()}" update=":formListado:tablaBancos" oncomplete="PF('dialogoEliminar').hide();"/>
+                            <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
+                        </p:dialog>
+        </h:form>
+        
+    </h:body>
+</html>
+
