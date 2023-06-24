@@ -48,7 +48,8 @@
                                 </h:selectOneMenu>
                                 <h:selectOneMenu id="seleccion-destino" value="#{bean.destino}">
                                     <f:selectItem itemValue=" " itemLabel="Selecciona un destino"/>
-                                    <f:selectItems value="#{bean.listaDestinos}" var="origen" itemValue="#{destino.value}" itemLabel="#{destino.label}" />
+                                    <f:selectItems value="#{aeropuerto_data.aeropuertos}" var="aeropuertos" itemValue="#{aeropuertos.id}"
+                                                   itemLabel="#{aeropuerto_data.obtenerEtiquetaAeropuerto(aeropuertos)}"/>
                                 </h:selectOneMenu>
                             </div>
                             <div class="filas-search">

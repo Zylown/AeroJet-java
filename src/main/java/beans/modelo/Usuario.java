@@ -104,8 +104,6 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 0;

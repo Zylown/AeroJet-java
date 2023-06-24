@@ -17,12 +17,23 @@ import javax.faces.context.FacesContext;
 public class usuario_data implements Serializable{
     
     private List<Usuario> usuarios;
+    private Usuario user;
     private UsuarioService usuarioService;
     private String nombreUsuario;
     private String password;
     private String email;
     private Usuario usuarioSeleccionado; // Nueva propiedad para almacenar el usuario seleccionado
     private int id;
+    //PRUEBA
+    private int selectedUserId;
+
+    public int getSelectedUserId() {
+        return selectedUserId;
+    }
+
+    public void setSelectedUserId(int selectedUserId) {
+        this.selectedUserId = selectedUserId;
+    }
 
     public int getId() {
         return id;
@@ -31,13 +42,25 @@ public class usuario_data implements Serializable{
     public void setId(int id) {
         this.id = id;
     }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
     
     
     
     public Usuario getUsuarioSeleccionado() {
         return usuarioSeleccionado;
     }
-        
+
+    public void setUsuarioSeleccionado(Usuario usuarioSeleccionado) {
+        this.usuarioSeleccionado = usuarioSeleccionado;
+    }
+    
     public usuario_data() {
         usuarioService = new UsuarioService();
     }
@@ -140,8 +163,11 @@ public void actualizarUsuario(int id, String nombreUsuario, String contraseña, 
 }
 
 
-public void eliminarUsuario(int id) {
-    usuarioService.eliminarUsuario(id);
+public void eliminarUsuario(int idn) {
+    UsuarioService serviceUser = new UsuarioService();
+    serviceUser.eliminarUsuario(idn);
+    //user.setId(idn);
+    //usuarioService.eliminarUsuario(user);
     FacesContext.getCurrentInstance().addMessage("form", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado correctamente", null));
 }
 

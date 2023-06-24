@@ -27,12 +27,14 @@ public class pruebaConexion {
         
         
         UsuarioService usuarioService = new UsuarioService();
-
+        Usuario user = new Usuario();
         /*Usuario usuario = new Usuario();
         usuario.setNombreUsuario("nombreUsuario");
         usuario.setContraseña("contraseña");
         usuario.setEmail("correo@example.com");*/
-        usuarioService.getAllUsuario();
+        //usuarioService.getAllUsuario();
+        //user.setId(6);
+        usuarioService.eliminarUsuario(5);
         
         //usuarioService.insertarUsuario(usuario);
         //usuarioService.actualizarUsuario(4,"pedro", "pedro", "pedro@correo.com");

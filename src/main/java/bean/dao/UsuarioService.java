@@ -90,7 +90,7 @@ public void actualizarUsuario(int id, String nombreUsuario, String contraseña, 
 public void eliminarUsuario(int id) {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
          PreparedStatement stmt = conn.prepareStatement("DELETE FROM usuario WHERE ID = ?")) {
-        
+        //stmt.setInt(1, user.getId());        
         stmt.setInt(1, id);
         
         stmt.executeUpdate();

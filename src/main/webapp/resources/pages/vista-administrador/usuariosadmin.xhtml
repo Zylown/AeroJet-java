@@ -90,7 +90,7 @@
         
         <h:form id="formListado">
             <p:dataTable id="tablaBancos" paginator="true" paginatorPosition="bottom" rows="10" var="usuario" value="#{usuario_data.usuarios}" emptyMessage="No existen bancos">
-                            <p:column headerText="ID">
+                            <p:column headerText="Id">
                                 <h:outputText value="#{usuario.id}" />
                             </p:column>
                             <p:column headerText="Usuario">
@@ -102,15 +102,15 @@
                             <p:column headerText="Correo">
                                 <h:outputText value="#{usuario.email}" />
                             </p:column>
-                            
-                            <p:column headerText="MODIFICAR" style="text-align: center">
-                                <p:commandButton icon="ui-icon-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
-                                    <f:setPropertyActionListener target="#{usuario_data.usuarios}" value="#{usuario}"/>
+                            <p:column headerText="Modificar" style="text-align: center">
+                                <p:commandButton icon="pi pi-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
+                                    <f:setPropertyActionListener target="#{usuario_data.usuarioSeleccionado}" value="#{usuario}"/>
                                 </p:commandButton>
                             </p:column>
-                            <p:column headerText="ELIMINAR" style="text-align: center">
-                                <p:commandButton icon="ui-icon-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
-                                    <f:setPropertyActionListener target="#{usuario_data.usuarios}" value="#{usuario}"/>
+                            <p:column headerText="Eliminar" style="text-align: center">
+                                <p:commandButton icon="pi pi-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
+                                    <f:setPropertyActionListener target="#{usuario_data.usuarioSeleccionado}" value="#{usuario}"/>
+                                    
                                 </p:commandButton>
                             </p:column>
               </p:dataTable>
@@ -136,27 +136,28 @@
             <p:dialog id="dlgModificar" header="Modificar Usuario" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
             <p:panelGrid columns="2" style="margin: 0 auto;">
                 <p:outputLabel value="Usuario:"/>
-                <p:inputText value="#{usuario_data.nombreUsuario}"/>
+                <p:inputText value="#{usuario_data.usuarioSeleccionado.nombreUsuario}"/>
 
                 <p:outputLabel value="Contraseña:"/>
-                <p:inputText value="#{usuario_data.password}"/>
+                <p:inputText value="#{usuario_data.usuarioSeleccionado.contraseña}"/>
 
                 <p:outputLabel value="Correo:"/>
-                <p:inputText value="#{usuario_data.email}"/>
+                <p:inputText value="#{usuario_data.usuarioSeleccionado.email}"/>
                 
-                <p:outputLabel value="id:"/>
-                <p:inputText value="#{usuario_data.id}"/>
             </p:panelGrid>
-                <p:commandButton value="Guardar" actionListener="#{usuario_data.actualizarUsuario(usuario_data.id, usuario_data.nombreUsuario, usuario_data.password, usuario_data.email)}" update=":formListado:tablaBancos" oncomplete="PF('dialogoModificar').hide();"/>
+                <p:commandButton value="Guardar" actionListener="#{usuario_data.actualizarUsuario(usuario_data.usuarioSeleccionado.id, usuario_data.usuarioSeleccionado.nombreUsuario, 
+                                                                   usuario_data.usuarioSeleccionado.contraseña, usuario_data.usuarioSeleccionado.email)}" update=":formListado:tablaBancos" oncomplete="PF('dialogoModificar').hide();"/>
                 <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
             </p:dialog>
         </h:form>
-
         <h:form id="formEliminar">
-                        <p:dialog id="dlgEliminar" header="Eliminar Banco" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
-                            <h:outputText value="Desea eliminar este registro?"/>
-                            <p:commandButton  value="Si" actionListener="#{usuario_data.eliminarUsuario(usuario_data.id)}" update=":formListado:tablaBancos" oncomplete="PF('dialogoEliminar').hide();"/>
+                        <p:dialog id="dlgEliminar" header="Eliminar Usuario" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                            <h:outputText value="Desea eliminar este registro con el id: #{usuario_data.usuarioSeleccionado.id} ?"/>
+                            <br/> <br/>
+                            <div style="display: flex; justify-content: space-between;">
+                            <p:commandButton  value="Si" actionListener="#{usuario_data.eliminarUsuario(usuario_data.usuarioSeleccionado.id)}" update=":formListado:tablaBancos" oncomplete="PF('dialogoEliminar').hide();"/>
                             <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
+                            </div>
                         </p:dialog>
         </h:form>
                                 </div>
