@@ -55,7 +55,7 @@
         <!-- /navbar-inner -->
     </div>
         
-                <div class="wrapper">
+        <div class="wrapper">
             <div class="container">
                 <div class="row">
                     <div class="span3">
@@ -71,9 +71,10 @@
                         </ul>
                         <!--/.widget-nav-->
                         <ul class="widget widget-menu unstyled">
-                            <li><a href="ui-button-icon.html"><i class="icon-user"></i>Usuarios</a></li>
-                            <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>Tipografía </a></li>
-                            <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Graficos </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/usuariosadmin.xhtml"><i class="icon-user" style="margin-right: 10px;"></i>Usuarios</a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/avionesAdmin.xhtml"><i class="menu-icon icon-book"></i>Aviones</a></li>
+                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Vuelos </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/rutasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Rutas </a></li>
                         </ul>
                         <!--/.widget-nav-->
                         </div>
@@ -89,7 +90,7 @@
         </h:form>
         
         <h:form id="formListado">
-            <p:dataTable id="tablaBancos" paginator="true" paginatorPosition="bottom" rows="10" var="usuario" value="#{usuario_data.usuarios}" emptyMessage="No existen bancos">
+            <p:dataTable id="tablaBancos" paginator="true" paginatorPosition="bottom" rows="10" var="usuario" value="#{usuario_data.usuarios}" emptyMessage="No existen usuarios">
                             <p:column headerText="Id">
                                 <h:outputText value="#{usuario.id}" />
                             </p:column>

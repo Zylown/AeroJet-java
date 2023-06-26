@@ -54,6 +54,13 @@ public class Aviones implements Serializable {
 
     public Aviones() {
     }
+    
+    public Aviones(Integer id, String modelo, Integer capacidad, String estado) {
+        this.id = id;
+        this.modelo = modelo;
+        this.capacidad = capacidad;
+        this.estado = estado;
+    }
 
     public Aviones(Integer id) {
         this.id = id;

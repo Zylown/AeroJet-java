@@ -53,8 +53,8 @@
                                 </h:selectOneMenu>
                             </div>
                             <div class="filas-search">
-                                <p:datePicker styleClass="input-calendario" id="fechaIda" value="#{bean.fechaIda}" placeholder="Fecha de ida" required="true" />
-                                <p:datePicker styleClass="input-calendario" id="fechaVuelta" value="#{bean.fechaVuelta}" placeholder="Fecha de vuelta" required="true" 
+                                <p:datePicker styleClass="input-calendario" id="fechaIda" value="#{vuelos_data.fecha}" placeholder="Fecha de ida" required="true" />
+                                <p:datePicker styleClass="input-calendario" id="fechaVuelta" value="#{vuelos_data.fecha}" placeholder="Fecha de vuelta" required="true" 
                                               disabled="#{bean.tramo eq 'Solo Ida'}"/>
                             </div>
                             <div class="filas-search">
@@ -68,7 +68,7 @@
                                     <f:selectItem itemLabel="Selecciona una opción" itemValue="" />
                                     <f:selectItem itemLabel="Clase Económica" itemValue="Clase Económica" />
                                     <f:selectItem itemLabel="Clase Ejecutiva" itemValue="Clase Ejecutiva" />
-                                    <f:selectItem itemLabel="Primera Clase" itemValue="Primera Clase" />
+                                 <!--   <f:selectItem itemLabel="Primera Clase" itemValue="Primera Clase" /> -->
                                 </h:selectOneMenu>
                             </div>
                         </div>
