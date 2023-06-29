@@ -11,6 +11,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 @ManagedBean(name = "usuario_data", eager = true)
 @ViewScoped
@@ -145,6 +146,13 @@ public void registrar(String nombreUsuario, String contraseña, String email) th
     // Aquí puedes llamar a tu servicio de UsuarioService y utilizar un método para insertar el nuevo usuario en la base de datos
     usuarioService.insertarUsuario(nombreUsuario, contraseña, email);
     
+    // Obtener la lista de usuarios actualizada de la base de datos
+    usuarios = usuarioService.getAllUsuario();
+    
+    // Restablecer los campos del formulario
+    nombreUsuario = "";
+    contraseña = "";
+    email = "";
     // Otras acciones después del registro, como mostrar un mensaje de éxito o redirigir a otra página
     FacesContext.getCurrentInstance().addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro exitoso", null));
     // Redirigir a otra página
@@ -163,12 +171,19 @@ public void actualizarUsuario(int id, String nombreUsuario, String contraseña, 
 }
 
 
-public void eliminarUsuario(int idn) {
+public void eliminarUsuario(int idn, AjaxBehaviorEvent event) {
     UsuarioService serviceUser = new UsuarioService();
     serviceUser.eliminarUsuario(idn);
     //user.setId(idn);
     //usuarioService.eliminarUsuario(user);
-    FacesContext.getCurrentInstance().addMessage("form", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado correctamente", null));
+    
+    // Obtener la lista de usuarios actualizada de la base de datos
+    usuarios = usuarioService.getAllUsuario();
+    
+    //FacesContext.getCurrentInstance().addMessage("form", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado correctamente", null));
+    // Otras acciones después de la eliminación, como mostrar un mensaje de éxito
+    FacesContext.getCurrentInstance().addMessage("formListado", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado exitosamente", null));
+
 }
 
 

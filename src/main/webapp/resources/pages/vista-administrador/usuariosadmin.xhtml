@@ -90,7 +90,7 @@
         </h:form>
         
         <h:form id="formListado">
-            <p:dataTable id="tablaBancos" paginator="true" paginatorPosition="bottom" rows="10" var="usuario" value="#{usuario_data.usuarios}" emptyMessage="No existen usuarios">
+            <p:dataTable id="tablaUsuarios" paginator="true" paginatorPosition="bottom" rows="10" var="usuario" value="#{usuario_data.usuarios}" emptyMessage="No existen usuarios">
                             <p:column headerText="Id">
                                 <h:outputText value="#{usuario.id}" />
                             </p:column>
@@ -110,8 +110,7 @@
                             </p:column>
                             <p:column headerText="Eliminar" style="text-align: center">
                                 <p:commandButton icon="pi pi-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
-                                    <f:setPropertyActionListener target="#{usuario_data.usuarioSeleccionado}" value="#{usuario}"/>
-                                    
+                                    <f:setPropertyActionListener target="#{usuario_data.usuarioSeleccionado}" value="#{usuario}" />
                                 </p:commandButton>
                             </p:column>
               </p:dataTable>
@@ -128,7 +127,7 @@
                                 <p:outputLabel value="Correo: "/>
                                 <p:inputText value="#{usuario_data.email}"/>
                             </p:panelGrid>
-                            <p:commandButton  value="Guardar" actionListener="#{usuario_data.registrar(usuario_data.nombreUsuario,usuario_data.password,usuario_data.email)}" update=":formListado:tablaBancos" oncomplete="PF('dialogoAgregar').hide();"/>
+                            <p:commandButton  value="Guardar" actionListener="#{usuario_data.registrar(usuario_data.nombreUsuario,usuario_data.password,usuario_data.email)}" update=":formListado:tablaUsuarios" oncomplete="PF('dialogoAgregar').hide();"/>
                             <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
                         </p:dialog>
         </h:form>
@@ -147,16 +146,19 @@
                 
             </p:panelGrid>
                 <p:commandButton value="Guardar" actionListener="#{usuario_data.actualizarUsuario(usuario_data.usuarioSeleccionado.id, usuario_data.usuarioSeleccionado.nombreUsuario, 
-                                                                   usuario_data.usuarioSeleccionado.contraseña, usuario_data.usuarioSeleccionado.email)}" update=":formListado:tablaBancos" oncomplete="PF('dialogoModificar').hide();"/>
+                                                                   usuario_data.usuarioSeleccionado.contraseña, usuario_data.usuarioSeleccionado.email)}" update=":formListado:tablaUsuarios" oncomplete="PF('dialogoModificar').hide();"/>
                 <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
             </p:dialog>
         </h:form>
+                                   
         <h:form id="formEliminar">
                         <p:dialog id="dlgEliminar" header="Eliminar Usuario" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
                             <h:outputText value="Desea eliminar este registro con el id: #{usuario_data.usuarioSeleccionado.id} ?"/>
                             <br/> <br/>
                             <div style="display: flex; justify-content: space-between;">
-                            <p:commandButton  value="Si" actionListener="#{usuario_data.eliminarUsuario(usuario_data.usuarioSeleccionado.id)}" update=":formListado:tablaBancos" oncomplete="PF('dialogoEliminar').hide();"/>
+                                <p:commandButton  value="Si" update=":formListado:tablaUsuarios" oncomplete="PF('dialogoEliminar').hide();">
+                                    <p:ajax listener="#{usuario_data.eliminarUsuario(usuario_data.usuarioSeleccionado.id, event)}" />
+                                </p:commandButton>
                             <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
                             </div>
                         </p:dialog>
