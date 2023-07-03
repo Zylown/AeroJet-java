@@ -35,18 +35,19 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Rutas.findByDuracionEstimada", query = "SELECT r FROM Rutas r WHERE r.duracionEstimada = :duracionEstimada")})
 public class Rutas implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID")
-    private Integer id;
     @Size(max = 50)
     @Column(name = "PuntoOrigen")
     private String puntoOrigen;
     @Size(max = 50)
     @Column(name = "PuntoDestino")
     private String puntoDestino;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ID")
+    private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Distancia")
     private BigDecimal distancia;
@@ -76,21 +77,6 @@ public class Rutas implements Serializable {
         this.id = id;
     }
 
-    public String getPuntoOrigen() {
-        return puntoOrigen;
-    }
-
-    public void setPuntoOrigen(String puntoOrigen) {
-        this.puntoOrigen = puntoOrigen;
-    }
-
-    public String getPuntoDestino() {
-        return puntoDestino;
-    }
-
-    public void setPuntoDestino(String puntoDestino) {
-        this.puntoDestino = puntoDestino;
-    }
 
     public BigDecimal getDistancia() {
         return distancia;
@@ -155,6 +141,22 @@ public class Rutas implements Serializable {
     @Override
     public String toString() {
         return "beans.conexion.Rutas[ id=" + id + " ]";
+    }
+
+    public String getPuntoOrigen() {
+        return puntoOrigen;
+    }
+
+    public void setPuntoOrigen(String puntoOrigen) {
+        this.puntoOrigen = puntoOrigen;
+    }
+
+    public String getPuntoDestino() {
+        return puntoDestino;
+    }
+
+    public void setPuntoDestino(String puntoDestino) {
+        this.puntoDestino = puntoDestino;
     }
     
 }

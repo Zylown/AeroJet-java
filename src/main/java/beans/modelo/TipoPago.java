@@ -32,12 +32,6 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "TipoPago.findByDescripcion", query = "SELECT t FROM TipoPago t WHERE t.descripcion = :descripcion")})
 public class TipoPago implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -46,6 +40,13 @@ public class TipoPago implements Serializable {
     @Size(max = 100)
     @Column(name = "Descripcion")
     private String descripcion;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @OneToMany(mappedBy = "tipoPagoID")
     private Collection<Compras> comprasCollection;
 
@@ -69,21 +70,6 @@ public class TipoPago implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 
     public Collection<Compras> getComprasCollection() {
         return comprasCollection;
@@ -116,6 +102,22 @@ public class TipoPago implements Serializable {
     @Override
     public String toString() {
         return "beans.conexion.TipoPago[ id=" + id + " ]";
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     
 }

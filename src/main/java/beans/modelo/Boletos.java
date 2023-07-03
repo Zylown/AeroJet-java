@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,12 +41,6 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Boletos.findByFechaEmision", query = "SELECT b FROM Boletos b WHERE b.fechaEmision = :fechaEmision")})
 public class Boletos implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -66,6 +61,15 @@ public class Boletos implements Serializable {
     @Column(name = "FechaEmision")
     @Temporal(TemporalType.DATE)
     private Date fechaEmision;
+    @OneToMany(mappedBy = "compraID")
+    private List<Tarifas> tarifasList;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @OneToMany(mappedBy = "iDboleto")
     private Collection<Compras> comprasCollection;
     @JoinColumn(name = "Asiento_ID", referencedColumnName = "ID")
@@ -101,37 +105,6 @@ public class Boletos implements Serializable {
         this.id = id;
     }
 
-    public String getNumeroBoleto() {
-        return numeroBoleto;
-    }
-
-    public void setNumeroBoleto(String numeroBoleto) {
-        this.numeroBoleto = numeroBoleto;
-    }
-
-    public BigDecimal getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(BigDecimal precio) {
-        this.precio = precio;
-    }
-
-    public String getClase() {
-        return clase;
-    }
-
-    public void setClase(String clase) {
-        this.clase = clase;
-    }
-
-    public Date getFechaEmision() {
-        return fechaEmision;
-    }
-
-    public void setFechaEmision(Date fechaEmision) {
-        this.fechaEmision = fechaEmision;
-    }
 
     public Collection<Compras> getComprasCollection() {
         return comprasCollection;
@@ -188,6 +161,46 @@ public class Boletos implements Serializable {
     @Override
     public String toString() {
         return "beans.conexion.Boletos[ id=" + id + " ]";
+    }
+
+    public String getNumeroBoleto() {
+        return numeroBoleto;
+    }
+
+    public void setNumeroBoleto(String numeroBoleto) {
+        this.numeroBoleto = numeroBoleto;
+    }
+
+    public BigDecimal getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
+    }
+
+    public String getClase() {
+        return clase;
+    }
+
+    public void setClase(String clase) {
+        this.clase = clase;
+    }
+
+    public Date getFechaEmision() {
+        return fechaEmision;
+    }
+
+    public void setFechaEmision(Date fechaEmision) {
+        this.fechaEmision = fechaEmision;
+    }
+
+    public List<Tarifas> getTarifasList() {
+        return tarifasList;
+    }
+
+    public void setTarifasList(List<Tarifas> tarifasList) {
+        this.tarifasList = tarifasList;
     }
     
 }

@@ -40,6 +40,12 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Vuelos.findByEstado", query = "SELECT v FROM Vuelos v WHERE v.estado = :estado")})
 public class Vuelos implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "Estado")
+    private String estado;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -61,11 +67,6 @@ public class Vuelos implements Serializable {
     @Column(name = "Fecha_Reprogramacion")
     @Temporal(TemporalType.DATE)
     private Date fechaReprogramacion;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "Estado")
-    private String estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vueloID")
     private Collection<Escalas> escalasCollection;
     @OneToMany(mappedBy = "vueloID")
@@ -148,13 +149,6 @@ public class Vuelos implements Serializable {
         this.fechaReprogramacion = fechaReprogramacion;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 
     public Collection<Escalas> getEscalasCollection() {
         return escalasCollection;
@@ -251,6 +245,14 @@ public class Vuelos implements Serializable {
     @Override
     public String toString() {
         return "beans.conexion.Vuelos[ id=" + id + " ]";
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
 }

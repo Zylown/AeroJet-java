@@ -31,22 +31,23 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Aviones.findByEstado", query = "SELECT a FROM Aviones a WHERE a.estado = :estado")})
 public class Aviones implements Serializable {
 
+    @Size(max = 50)
+    @Column(name = "Modelo")
+    private String modelo;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "Estado")
+    private String estado;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
     private Integer id;
-    @Size(max = 50)
-    @Column(name = "Modelo")
-    private String modelo;
     @Column(name = "Capacidad")
     private Integer capacidad;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "Estado")
-    private String estado;
     @OneToMany(mappedBy = "avionID")
     private Collection<Asientos> asientosCollection;
     @OneToMany(mappedBy = "avionID")
@@ -79,13 +80,6 @@ public class Aviones implements Serializable {
         this.id = id;
     }
 
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
 
     public Integer getCapacidad() {
         return capacidad;
@@ -95,13 +89,6 @@ public class Aviones implements Serializable {
         this.capacidad = capacidad;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 
     public Collection<Asientos> getAsientosCollection() {
         return asientosCollection;
@@ -142,6 +129,22 @@ public class Aviones implements Serializable {
     @Override
     public String toString() {
         return "beans.conexion.Aviones[ id=" + id + " ]";
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
 }

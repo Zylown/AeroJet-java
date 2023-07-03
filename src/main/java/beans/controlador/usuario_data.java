@@ -15,8 +15,8 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 @ManagedBean(name = "usuario_data", eager = true)
 @ViewScoped
-public class usuario_data implements Serializable{
-    
+public class usuario_data implements Serializable {
+
     private List<Usuario> usuarios;
     private Usuario user;
     private UsuarioService usuarioService;
@@ -51,9 +51,7 @@ public class usuario_data implements Serializable{
     public void setUser(Usuario user) {
         this.user = user;
     }
-    
-    
-    
+
     public Usuario getUsuarioSeleccionado() {
         return usuarioSeleccionado;
     }
@@ -61,7 +59,7 @@ public class usuario_data implements Serializable{
     public void setUsuarioSeleccionado(Usuario usuarioSeleccionado) {
         this.usuarioSeleccionado = usuarioSeleccionado;
     }
-    
+
     public usuario_data() {
         usuarioService = new UsuarioService();
     }
@@ -94,10 +92,9 @@ public class usuario_data implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
-@PostConstruct
-public void init() {
+
+    @PostConstruct
+    public void init() {
         usuarioService = new UsuarioService();
         usuarios = usuarioService.getAllUsuario();
 
@@ -108,86 +105,83 @@ public void init() {
         System.out.println("Correo: " + usuario.getEmail());
         System.out.println("-----------------------");
     }*/
-}
-
-
-
-public void validarCuenta(String nombreUsuario, String contraseña) throws IOException {
-    boolean cuentaValida = false;
-    
-    usuarioService = new UsuarioService();
-    usuarios = usuarioService.getAllUsuario();
-    
-    for (Usuario usuario : usuarios) {
-        if (usuario.getNombreUsuario().equals(nombreUsuario) && usuario.getContraseña().equals(contraseña)) {
-            cuentaValida = true;
-            break;
-        }
     }
 
-    if (cuentaValida) {
-        if (nombreUsuario.equals("admin") && contraseña.equals("pass")) {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/AeroJet-Java/faces/resources/pages/vista-administrador/indexadmin.xhtml");
+    public void validarCuenta(String nombreUsuario, String contraseña) throws IOException {
+        boolean cuentaValida = false;
+
+        usuarioService = new UsuarioService();
+        usuarios = usuarioService.getAllUsuario();
+
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNombreUsuario().equals(nombreUsuario) && usuario.getContraseña().equals(contraseña)) {
+                cuentaValida = true;
+                break;
+            }
+        }
+
+        if (cuentaValida) {
+            if (nombreUsuario.equals("admin") && contraseña.equals("pass")) {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/AeroJet-Java/faces/resources/pages/vista-administrador/indexadmin.xhtml");
+            } else {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/AeroJet-Java/faces/index.xhtml");
+            }
+            FacesContext.getCurrentInstance().responseComplete();
         } else {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/AeroJet-Java/faces/index.xhtml");
+            FacesContext.getCurrentInstance().addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecta", null));
         }
-        FacesContext.getCurrentInstance().responseComplete();
-    } else {
-        FacesContext.getCurrentInstance().addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecta", null));
     }
-}
 
-public void registrar(String nombreUsuario, String contraseña, String email) throws IOException {
-    Usuario nuevoUsuario = new Usuario();
-    nuevoUsuario.setNombreUsuario(nombreUsuario);
-    nuevoUsuario.setContraseña(contraseña);
-    nuevoUsuario.setEmail(email);
-    
-    // Aquí puedes llamar a tu servicio de UsuarioService y utilizar un método para insertar el nuevo usuario en la base de datos
-    usuarioService.insertarUsuario(nombreUsuario, contraseña, email);
-    
-    // Obtener la lista de usuarios actualizada de la base de datos
-    usuarios = usuarioService.getAllUsuario();
-    
-    // Restablecer los campos del formulario
-    nombreUsuario = "";
-    contraseña = "";
-    email = "";
-    // Otras acciones después del registro, como mostrar un mensaje de éxito o redirigir a otra página
-    FacesContext.getCurrentInstance().addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro exitoso", null));
-    // Redirigir a otra página
-    // FacesContext.getCurrentInstance().getExternalContext().redirect("otra_pagina.xhtml");
-}
+    public void registrar(String nombreUsuario, String contraseña, String email) throws IOException {
+        Usuario nuevoUsuario = new Usuario();
+        nuevoUsuario.setNombreUsuario(nombreUsuario);
+        nuevoUsuario.setContraseña(contraseña);
+        nuevoUsuario.setEmail(email);
 
-public void actualizarUsuario(int id, String nombreUsuario, String contraseña, String email) throws IOException {
-     Usuario nuevoUsuario = new Usuario();
-    nuevoUsuario.setId(id);
-    nuevoUsuario.setNombreUsuario(nombreUsuario);
-    nuevoUsuario.setContraseña(contraseña);
-    nuevoUsuario.setEmail(email);
-     
-    usuarioService.actualizarUsuario(id, nombreUsuario, contraseña, email);
-    FacesContext.getCurrentInstance().addMessage("form", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario actualizado correctamente", null));
-}
+        // Aquí puedes llamar a tu servicio de UsuarioService y utilizar un método para insertar el nuevo usuario en la base de datos
+        usuarioService.insertarUsuario(nombreUsuario, contraseña, email);
 
+        // Obtener la lista de usuarios actualizada de la base de datos
+        usuarios = usuarioService.getAllUsuario();
 
-public void eliminarUsuario(int idn, AjaxBehaviorEvent event) {
-    UsuarioService serviceUser = new UsuarioService();
-    serviceUser.eliminarUsuario(idn);
-    //user.setId(idn);
-    //usuarioService.eliminarUsuario(user);
-    
-    // Obtener la lista de usuarios actualizada de la base de datos
-    usuarios = usuarioService.getAllUsuario();
-    
-    //FacesContext.getCurrentInstance().addMessage("form", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado correctamente", null));
-    // Otras acciones después de la eliminación, como mostrar un mensaje de éxito
-    FacesContext.getCurrentInstance().addMessage("formListado", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado exitosamente", null));
+        // Restablecer los campos del formulario
+        nombreUsuario = "";
+        contraseña = "";
+        email = "";
+        // Otras acciones después del registro, como mostrar un mensaje de éxito o redirigir a otra página
+        FacesContext.getCurrentInstance().addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro exitoso", null));
+        // Redirigir a otra página
+        // FacesContext.getCurrentInstance().getExternalContext().redirect("otra_pagina.xhtml");
+    }
 
-}
+    public void actualizarUsuario(int id, String nombreUsuario, String contraseña, String email) throws IOException {
+        Usuario nuevoUsuario = new Usuario();
+        nuevoUsuario.setId(id);
+        nuevoUsuario.setNombreUsuario(nombreUsuario);
+        nuevoUsuario.setContraseña(contraseña);
+        nuevoUsuario.setEmail(email);
+
+        usuarioService.actualizarUsuario(id, nombreUsuario, contraseña, email);
+        FacesContext.getCurrentInstance().addMessage("form", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario actualizado correctamente", null));
+    }
+
+    public void eliminarUsuario(int idn, AjaxBehaviorEvent event) {
+        UsuarioService serviceUser = new UsuarioService();
+        serviceUser.eliminarUsuario(idn);
+        //user.setId(idn);
+        //usuarioService.eliminarUsuario(user);
+
+        // Obtener la lista de usuarios actualizada de la base de datos
+        usuarios = usuarioService.getAllUsuario();
+
+        //FacesContext.getCurrentInstance().addMessage("form", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado correctamente", null));
+        // Otras acciones después de la eliminación, como mostrar un mensaje de éxito
+        FacesContext.getCurrentInstance().addMessage("formListado", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado exitosamente", null));
+
+    }
 
 
-/*
+    /*
 public void validarCuentaConsola() {
     Scanner scanner = new Scanner(System.in);
     
@@ -198,6 +192,4 @@ public void validarCuentaConsola() {
     
     validarCuenta(nombreUsuario, contraseña);
 }*/
-    
-
 }

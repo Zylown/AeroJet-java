@@ -32,12 +32,6 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Aeropuerto.findByCapacidad", query = "SELECT a FROM Aeropuerto a WHERE a.capacidad = :capacidad")})
 public class Aeropuerto implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID")
-    private Integer id;
     @Size(max = 100)
     @Column(name = "Nombre")
     private String nombre;
@@ -53,11 +47,6 @@ public class Aeropuerto implements Serializable {
     @Size(max = 4)
     @Column(name = "CodigoICAO")
     private String codigoICAO;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "Latitud")
-    private BigDecimal latitud;
-    @Column(name = "Longitud")
-    private BigDecimal longitud;
     @Size(max = 50)
     @Column(name = "ZonaHoraria")
     private String zonaHoraria;
@@ -67,6 +56,18 @@ public class Aeropuerto implements Serializable {
     @Size(max = 50)
     @Column(name = "Terminal")
     private String terminal;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ID")
+    private Integer id;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "Latitud")
+    private BigDecimal latitud;
+    @Column(name = "Longitud")
+    private BigDecimal longitud;
     @Column(name = "Capacidad")
     private Integer capacidad;
     @OneToMany(mappedBy = "aeropuertoDestinoID")
@@ -104,45 +105,6 @@ public class Aeropuerto implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
-    public String getCodigoIATA() {
-        return codigoIATA;
-    }
-
-    public void setCodigoIATA(String codigoIATA) {
-        this.codigoIATA = codigoIATA;
-    }
-
-    public String getCodigoICAO() {
-        return codigoICAO;
-    }
-
-    public void setCodigoICAO(String codigoICAO) {
-        this.codigoICAO = codigoICAO;
-    }
 
     public BigDecimal getLatitud() {
         return latitud;
@@ -160,29 +122,6 @@ public class Aeropuerto implements Serializable {
         this.longitud = longitud;
     }
 
-    public String getZonaHoraria() {
-        return zonaHoraria;
-    }
-
-    public void setZonaHoraria(String zonaHoraria) {
-        this.zonaHoraria = zonaHoraria;
-    }
-
-    public String getTipoAeropuerto() {
-        return tipoAeropuerto;
-    }
-
-    public void setTipoAeropuerto(String tipoAeropuerto) {
-        this.tipoAeropuerto = tipoAeropuerto;
-    }
-
-    public String getTerminal() {
-        return terminal;
-    }
-
-    public void setTerminal(String terminal) {
-        this.terminal = terminal;
-    }
 
     public Integer getCapacidad() {
         return capacidad;
@@ -231,6 +170,70 @@ public class Aeropuerto implements Serializable {
     @Override
     public String toString() {
         return "beans.conexion.Aeropuerto[ id=" + id + " ]";
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public String getCodigoIATA() {
+        return codigoIATA;
+    }
+
+    public void setCodigoIATA(String codigoIATA) {
+        this.codigoIATA = codigoIATA;
+    }
+
+    public String getCodigoICAO() {
+        return codigoICAO;
+    }
+
+    public void setCodigoICAO(String codigoICAO) {
+        this.codigoICAO = codigoICAO;
+    }
+
+    public String getZonaHoraria() {
+        return zonaHoraria;
+    }
+
+    public void setZonaHoraria(String zonaHoraria) {
+        this.zonaHoraria = zonaHoraria;
+    }
+
+    public String getTipoAeropuerto() {
+        return tipoAeropuerto;
+    }
+
+    public void setTipoAeropuerto(String tipoAeropuerto) {
+        this.tipoAeropuerto = tipoAeropuerto;
+    }
+
+    public String getTerminal() {
+        return terminal;
+    }
+
+    public void setTerminal(String terminal) {
+        this.terminal = terminal;
     }
     
 }

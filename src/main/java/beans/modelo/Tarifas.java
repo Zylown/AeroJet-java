@@ -1,11 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package beans.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -41,6 +40,11 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Tarifas.findByMontoCargoAdicional", query = "SELECT t FROM Tarifas t WHERE t.montoCargoAdicional = :montoCargoAdicional")})
 public class Tarifas implements Serializable {
 
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "Descripcion")
+    private String descripcion;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -50,10 +54,6 @@ public class Tarifas implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Precio")
     private BigDecimal precio;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "Descripcion")
-    private String descripcion;
     @Column(name = "Promocion")
     private Boolean promocion;
     @Column(name = "FechaInicio")
@@ -78,6 +78,18 @@ public class Tarifas implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tarifaID")
     private Collection<Boletos> boletosCollection;
 
+public Tarifas(String descripcion, Integer id, BigDecimal precio, Boolean promocion, Date fechaInicio, Date fechaFin, BigDecimal montoCargoAdicional) {
+    this.descripcion = descripcion;
+    this.id = id;
+    this.precio = precio;
+    this.promocion = promocion;
+    this.fechaInicio = fechaInicio;
+    this.fechaFin = fechaFin;
+    this.montoCargoAdicional = montoCargoAdicional;
+}
+
+
+
     public Tarifas() {
     }
 
@@ -99,14 +111,6 @@ public class Tarifas implements Serializable {
 
     public void setPrecio(BigDecimal precio) {
         this.precio = precio;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public Boolean getPromocion() {
@@ -205,5 +209,13 @@ public class Tarifas implements Serializable {
     public String toString() {
         return "beans.conexion.Tarifas[ id=" + id + " ]";
     }
-    
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
 }

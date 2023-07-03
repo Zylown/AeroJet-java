@@ -36,12 +36,6 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Compras.findByNumComfirmacion", query = "SELECT c FROM Compras c WHERE c.numComfirmacion = :numComfirmacion")})
 public class Compras implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Fecha_Compra")
@@ -56,6 +50,13 @@ public class Compras implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "NumComfirmacion")
     private String numComfirmacion;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ID")
+    private Integer id;
     @OneToMany(mappedBy = "compraID")
     private Collection<Tarifas> tarifasCollection;
     @JoinColumn(name = "Asiento_ID", referencedColumnName = "ID")
@@ -109,21 +110,6 @@ public class Compras implements Serializable {
         this.fechaCompra = fechaCompra;
     }
 
-    public long getTotalCompra() {
-        return totalCompra;
-    }
-
-    public void setTotalCompra(long totalCompra) {
-        this.totalCompra = totalCompra;
-    }
-
-    public String getNumComfirmacion() {
-        return numComfirmacion;
-    }
-
-    public void setNumComfirmacion(String numComfirmacion) {
-        this.numComfirmacion = numComfirmacion;
-    }
 
     public Collection<Tarifas> getTarifasCollection() {
         return tarifasCollection;
@@ -212,6 +198,22 @@ public class Compras implements Serializable {
     @Override
     public String toString() {
         return "beans.conexion.Compras[ id=" + id + " ]";
+    }
+
+    public long getTotalCompra() {
+        return totalCompra;
+    }
+
+    public void setTotalCompra(long totalCompra) {
+        this.totalCompra = totalCompra;
+    }
+
+    public String getNumComfirmacion() {
+        return numComfirmacion;
+    }
+
+    public void setNumComfirmacion(String numComfirmacion) {
+        this.numComfirmacion = numComfirmacion;
     }
     
 }

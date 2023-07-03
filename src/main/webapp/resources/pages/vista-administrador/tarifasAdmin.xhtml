@@ -5,11 +5,136 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       >
-    <h:head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:head>     
+        <link rel="stylesheet" type="text/css" href="css/theme.css"/>
+        <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/>
+        <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet"/>
+        <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
+        <link rel="shortcut icon" href="../../../resources/img/airplane-black-glyph-icon-flight-2239097-transformed.ico"/>
+        <title>AeroJet: Tarifas Panel</title>   
     </h:head>
     <h:body>
-        <div>TODO write content</div>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                    <i class="icon-reorder shaded"></i></a><a class="brand" href="indexadmin.html">Admin Panel </a>
+                <div class="nav-collapse collapse navbar-inverse-collapse">
+                    <ul class="nav nav-icons">
+                        <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
+                        <li><a href="#"><i class="icon-eye-open"></i></a></li>
+                        <li><a href="#"><i class="icon-bar-chart"></i></a></li>
+                    </ul>
+                    <h:form class="navbar-search pull-left input-append">
+                        <!--<input type="text" class="span3">
+                        <button class="btn" type="button">
+                            <i class="icon-search"></i>
+                        </button>-->
+                    </h:form>
+                    <ul class="nav pull-right">
+                        <li><a href="#">Apoyo </a></li>
+                        <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="images/user.png" class="nav-avatar" />
+                                <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Your Profile</a></li>
+                                <li><a href="#">Edit Profile</a></li>
+                                <li><a href="#">Account Settings</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.nav-collapse -->
+            </div>
+        </div>
+        <!-- /navbar-inner -->
+    </div>
+        
+        <div class="wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="span3">
+                        <div class="sidebar">
+                        <ul class="widget widget-menu unstyled">
+                            <li class="active"><a href="indexadmin.xhtml"><i class="menu-icon icon-dashboard"></i>Panel
+                                </a></li>
+                            <li><a href="activity.html"><i class="menu-icon icon-bullhorn"></i>Comentarios </a>
+                            </li>
+                            <li><a href="message.html"><i class="menu-icon icon-inbox"></i>Mensajes <b
+                                        class="label green pull-right">
+                                        11</b> </a></li>
+                        </ul>
+                        <!--/.widget-nav-->
+                        <ul class="widget widget-menu unstyled">
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/usuariosadmin.xhtml"><i class="icon-user" style="margin-right: 10px;"></i>Usuarios</a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/avionesAdmin.xhtml"><i class="menu-icon icon-book"></i>Aviones</a></li>
+                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Vuelos </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/rutasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Rutas </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/tarifasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Tarifas </a></li>
+                        </ul>
+                        <!--/.widget-nav-->
+                        </div>                        
+                    </div>
+        
+        <div class="span9">
+            <div class="content">
+                <div class="btn-controls">
+                    <div class="btn-box-row row-fluid">
+                        <!--
+        <h:form>
+            <p:commandButton value="Agregar Tarifa" actionListener="#{tarifas_data.init()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+            <p:separator/>
+        </h:form> -->
+        
+         <h:form id="formListado">
+             <p:dataTable id="tablaUsuarios" paginator="true" paginatorPosition="bottom" rows="10" var="tarifas" value="#{tarifas_data.tarifas}" emptyMessage="No existen tarifas">
+                            <p:column headerText="Id">
+                                <h:outputText value="#{tarifas.id}" />
+                            </p:column>
+                            <p:column headerText="Precio">
+                                <h:outputText value="#{tarifas.precio}" />
+                            </p:column>
+                            <p:column headerText="Descripción">
+                                <h:outputText value="#{tarifas.descripcion}" />
+                            </p:column>
+                            <p:column headerText="Fecha Inicio">
+                                <h:outputText value="#{tarifas.fechaInicio}" />
+                            </p:column>
+                            <p:column headerText="Fecha Fin">
+                                <h:outputText value="#{tarifas.fechaFin}" />
+                            </p:column>
+                            <p:column headerText="Promocion">
+                                <h:outputText value="#{tarifas.promocion}" />
+                            </p:column>
+                            <p:column headerText="Cargo Adicional">
+                                <h:outputText value="#{tarifas.montoCargoAdicional}" />
+                            </p:column>
+                          <!--  
+                            <p:column headerText="Modificar" style="text-align: center">
+                                <p:commandButton icon="pi pi-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
+                                    <f:setPropertyActionListener target="#{usuario_data.usuarioSeleccionado}" value="#{usuario}"/>
+                                </p:commandButton>
+                            </p:column>
+                            <p:column headerText="Eliminar" style="text-align: center">
+                                <p:commandButton icon="pi pi-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
+                                    <f:setPropertyActionListener target="#{usuario_data.usuarioSeleccionado}" value="#{usuario}" />
+                                </p:commandButton>
+                            </p:column> -->
+              </p:dataTable>
+        </h:form>
+                        
+                    </div>
+                </div>
+            </div>
+            </div>
+                
+                </div>
+            </div>
+        </div>
     </h:body>
 </html>

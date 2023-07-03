@@ -34,6 +34,10 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Asientos.findByUbicacion", query = "SELECT a FROM Asientos a WHERE a.ubicacion = :ubicacion")})
 public class Asientos implements Serializable {
 
+    @Size(max = 70)
+    @Column(name = "Ubicacion")
+    private String ubicacion;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -44,9 +48,6 @@ public class Asientos implements Serializable {
     private Integer numero;
     @Column(name = "Estado")
     private Boolean estado;
-    @Size(max = 70)
-    @Column(name = "Ubicacion")
-    private String ubicacion;
     @OneToMany(mappedBy = "asientoID")
     private Collection<Tarifas> tarifasCollection;
     @OneToMany(mappedBy = "asientoID")
@@ -91,13 +92,6 @@ public class Asientos implements Serializable {
         this.estado = estado;
     }
 
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
 
     public Collection<Tarifas> getTarifasCollection() {
         return tarifasCollection;
@@ -162,6 +156,14 @@ public class Asientos implements Serializable {
     @Override
     public String toString() {
         return "beans.conexion.Asientos[ id=" + id + " ]";
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
     
 }

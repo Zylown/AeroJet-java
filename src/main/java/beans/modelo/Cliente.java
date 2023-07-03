@@ -34,34 +34,35 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Cliente.findByCorreoElectronico", query = "SELECT c FROM Cliente c WHERE c.correoElectronico = :correoElectronico")})
 public class Cliente implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID")
-    private Integer id;
     @Size(max = 50)
     @Column(name = "Nombre")
     private String nombre;
     @Size(max = 50)
     @Column(name = "Apellido")
     private String apellido;
-    @Column(name = "DNI")
-    private Integer dni;
-    @Column(name = "Telefono")
-    private Integer telefono;
     @Size(max = 50)
     @Column(name = "Genero")
     private String genero;
-    @Column(name = "Fecha_Nacimiento")
-    @Temporal(TemporalType.DATE)
-    private Date fechaNacimiento;
     @Size(max = 100)
     @Column(name = "Nacionalidad")
     private String nacionalidad;
     @Size(max = 100)
     @Column(name = "CorreoElectronico")
     private String correoElectronico;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ID")
+    private Integer id;
+    @Column(name = "DNI")
+    private Integer dni;
+    @Column(name = "Telefono")
+    private Integer telefono;
+    @Column(name = "Fecha_Nacimiento")
+    @Temporal(TemporalType.DATE)
+    private Date fechaNacimiento;
     @JoinColumn(name = "ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Usuario usuario;
@@ -98,21 +99,6 @@ public class Cliente implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
 
     public Integer getDni() {
         return dni;
@@ -130,13 +116,6 @@ public class Cliente implements Serializable {
         this.telefono = telefono;
     }
 
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
 
     public Date getFechaNacimiento() {
         return fechaNacimiento;
@@ -146,21 +125,6 @@ public class Cliente implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getNacionalidad() {
-        return nacionalidad;
-    }
-
-    public void setNacionalidad(String nacionalidad) {
-        this.nacionalidad = nacionalidad;
-    }
-
-    public String getCorreoElectronico() {
-        return correoElectronico;
-    }
-
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
-    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -209,6 +173,46 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return "beans.conexion.Cliente[ id=" + id + " ]";
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
+
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
     }
     
 }
