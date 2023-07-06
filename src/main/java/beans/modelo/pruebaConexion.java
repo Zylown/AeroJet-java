@@ -1,6 +1,7 @@
 package beans.modelo;
 
 import bean.dao.AeropuertoService;
+import bean.dao.TarifasService;
 import bean.dao.UsuarioService;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,15 +11,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import beans.controlador.aeropuerto_data;
+import beans.controlador.tarifas_data;
 import beans.controlador.usuario_data;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 
 public class pruebaConexion {
     /*private static final String DB_URL = "jdbc:mariadb://localhost:3306/aerojet-java";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "";*/
-    
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException, IOException {
+    SimpleDateFormat dateFormato = new SimpleDateFormat("yyyy-MM-dd");
         /*aeropuerto_data aeropuertos = new aeropuerto_data();
         
         
@@ -26,15 +32,26 @@ public class pruebaConexion {
         //usuario_data usuarios = new usuario_data();
         
         
-        UsuarioService usuarioService = new UsuarioService();
-        Usuario user = new Usuario();
+        /*UsuarioService usuarioService = new UsuarioService();
+        Usuario user = new Usuario();*/
         /*Usuario usuario = new Usuario();
         usuario.setNombreUsuario("nombreUsuario");
         usuario.setContraseña("contraseña");
         usuario.setEmail("correo@example.com");*/
         //usuarioService.getAllUsuario();
         //user.setId(6);
-        usuarioService.eliminarUsuario(5);
+        //usuarioService.eliminarUsuario(5);
+        
+      /*  TarifasService tarifaService = new TarifasService();
+       tarifaService.insertarTarifa(new BigDecimal(100.00), "De Lima a Arequipa",
+               dateFormato.parse("2023-08-01"),
+        dateFormato.parse("2023-08-01"),
+        false,new BigDecimal(00.00));*/
+        
+        tarifas_data tarifadata = new tarifas_data();
+        tarifadata.init();
+        tarifadata.registrar(new BigDecimal(100.00), "aea", dateFormato.parse("2023-08-01"),dateFormato.parse("2023-08-01"), false,new BigDecimal(00.00));
+//tarifadata.registrarConsola();
         
         //usuarioService.insertarUsuario(usuario);
         //usuarioService.actualizarUsuario(4,"pedro", "pedro", "pedro@correo.com");

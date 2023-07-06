@@ -88,8 +88,6 @@ public Tarifas(String descripcion, Integer id, BigDecimal precio, Boolean promoc
     this.montoCargoAdicional = montoCargoAdicional;
 }
 
-
-
     public Tarifas() {
     }
 

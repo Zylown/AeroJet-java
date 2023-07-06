@@ -85,12 +85,12 @@
             <div class="content">
                 <div class="btn-controls">
                     <div class="btn-box-row row-fluid">
-                        <!--
+                        <!-- #{tarifas_data.init()} -->
         <h:form>
             <p:commandButton value="Agregar Tarifa" actionListener="#{tarifas_data.init()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
             <p:separator/>
-        </h:form> -->
-        
+        </h:form> 
+       
          <h:form id="formListado">
              <p:dataTable id="tablaUsuarios" paginator="true" paginatorPosition="bottom" rows="10" var="tarifas" value="#{tarifas_data.tarifas}" emptyMessage="No existen tarifas">
                             <p:column headerText="Id">
@@ -114,7 +114,7 @@
                             <p:column headerText="Cargo Adicional">
                                 <h:outputText value="#{tarifas.montoCargoAdicional}" />
                             </p:column>
-                          <!--  
+                 <!--
                             <p:column headerText="Modificar" style="text-align: center">
                                 <p:commandButton icon="pi pi-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
                                     <f:setPropertyActionListener target="#{usuario_data.usuarioSeleccionado}" value="#{usuario}"/>
@@ -127,6 +127,28 @@
                             </p:column> -->
               </p:dataTable>
         </h:form>
+                       
+        <h:form id="formAgregar">
+                        <p:dialog id="dlgAgregar" header="Agregar Tarifa" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                            <p:panelGrid columns="2" style="margin: 0 auto;">                                
+                                <p:outputLabel value="Precio: "/>
+                                <p:inputText value="#{tarifas_data.precio}"/>                                
+                                <p:outputLabel value="Descripción: "/>
+                                <p:inputText value="#{tarifas_data.descripcion}"/>                                
+                                <p:outputLabel value="Fecha Inicio: "/>
+                                <p:inputText value="#{tarifas_data.fechaInicio}"/>                                
+                                <p:outputLabel value="Fecha Fin: "/>
+                                <p:inputText value="#{tarifas_data.fechaFin}"/>                                
+                                <p:outputLabel value="Promoción: "/>
+                                <p:inputText value="#{tarifas_data.promocion}"/>                                
+                                <p:outputLabel value="Monto Adicional: "/>
+                                <p:inputText value="#{tarifas_data.cargoAdicional}"/>
+                            </p:panelGrid>
+                            <p:commandButton  value="Guardar" actionListener="#{tarifas_data.registrar(tarifas_data.precio, tarifas_data.descripcion, tarifas_data.fechaInicio, tarifas_data.fechaFin,tarifas_data.promocion,tarifas_data.cargoAdicional)}" update=":formListado:tablaUsuarios" oncomplete="PF('dialogoAgregar').hide();"/>
+                            
+                            <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
+                        </p:dialog>
+        </h:form>                       
                         
                     </div>
                 </div>

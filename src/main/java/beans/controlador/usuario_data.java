@@ -25,16 +25,6 @@ public class usuario_data implements Serializable {
     private String email;
     private Usuario usuarioSeleccionado; // Nueva propiedad para almacenar el usuario seleccionado
     private int id;
-    //PRUEBA
-    private int selectedUserId;
-
-    public int getSelectedUserId() {
-        return selectedUserId;
-    }
-
-    public void setSelectedUserId(int selectedUserId) {
-        this.selectedUserId = selectedUserId;
-    }
 
     public int getId() {
         return id;
