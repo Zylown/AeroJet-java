@@ -78,13 +78,13 @@ public class Tarifas implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tarifaID")
     private Collection<Boletos> boletosCollection;
 
-public Tarifas(String descripcion, Integer id, BigDecimal precio, Boolean promocion, Date fechaInicio, Date fechaFin, BigDecimal montoCargoAdicional) {
-    this.descripcion = descripcion;
+public Tarifas(Integer id,BigDecimal precio,String descripcion , Date fechaInicio, Date fechaFin,Boolean promocion, BigDecimal montoCargoAdicional) {
     this.id = id;
     this.precio = precio;
-    this.promocion = promocion;
+    this.descripcion = descripcion;
     this.fechaInicio = fechaInicio;
     this.fechaFin = fechaFin;
+    this.promocion = promocion;
     this.montoCargoAdicional = montoCargoAdicional;
 }
 

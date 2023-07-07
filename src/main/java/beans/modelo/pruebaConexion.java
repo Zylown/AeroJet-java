@@ -50,7 +50,9 @@ public class pruebaConexion {
         
         tarifas_data tarifadata = new tarifas_data();
         tarifadata.init();
-        tarifadata.registrar(new BigDecimal(100.00), "aea", dateFormato.parse("2023-08-01"),dateFormato.parse("2023-08-01"), false,new BigDecimal(00.00));
+        tarifadata.actualizarTarifas(3, new BigDecimal(950.00), "Prueba Dos", dateFormato.parse("2023-10-20") ,
+                dateFormato.parse("2023-10-25"),false, new BigDecimal(0.00));
+//        tarifadata.registrar("100.00", "xdxdxd", "2023-08-01","2023-08-01", "false","00.00");
 //tarifadata.registrarConsola();
         
         //usuarioService.insertarUsuario(usuario);

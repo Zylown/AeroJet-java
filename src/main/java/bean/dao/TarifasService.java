@@ -34,7 +34,8 @@ public class TarifasService {
             Date fechaFin = rs.getDate("FechaFin");
             BigDecimal montoCargoAdicional = rs.getBigDecimal("MontoCargoAdicional");
 
-            Tarifas tarifa = new Tarifas(descripcion, id, precio, promocion, fechaInicio, fechaFin, montoCargoAdicional);
+            //Tarifas tarifa = new Tarifas(descripcion, id, precio, promocion, fechaInicio, fechaFin, montoCargoAdicional);
+            Tarifas tarifa = new Tarifas(id, precio, descripcion, fechaInicio, fechaFin, promocion, montoCargoAdicional);
             tarifas.add(tarifa);
             }
 
@@ -48,9 +49,6 @@ public class TarifasService {
 public void insertarTarifa(BigDecimal precio, String descripcion, Date fechaInicio, Date fechaFin,Boolean promocion ,BigDecimal montoCargoAdicional) {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
          Statement stmt = conn.createStatement()) {
-        
-        System.out.println("Precio " + precio);
-        
         
         ResultSet rs = stmt.executeQuery("SELECT MAX(ID) FROM tarifas");
         int ultimoID = rs.next() ? rs.getInt(1) : 0;
@@ -73,5 +71,45 @@ public void insertarTarifa(BigDecimal precio, String descripcion, Date fechaInic
         System.out.println("Error al insertar usuario en la base de datos: " + e.getMessage());
     }
 }   
+    public void actualizarTarifa(int id, BigDecimal precio, String descripcion, Date fechaInicio, Date fechaFin,Boolean promocion ,BigDecimal montoCargoAdicional) {
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement pstmt = conn.prepareStatement("UPDATE tarifas SET Precio = ?, Descripcion = ?, Promocion = ?, FechaInicio = ?, FechaFin = ?, MontoCargoAdicional = ? WHERE ID = ?")) {
+        
+        
+        pstmt.setBigDecimal(1, precio);
+        pstmt.setString(2, descripcion);
+        pstmt.setBoolean(3, promocion);
+        pstmt.setDate(4,new java.sql.Date(fechaInicio.getTime()));
+        pstmt.setDate(5,new java.sql.Date(fechaFin.getTime()));
+        pstmt.setBigDecimal(6,montoCargoAdicional);
+        pstmt.setInt(7, id);
+        
+        pstmt.executeUpdate();
+        
+        System.out.println("Precio: "+precio);
+        System.out.println("Descripcion: "+descripcion);
+        System.out.println("Incio: "+fechaInicio);
+        System.out.println("Fin: "+fechaFin);
+        System.out.println("Promocion: : "+promocion);
+        System.out.println("Cargo Adicional: "+montoCargoAdicional);
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+        System.out.println("Error al actualizar usuario en la base de datos: " + e.getMessage());
+    }
+}
     
+    public void eliminarTarifas(int id) {
+    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+         PreparedStatement stmt = conn.prepareStatement("DELETE FROM tarifas WHERE ID = ?")) {
+        //stmt.setInt(1, user.getId());        
+        stmt.setInt(1, id);
+        
+        stmt.executeUpdate();
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+        System.out.println("Error al eliminar usuario de la base de datos: " + e.getMessage());
+    }
+}
 }
