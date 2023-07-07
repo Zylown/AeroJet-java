@@ -142,9 +142,14 @@
                                 <p:outputLabel value="Fecha Inicio: "/>
                                 <p:datePicker value="#{tarifas_data.fechaInicio}"/>                                
                                 <p:outputLabel value="Fecha Fin: "/>
-                                <p:datePicker value="#{tarifas_data.fechaFin}"/>                                
+                                <p:datePicker value="#{tarifas_data.fechaFin}"/> 
+                                
                                 <p:outputLabel value="Promoción: "/>
-                                <p:inputText value="#{tarifas_data.promocion}"/>                                
+                                 <p:selectOneMenu value="#{tarifas_data.promocion}">
+                                    <f:selectItem itemLabel="True" itemValue="true" />
+                                    <f:selectItem itemLabel="False" itemValue="false" />
+                                 </p:selectOneMenu>
+                                
                                 <p:outputLabel value="Monto Adicional: "/>
                                 <p:inputNumber value="#{tarifas_data.cargoAdicional}"/>
                             </p:panelGrid>
@@ -177,7 +182,10 @@
             </p:datePicker>    
             
             <p:outputLabel value="Promoción: "/>
-            <p:inputText value="#{tarifas_data.tarifaSeleccionado.promocion}"/>   
+            <p:selectOneMenu value="#{tarifas_data.tarifaSeleccionado.promocion}">
+                                    <f:selectItem itemLabel="True" itemValue="true" />
+                                    <f:selectItem itemLabel="False" itemValue="false" />
+                                 </p:selectOneMenu> 
             
             <p:outputLabel value="Monto Adicional: "/>
             <p:inputNumber value="#{tarifas_data.tarifaSeleccionado.montoCargoAdicional}">
