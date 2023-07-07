@@ -2,7 +2,6 @@ package beans.controlador;
 
 import bean.dao.TarifasService;
 import beans.modelo.Tarifas;
-import beans.modelo.Usuario;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;

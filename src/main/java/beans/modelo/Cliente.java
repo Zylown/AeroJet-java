@@ -71,7 +71,7 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "clienteID")
     private Collection<Comentarios> comentariosCollection;
 
-    public Cliente(Integer id, String nombre, String apellido, Integer dni, Integer telefono, String genero, Date fechaNacimiento, String nacionalidad, String correoElectronico, Usuario usuario) {
+    public Cliente(Integer id, String nombre, String apellido, Integer dni, Integer telefono, String genero, Date fechaNacimiento, String nacionalidad, String correoElectronico) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -81,7 +81,6 @@ public class Cliente implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
         this.nacionalidad = nacionalidad;
         this.correoElectronico = correoElectronico;
-        this.usuario = usuario;
     }
     
     public Cliente() {

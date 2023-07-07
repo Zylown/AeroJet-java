@@ -1,6 +1,7 @@
 beans\modelo\Usuario.class
 beans\controlador\usuario_data.class
 bean\dao\ClienteService.class
+beans\controlador\cliente_data.class
 beans\modelo\Rutas.class
 bean\dao\AvionDao.class
 beans\modelo\Vuelos.class
