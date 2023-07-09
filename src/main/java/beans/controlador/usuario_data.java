@@ -10,8 +10,10 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.validator.ValidatorException;
 
 @ManagedBean(name = "usuario_data", eager = true)
 @ViewScoped
@@ -25,6 +27,15 @@ public class usuario_data implements Serializable {
     private String email;
     private Usuario usuarioSeleccionado; // Nueva propiedad para almacenar el usuario seleccionado
     private int id;
+    private boolean terminosAceptados; // Nueva propiedad para almacenar el estado de aceptación de los términos
+
+    public boolean isTerminosAceptados() {
+        return terminosAceptados;
+    }
+
+    public void setTerminosAceptados(boolean terminosAceptados) {
+        this.terminosAceptados = terminosAceptados;
+    }
 
     public int getId() {
         return id;
@@ -87,14 +98,6 @@ public class usuario_data implements Serializable {
     public void init() {
         usuarioService = new UsuarioService();
         usuarios = usuarioService.getAllUsuario();
-
-        /*for (Usuario usuario : usuarios) {
-        System.out.println("ID: " + usuario.getId());
-        System.out.println("Nombre: " + usuario.getNombreUsuario());
-        System.out.println("Contraseña: " + usuario.getContraseña());
-        System.out.println("Correo: " + usuario.getEmail());
-        System.out.println("-----------------------");
-    }*/
     }
 
     public void validarCuenta(String nombreUsuario, String contraseña) throws IOException {
@@ -122,7 +125,42 @@ public class usuario_data implements Serializable {
         }
     }
 
+    public void validarEmail(FacesContext context, UIComponent component, Object value) {
+        String email = (String) value;
+        String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+        if (!email.matches(emailPattern)) { //.matches es un metodo String para verificar el  texto(email) coincide con el patron(emailpattern)
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo electrónico no es válido", null);
+            throw new ValidatorException(message);
+        }
+    }
+
+    public void validarPassword(FacesContext context, UIComponent component, Object value) {
+        String password = (String) value;
+
+        if (password.length() <= 8) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña debe tener más de 8 caracteres", null);
+            throw new ValidatorException(message);
+        }
+    }
+
+    public void validarUsuario(FacesContext context, UIComponent component, Object value) {
+        String usuario = (String) value;
+        String pattern = "^[a-zA-Z0-9]+$";
+        if (!usuario.matches(pattern) || usuario.length() <= 5) { //Se verifica si el usuario no coincide con el patrón 
+            //Es con OR || porque si una funciona y la otra no, entonces no entra, si fuera && seria si solo si las dos funcionan
+            //si una no entra, salta error, lo cual esta bien que sean independientes
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario contiene caracteres inválidos o tiene menos de 6 caracteres", null);
+            throw new ValidatorException(message);
+        }
+    }
+
     public void registrar(String nombreUsuario, String contraseña, String email) throws IOException {
+        if (!terminosAceptados) { // es igual a: terminosAceptados == false 
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe aceptar los términos y condiciones", null);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return; // Detener el registro si los términos no están aceptados
+        }
         Usuario nuevoUsuario = new Usuario();
         nuevoUsuario.setNombreUsuario(nombreUsuario);
         nuevoUsuario.setContraseña(contraseña);
@@ -169,17 +207,4 @@ public class usuario_data implements Serializable {
         FacesContext.getCurrentInstance().addMessage("formListado", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado exitosamente", null));
 
     }
-
-
-    /*
-public void validarCuentaConsola() {
-    Scanner scanner = new Scanner(System.in);
-    
-    System.out.print("Ingrese el nombre de usuario: ");
-    String nombreUsuario = scanner.nextLine();
-    System.out.print("Ingrese la contraseña: ");
-    String contraseña = scanner.nextLine();
-    
-    validarCuenta(nombreUsuario, contraseña);
-}*/
 }

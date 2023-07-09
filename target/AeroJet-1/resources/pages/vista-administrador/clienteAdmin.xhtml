@@ -19,65 +19,65 @@
     </h:head>
     <h:body>
         <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                    <i class="icon-reorder shaded"></i></a><a class="brand" href="indexadmin.html">Admin Panel </a>
-                <div class="nav-collapse collapse navbar-inverse-collapse">
-                    <ul class="nav nav-icons">
-                        <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
-                        <li><a href="#"><i class="icon-eye-open"></i></a></li>
-                        <li><a href="#"><i class="icon-bar-chart"></i></a></li>
-                    </ul>
-                    <h:form class="navbar-search pull-left input-append">
-                        <!--<input type="text" class="span3">
-                        <button class="btn" type="button">
-                            <i class="icon-search"></i>
-                        </button>-->
-                    </h:form>
-                    <ul class="nav pull-right">
-                        <li><a href="#">Apoyo </a></li>
-                        <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="images/user.png" class="nav-avatar" />
-                                <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Your Profile</a></li>
-                                <li><a href="#">Edit Profile</a></li>
-                                <li><a href="#">Account Settings</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                        <i class="icon-reorder shaded"></i></a><a class="brand" href="indexadmin.html">Admin Panel </a>
+                    <div class="nav-collapse collapse navbar-inverse-collapse">
+                        <ul class="nav nav-icons">
+                            <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
+                            <li><a href="#"><i class="icon-eye-open"></i></a></li>
+                            <li><a href="#"><i class="icon-bar-chart"></i></a></li>
+                        </ul>
+                        <h:form class="navbar-search pull-left input-append">
+                            <!--<input type="text" class="span3">
+                            <button class="btn" type="button">
+                                <i class="icon-search"></i>
+                            </button>-->
+                        </h:form>
+                        <ul class="nav pull-right">
+                            <li><a href="#">Apoyo </a></li>
+                            <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="images/user.png" class="nav-avatar" />
+                                    <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Your Profile</a></li>
+                                    <li><a href="#">Edit Profile</a></li>
+                                    <li><a href="#">Account Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.nav-collapse -->
                 </div>
-                <!-- /.nav-collapse -->
             </div>
+            <!-- /navbar-inner -->
         </div>
-        <!-- /navbar-inner -->
-    </div>
         <div class="wrapper">
             <div class="container">
                 <div class="row">
                     <div class="span3">
                         <div class="sidebar">
-                        <ul class="widget widget-menu unstyled">
-                            <li class="active"><a href="indexadmin.xhtml"><i class="menu-icon icon-dashboard"></i>Panel
-                                </a></li>
-                            <li><a href="activity.html"><i class="menu-icon icon-bullhorn"></i>Comentarios </a>
-                            </li>
-                            <li><a href="message.html"><i class="menu-icon icon-inbox"></i>Mensajes <b
-                                        class="label green pull-right">
-                                        11</b> </a></li>
-                        </ul>
-                        <!--/.widget-nav-->
-                        <ul class="widget widget-menu unstyled">
+                            <ul class="widget widget-menu unstyled">
+                                <li class="active"><a href="indexadmin.xhtml"><i class="menu-icon icon-dashboard"></i>Panel
+                                    </a></li>
+                                <li><a href="activity.html"><i class="menu-icon icon-bullhorn"></i>Comentarios </a>
+                                </li>
+                                <li><a href="message.html"><i class="menu-icon icon-inbox"></i>Mensajes <b
+                                            class="label green pull-right">
+                                            11</b> </a></li>
+                            </ul>
+                            <!--/.widget-nav-->
+                            <ul class="widget widget-menu unstyled">
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/usuariosadmin.xhtml"><i class="icon-user" style="margin-right: 10px;"></i>Usuarios</a></li>
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/avionesAdmin.xhtml"><i class="menu-icon icon-book"></i>Aviones</a></li>
                                 <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Vuelos </a></li>
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/rutasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Rutas </a></li>
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/tarifasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Tarifas </a></li>
-                        </ul>
-                        <!--/.widget-nav-->
+                            </ul>
+                            <!--/.widget-nav-->
                         </div>
                     </div>
                     <div class="span9">
@@ -85,91 +85,141 @@
                             <div class="btn-controls">
                                 <div class="btn-box-row row-fluid">
                                     #{cliente_data.init()} 
-        <h:form>
-            <p:commandButton value="Agregar Cliente" actionListener="#{cliente_data.init()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
-            <p:separator/>
-        </h:form>
-        
-        <h:form id="formListado">
-            <p:dataTable id="tablaCliente" paginator="true" paginatorPosition="bottom" rows="10" var="cliente" value="#{cliente_data.clientes}" emptyMessage="No existen clientes">
-                            <p:column headerText="Id">
-                                <h:outputText value="#{cliente.id}" />
-                            </p:column>
-                            <p:column headerText="Nombre">
-                                <h:outputText value="#{cliente.nombre}" />
-                            </p:column>
-                            <p:column headerText="Apellido">
-                                <h:outputText value="#{cliente.apellido}" />
-                            </p:column>
-                             <p:column headerText="DNI">
-                                 <h:outputText value="#{cliente.dni}" />
-                            </p:column>
-                             <p:column headerText="Teléfono">
-                                 <h:outputText value="#{cliente.telefono}" />
-                            </p:column>
-                             <p:column headerText="Género">
-                                 <h:outputText value="#{cliente.genero}" />
-                            </p:column>
-                             <p:column headerText="Fecha Nacimiento">
-                                 <h:outputText value="#{cliente.fechaNacimiento}">
-                                    <f:convertDateTime pattern="yyyy-MM-dd" />
-                                </h:outputText>
-                            </p:column>
-                             <p:column headerText="Nacionalidad">
-                                 <h:outputText value="#{cliente.nacionalidad}" />
-                            </p:column>
-                            <p:column headerText="Correo">
-                                <h:outputText value="#{cliente.correoElectronico}" />
-                            </p:column>
-<!--                            <p:column headerText="Modificar" style="text-align: center">
-                                <p:commandButton icon="pi pi-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
-                                    <f:setPropertyActionListener target="#{cliente_data.clienteSeleccionado}" value="#{cliente}"/>
-                                </p:commandButton>
-                            </p:column>
-                            <p:column headerText="Eliminar" style="text-align: center">
-                                <p:commandButton icon="pi pi-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
-                                    <f:setPropertyActionListener target="#{cliente_data.clienteSeleccionado}" value="#{cliente}" />
-                                </p:commandButton>
-                            </p:column> -->
-              </p:dataTable>
-        </h:form>
-                                    
-                <h:form id="formAgregar">
-                        <p:dialog id="dlgAgregar" header="Agregar Cliente" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
-                            <p:panelGrid columns="2" style="margin: 0 auto;">                                
-                                <p:outputLabel value="Nombre: "/>
-                                <p:inputText value="#{cliente_data.nombre}"/>  
-                                
-                                <p:outputLabel value="Apellido: "/>
-                                <p:inputText value="#{cliente_data.apellido}"/>   
-                                
-                                <p:outputLabel value="Dni: "/>
-                                <p:inputText value="#{cliente_data.dni}"/> 
-                                
-                                <p:outputLabel value="Telefono: "/>
-                                <p:inputText value="#{cliente_data.telefono}"/>  
-                                
-                                <p:outputLabel value="Genero: "/>
-                                <p:inputText value="#{cliente_data.genero}"/>   
-                                
-                                <p:outputLabel value="Fecha Nacimiento: "/>
-                                <p:datePicker value="#{cliente_data.fechaNacimiento}" locale="es" monthNavigator="true" yearNavigator="true"
-                                              yearRange="1920:2023"/>  
-                                
-                                <p:outputLabel value="Nacionalidad: "/>
-                                <p:inputText value="#{cliente_data.nacionalidad}"/> 
-                                
-                                <p:outputLabel value="Correo: "/>
-                                <p:inputText value="#{cliente_data.correo}"/>        
-                            </p:panelGrid>
-                            <p:commandButton  value="Guardar" actionListener="#{cliente_data.registrarr(cliente_data.nombre, 
-                                                                                cliente_data.apellido, cliente_data.dni, 
-                                                                                cliente_data.telefono, cliente_data.genero, 
-                                                                                cliente_data.fechaNacimiento, cliente_data.nacionalidad, 
-                                                                                cliente_data.correo)}" update=":formListado:tablaCliente" oncomplete="PF('dialogoAgregar').hide();"/>
-                            <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
-                        </p:dialog>
-                </h:form>                            
+                                    <h:form>
+                                        <p:commandButton value="Agregar Cliente" actionListener="#{cliente_data.init()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+                                        <p:separator/>
+                                    </h:form>
+
+                                    <h:form id="formListado">
+                                        <p:dataTable id="tablaCliente" paginator="true" paginatorPosition="bottom" rows="10" var="cliente" value="#{cliente_data.clientes}" emptyMessage="No existen clientes">
+                                            <p:column headerText="Id">
+                                                <h:outputText value="#{cliente.id}" />
+                                            </p:column>
+                                            <p:column headerText="Nombre">
+                                                <h:outputText value="#{cliente.nombre}" />
+                                            </p:column>
+                                            <p:column headerText="Apellido">
+                                                <h:outputText value="#{cliente.apellido}" />
+                                            </p:column>
+                                            <p:column headerText="DNI">
+                                                <h:outputText value="#{cliente.dni}" />
+                                            </p:column>
+                                            <p:column headerText="Teléfono">
+                                                <h:outputText value="#{cliente.telefono}" />
+                                            </p:column>
+                                            <p:column headerText="Género">
+                                                <h:outputText value="#{cliente.genero}" />
+                                            </p:column>
+                                            <p:column headerText="Fecha Nacimiento">
+                                                <h:outputText value="#{cliente.fechaNacimiento}">
+                                                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column headerText="Nacionalidad">
+                                                <h:outputText value="#{cliente.nacionalidad}" />
+                                            </p:column>
+                                            <p:column headerText="Correo">
+                                                <h:outputText value="#{cliente.correoElectronico}" />
+                                            </p:column>
+                                            <p:column headerText="Modificar" style="text-align: center">
+                                                <p:commandButton icon="pi pi-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
+                                                    <f:setPropertyActionListener target="#{cliente_data.clienteSeleccionado}" value="#{cliente}"/>
+                                                </p:commandButton>
+                                            </p:column>
+                                            <p:column headerText="Eliminar" style="text-align: center">
+                                                <p:commandButton icon="pi pi-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
+                                                    <f:setPropertyActionListener target="#{cliente_data.clienteSeleccionado}" value="#{cliente}" />
+                                                </p:commandButton>
+                                            </p:column> 
+                                        </p:dataTable>
+                                    </h:form>
+
+                                    <h:form id="formAgregar">
+                                        <p:dialog id="dlgAgregar" header="Agregar Cliente" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <p:panelGrid columns="2" style="margin: 0 auto;">                                
+                                                <p:outputLabel value="Nombre: "/>
+                                                <p:inputText value="#{cliente_data.nombre}"/>  
+
+                                                <p:outputLabel value="Apellido: "/>
+                                                <p:inputText value="#{cliente_data.apellido}"/>   
+
+                                                <p:outputLabel value="Dni: "/>
+                                                <p:inputText value="#{cliente_data.dni}"/> 
+
+                                                <p:outputLabel value="Telefono: "/>
+                                                <p:inputText value="#{cliente_data.telefono}"/>  
+
+                                                <p:outputLabel value="Genero: "/>
+                                                <p:inputText value="#{cliente_data.genero}"/>   
+
+                                                <p:outputLabel value="Fecha Nacimiento: "/>
+                                                <p:datePicker value="#{cliente_data.fechaNacimiento}" locale="es" monthNavigator="true" yearNavigator="true"
+                                                              yearRange="1920:2023"/>  
+
+                                                <p:outputLabel value="Nacionalidad: "/>
+                                                <p:inputText value="#{cliente_data.nacionalidad}"/> 
+
+                                                <p:outputLabel value="Correo: "/>
+                                                <p:inputText value="#{cliente_data.correo}"/>        
+                                            </p:panelGrid>
+                                            <p:commandButton  value="Guardar" actionListener="#{cliente_data.registrarr(cliente_data.nombre, 
+                                                                                                cliente_data.apellido, cliente_data.dni, 
+                                                                                                cliente_data.telefono, cliente_data.genero, 
+                                                                                                cliente_data.fechaNacimiento, cliente_data.nacionalidad, 
+                                                                                                cliente_data.correo)}" update=":formListado:tablaCliente" oncomplete="PF('dialogoAgregar').hide();"/>
+                                            <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
+                                        </p:dialog>
+                                    </h:form>
+                                    <h:form id="formModificar">
+                                        <p:dialog id="dlgModificar" header="Modificar Cliente" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <p:panelGrid columns="2" style="margin: 0 auto;">         
+
+                                                <p:outputLabel value="Nombre: "/>
+                                                <p:inputText value="#{cliente_data.clienteSeleccionado.nombre}"/>  
+
+                                                <p:outputLabel value="Apellido: "/>
+                                                <p:inputText value="#{cliente_data.clienteSeleccionado.apellido}"/>   
+
+                                                <p:outputLabel value="Dni: "/>
+                                                <p:inputText value="#{cliente_data.clienteSeleccionado.dni}"/> 
+
+                                                <p:outputLabel value="Telefono: "/>
+                                                <p:inputText value="#{cliente_data.clienteSeleccionado.telefono}"/>  
+
+                                                <p:outputLabel value="Genero: "/>
+                                                <p:inputText value="#{cliente_data.clienteSeleccionado.genero}"/>   
+
+                                                <p:outputLabel value="Fecha Nacimiento: "/>
+                                                <p:datePicker value="#{cliente_data.clienteSeleccionado.fechaNacimiento}" locale="es" monthNavigator="true" yearNavigator="true"
+                                                              yearRange="1920:2023"/>  
+
+                                                <p:outputLabel value="Nacionalidad: "/>
+                                                <p:inputText value="#{cliente_data.clienteSeleccionado.nacionalidad}"/> 
+
+                                                <p:outputLabel value="Correo: "/>
+                                                <p:inputText value="#{cliente_data.clienteSeleccionado.correoElectronico}"/>     
+
+                                            </p:panelGrid>
+                                            <p:commandButton value="Guardar" actionListener="#{cliente_data.actualizarCliente(cliente_data.clienteSeleccionado.id,cliente_data.clienteSeleccionado.nombre, 
+                                                                                                cliente_data.clienteSeleccionado.apellido, cliente_data.clienteSeleccionado.dni, 
+                                                                                                cliente_data.clienteSeleccionado.telefono, cliente_data.clienteSeleccionado.genero, 
+                                                                                                cliente_data.clienteSeleccionado.fechaNacimiento, cliente_data.clienteSeleccionado.nacionalidad, 
+                                                                                                cliente_data.clienteSeleccionado.correoElectronico)}" update=":formListado:tablaCliente" oncomplete="PF('dialogoModificar').hide();"/>
+                                            <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
+                                        </p:dialog>
+                                    </h:form>
+                                    <h:form id="formEliminar">
+                                        <p:dialog id="dlgEliminar" header="Eliminar Cliente" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <h:outputText value="Desea eliminar este registro con el id: #{cliente_data.clienteSeleccionado.id} ?"/>
+                                            <br/> <br/>
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <p:commandButton  value="Si" update=":formListado:tablaCliente" oncomplete="PF('dialogoEliminar').hide();">
+                                                    <p:ajax listener="#{cliente_data.eliminarUsuario(cliente_data.clienteSeleccionado.id, event)}"/>
+                                                </p:commandButton>
+                                                <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
+                                            </div>
+                                        </p:dialog>
+                                    </h:form> 
                                 </div>
                             </div>
                         </div>
@@ -177,18 +227,18 @@
                 </div>
             </div>
         </div>       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
     </h:body>
 </html>

@@ -17,202 +17,202 @@
         <title>AeroJet: Tarifas Panel</title>   
     </h:head>
     <h:body>
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                    <i class="icon-reorder shaded"></i></a><a class="brand" href="indexadmin.html">Admin Panel </a>
-                <div class="nav-collapse collapse navbar-inverse-collapse">
-                    <ul class="nav nav-icons">
-                        <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
-                        <li><a href="#"><i class="icon-eye-open"></i></a></li>
-                        <li><a href="#"><i class="icon-bar-chart"></i></a></li>
-                    </ul>
-                    <h:form class="navbar-search pull-left input-append">
-                        <!--<input type="text" class="span3">
-                        <button class="btn" type="button">
-                            <i class="icon-search"></i>
-                        </button>-->
-                    </h:form>
-                    <ul class="nav pull-right">
-                        <li><a href="#">Apoyo </a></li>
-                        <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="images/user.png" class="nav-avatar" />
-                                <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Your Profile</a></li>
-                                <li><a href="#">Edit Profile</a></li>
-                                <li><a href="#">Account Settings</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                        <i class="icon-reorder shaded"></i></a><a class="brand" href="indexadmin.html">Admin Panel </a>
+                    <div class="nav-collapse collapse navbar-inverse-collapse">
+                        <ul class="nav nav-icons">
+                            <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
+                            <li><a href="#"><i class="icon-eye-open"></i></a></li>
+                            <li><a href="#"><i class="icon-bar-chart"></i></a></li>
+                        </ul>
+                        <h:form class="navbar-search pull-left input-append">
+                            <!--<input type="text" class="span3">
+                            <button class="btn" type="button">
+                                <i class="icon-search"></i>
+                            </button>-->
+                        </h:form>
+                        <ul class="nav pull-right">
+                            <li><a href="#">Apoyo </a></li>
+                            <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="images/user.png" class="nav-avatar" />
+                                    <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Your Profile</a></li>
+                                    <li><a href="#">Edit Profile</a></li>
+                                    <li><a href="#">Account Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.nav-collapse -->
                 </div>
-                <!-- /.nav-collapse -->
             </div>
+            <!-- /navbar-inner -->
         </div>
-        <!-- /navbar-inner -->
-    </div>
-        
+
         <div class="wrapper">
             <div class="container">
                 <div class="row">
                     <div class="span3">
                         <div class="sidebar">
-                        <ul class="widget widget-menu unstyled">
-                            <li class="active"><a href="indexadmin.xhtml"><i class="menu-icon icon-dashboard"></i>Panel
-                                </a></li>
-                            <li><a href="activity.html"><i class="menu-icon icon-bullhorn"></i>Comentarios </a>
-                            </li>
-                            <li><a href="message.html"><i class="menu-icon icon-inbox"></i>Mensajes <b
-                                        class="label green pull-right">
-                                        11</b> </a></li>
-                        </ul>
-                        <!--/.widget-nav-->
-                        <ul class="widget widget-menu unstyled">
+                            <ul class="widget widget-menu unstyled">
+                                <li class="active"><a href="indexadmin.xhtml"><i class="menu-icon icon-dashboard"></i>Panel
+                                    </a></li>
+                                <li><a href="activity.html"><i class="menu-icon icon-bullhorn"></i>Comentarios </a>
+                                </li>
+                                <li><a href="message.html"><i class="menu-icon icon-inbox"></i>Mensajes <b
+                                            class="label green pull-right">
+                                            11</b> </a></li>
+                            </ul>
+                            <!--/.widget-nav-->
+                            <ul class="widget widget-menu unstyled">
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/usuariosadmin.xhtml"><i class="icon-user" style="margin-right: 10px;"></i>Usuarios</a></li>
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/avionesAdmin.xhtml"><i class="menu-icon icon-book"></i>Aviones</a></li>
                                 <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Vuelos </a></li>
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/rutasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Rutas </a></li>
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/tarifasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Tarifas </a></li>
-                        </ul>
-                        <!--/.widget-nav-->
+                            </ul>
+                            <!--/.widget-nav-->
                         </div>                        
                     </div>
-        
-        <div class="span9">
-            <div class="content">
-                <div class="btn-controls">
-                    <div class="btn-box-row row-fluid">
-                        #{tarifas_data.init()}
-        <h:form>
-            <p:commandButton value="Agregar Tarifa" actionListener="#{tarifas_data.init()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
-            <p:separator/>
-        </h:form> 
-       
-         <h:form id="formListado">
-             <p:dataTable id="tablaTarifas" paginator="true" paginatorPosition="bottom" rows="10" var="tarifas" value="#{tarifas_data.tarifas}" emptyMessage="No existen tarifas">
-                            <p:column headerText="Id">
-                                <h:outputText value="#{tarifas.id}" />
-                            </p:column>
-                            <p:column headerText="Precio">
-                                <h:outputText value="#{tarifas.precio}" />
-                            </p:column>
-                            <p:column headerText="Descripción">
-                                <h:outputText value="#{tarifas.descripcion}" />
-                            </p:column>
-                            <p:column headerText="Fecha Inicio">
-                                <h:outputText value="#{tarifas.fechaInicio}">
-                                    <f:convertDateTime pattern="yyyy-MM-dd" />
-                                </h:outputText>
-                            </p:column>
-                            <p:column headerText="Fecha Fin">
-                                <h:outputText value="#{tarifas.fechaFin}" >
-                                    <f:convertDateTime pattern="yyyy-MM-dd" />
-                                </h:outputText>
-                            </p:column>
-                            <p:column headerText="Promocion">
-                                <h:outputText value="#{tarifas.promocion}" />
-                            </p:column>
-                            <p:column headerText="Cargo Adicional">
-                                <h:outputText value="#{tarifas.montoCargoAdicional}" />
-                            </p:column>
-                                             
-                            <p:column headerText="Modificar" style="text-align: center">
-                                <p:commandButton icon="pi pi-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
-                                    <f:setPropertyActionListener target="#{tarifas_data.tarifaSeleccionado}" value="#{tarifas}"/>
-                                </p:commandButton>
-                            </p:column>
-                            <p:column headerText="Eliminar" style="text-align: center">
-                                <p:commandButton icon="pi pi-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
-                                    <f:setPropertyActionListener target="#{tarifas_data.tarifaSeleccionado}" value="#{tarifas}" />
-                                </p:commandButton>
-                            </p:column>
-              </p:dataTable>
-        </h:form>
-                       
-                    <h:form id="formAgregar">
-                        <p:dialog id="dlgAgregar" header="Agregar Tarifa" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
-                            <p:panelGrid columns="2" style="margin: 0 auto;">                                
-                                <p:outputLabel value="Precio: "/>
-                                <p:inputNumber value="#{tarifas_data.precio}"/>                            
-                                <p:outputLabel value="Descripción: "/>
-                                <p:inputText value="#{tarifas_data.descripcion}"/>                                
-                                <p:outputLabel value="Fecha Inicio: "/>
-                                <p:datePicker value="#{tarifas_data.fechaInicio}"/>                                
-                                <p:outputLabel value="Fecha Fin: "/>
-                                <p:datePicker value="#{tarifas_data.fechaFin}"/> 
-                                
-                                <p:outputLabel value="Promoción: "/>
-                                 <p:selectOneMenu value="#{tarifas_data.promocion}">
-                                    <f:selectItem itemLabel="True" itemValue="true" />
-                                    <f:selectItem itemLabel="False" itemValue="false" />
-                                 </p:selectOneMenu>
-                                
-                                <p:outputLabel value="Monto Adicional: "/>
-                                <p:inputNumber value="#{tarifas_data.cargoAdicional}"/>
-                            </p:panelGrid>
-                     
-                            <p:commandButton  value="Guardar" actionListener="#{tarifas_data.registrarr(tarifas_data.precio,tarifas_data.descripcion,tarifas_data.fechaInicio,tarifas_data.fechaFin,tarifas_data.promocion,tarifas_data.cargoAdicional)}" update=":formListado:tablaTarifas" oncomplete="PF('dialogoAgregar').hide();"/>    
-                            <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
-                        </p:dialog>
-                    </h:form>   
-                        
-<h:form id="formModificar">
-    <p:dialog id="dlgModificar" header="Modificar Tarifa" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
-        <p:panelGrid columns="2" style="margin: 0 auto;">         
-            
-            <p:outputLabel value="Precio: "/>
-            <p:inputNumber value="#{tarifas_data.tarifaSeleccionado.precio}">
-                    
-            </p:inputNumber>     
-            
-            <p:outputLabel value="Descripción: "/>
-            <p:inputText value="#{tarifas_data.tarifaSeleccionado.descripcion}"/>    
-            
-            <p:outputLabel value="Fecha Inicio: "/>
-            <p:datePicker value="#{tarifas_data.tarifaSeleccionado.fechaInicio}">
-                            
-            </p:datePicker>   
-            
-            <p:outputLabel value="Fecha Fin: "/>
-            <p:datePicker value="#{tarifas_data.tarifaSeleccionado.fechaFin}">
-                            
-            </p:datePicker>    
-            
-            <p:outputLabel value="Promoción: "/>
-            <p:selectOneMenu value="#{tarifas_data.tarifaSeleccionado.promocion}">
-                                    <f:selectItem itemLabel="True" itemValue="true" />
-                                    <f:selectItem itemLabel="False" itemValue="false" />
-                                 </p:selectOneMenu> 
-            
-            <p:outputLabel value="Monto Adicional: "/>
-            <p:inputNumber value="#{tarifas_data.tarifaSeleccionado.montoCargoAdicional}">
-                    
-            </p:inputNumber>     
-            
-        </p:panelGrid>
-        <p:commandButton value="Guardar" actionListener="#{tarifas_data.actualizarTarifas(tarifas_data.tarifaSeleccionado.id, tarifas_data.tarifaSeleccionado.precio,
-                                                       tarifas_data.tarifaSeleccionado.descripcion,tarifas_data.tarifaSeleccionado.fechaInicio,tarifas_data.tarifaSeleccionado.fechaFin, 
-                                                       tarifas_data.tarifaSeleccionado.promocion, tarifas_data.tarifaSeleccionado.montoCargoAdicional)}" update=":formListado:tablaTarifas" oncomplete="PF('dialogoModificar').hide();"/>
-        <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
-    </p:dialog>
-</h:form>
-                                   
-        <h:form id="formEliminar">
-                        <p:dialog id="dlgEliminar" header="Eliminar Tarifas" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
-                            <h:outputText value="Desea eliminar este registro con el id: #{tarifas_data.tarifaSeleccionado.id} ?"/>
-                            <br/> <br/>
-                            <div style="display: flex; justify-content: space-between;">
-                                <p:commandButton  value="Si" update=":formListado:tablaTarifas" oncomplete="PF('dialogoEliminar').hide();">
-                                    <p:ajax listener="#{tarifas_data.eliminarUsuario(tarifas_data.tarifaSeleccionado.id, event)}"/>
-                                </p:commandButton>
-                            <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
-                            </div>
-                        </p:dialog>
-        </h:form>                        
-        
+
+                    <div class="span9">
+                        <div class="content">
+                            <div class="btn-controls">
+                                <div class="btn-box-row row-fluid">
+                                    #{tarifas_data.init()}
+                                    <h:form>
+                                        <p:commandButton value="Agregar Tarifa" actionListener="#{tarifas_data.init()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+                                        <p:separator/>
+                                    </h:form> 
+
+                                    <h:form id="formListado">
+                                        <p:dataTable id="tablaTarifas" paginator="true" paginatorPosition="bottom" rows="10" var="tarifas" value="#{tarifas_data.tarifas}" emptyMessage="No existen tarifas">
+                                            <p:column headerText="Id">
+                                                <h:outputText value="#{tarifas.id}" />
+                                            </p:column>
+                                            <p:column headerText="Precio">
+                                                <h:outputText value="#{tarifas.precio}" />
+                                            </p:column>
+                                            <p:column headerText="Descripción">
+                                                <h:outputText value="#{tarifas.descripcion}" />
+                                            </p:column>
+                                            <p:column headerText="Fecha Inicio">
+                                                <h:outputText value="#{tarifas.fechaInicio}">
+                                                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column headerText="Fecha Fin">
+                                                <h:outputText value="#{tarifas.fechaFin}" >
+                                                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column headerText="Promocion">
+                                                <h:outputText value="#{tarifas.promocion}" />
+                                            </p:column>
+                                            <p:column headerText="Cargo Adicional">
+                                                <h:outputText value="#{tarifas.montoCargoAdicional}" />
+                                            </p:column>
+
+                                            <p:column headerText="Modificar" style="text-align: center">
+                                                <p:commandButton icon="pi pi-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
+                                                    <f:setPropertyActionListener target="#{tarifas_data.tarifaSeleccionado}" value="#{tarifas}"/>
+                                                </p:commandButton>
+                                            </p:column>
+                                            <p:column headerText="Eliminar" style="text-align: center">
+                                                <p:commandButton icon="pi pi-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
+                                                    <f:setPropertyActionListener target="#{tarifas_data.tarifaSeleccionado}" value="#{tarifas}" />
+                                                </p:commandButton>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </h:form>
+
+                                    <h:form id="formAgregar">
+                                        <p:dialog id="dlgAgregar" header="Agregar Tarifa" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <p:panelGrid columns="2" style="margin: 0 auto;">                                
+                                                <p:outputLabel value="Precio: "/>
+                                                <p:inputNumber value="#{tarifas_data.precio}"/>                            
+                                                <p:outputLabel value="Descripción: "/>
+                                                <p:inputText value="#{tarifas_data.descripcion}"/>                                
+                                                <p:outputLabel value="Fecha Inicio: "/>
+                                                <p:datePicker value="#{tarifas_data.fechaInicio}"/>                                
+                                                <p:outputLabel value="Fecha Fin: "/>
+                                                <p:datePicker value="#{tarifas_data.fechaFin}"/> 
+
+                                                <p:outputLabel value="Promoción: "/>
+                                                <p:selectOneMenu value="#{tarifas_data.promocion}">
+                                                    <f:selectItem itemLabel="True" itemValue="true" />
+                                                    <f:selectItem itemLabel="False" itemValue="false" />
+                                                </p:selectOneMenu>
+
+                                                <p:outputLabel value="Monto Adicional: "/>
+                                                <p:inputNumber value="#{tarifas_data.cargoAdicional}"/>
+                                            </p:panelGrid>
+
+                                            <p:commandButton  value="Guardar" actionListener="#{tarifas_data.registrarr(tarifas_data.precio,tarifas_data.descripcion,tarifas_data.fechaInicio,tarifas_data.fechaFin,tarifas_data.promocion,tarifas_data.cargoAdicional)}" update=":formListado:tablaTarifas" oncomplete="PF('dialogoAgregar').hide();"/>    
+                                            <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
+                                        </p:dialog>
+                                    </h:form>   
+
+                                    <h:form id="formModificar">
+                                        <p:dialog id="dlgModificar" header="Modificar Tarifa" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <p:panelGrid columns="2" style="margin: 0 auto;">         
+
+                                                <p:outputLabel value="Precio: "/>
+                                                <p:inputNumber value="#{tarifas_data.tarifaSeleccionado.precio}">
+
+                                                </p:inputNumber>     
+
+                                                <p:outputLabel value="Descripción: "/>
+                                                <p:inputText value="#{tarifas_data.tarifaSeleccionado.descripcion}"/>    
+
+                                                <p:outputLabel value="Fecha Inicio: "/>
+                                                <p:datePicker value="#{tarifas_data.tarifaSeleccionado.fechaInicio}">
+
+                                                </p:datePicker>   
+
+                                                <p:outputLabel value="Fecha Fin: "/>
+                                                <p:datePicker value="#{tarifas_data.tarifaSeleccionado.fechaFin}">
+
+                                                </p:datePicker>    
+
+                                                <p:outputLabel value="Promoción: "/>
+                                                <p:selectOneMenu value="#{tarifas_data.tarifaSeleccionado.promocion}">
+                                                    <f:selectItem itemLabel="True" itemValue="true" />
+                                                    <f:selectItem itemLabel="False" itemValue="false" />
+                                                </p:selectOneMenu> 
+
+                                                <p:outputLabel value="Monto Adicional: "/>
+                                                <p:inputNumber value="#{tarifas_data.tarifaSeleccionado.montoCargoAdicional}">
+
+                                                </p:inputNumber>     
+
+                                            </p:panelGrid>
+                                            <p:commandButton value="Guardar" actionListener="#{tarifas_data.actualizarTarifas(tarifas_data.tarifaSeleccionado.id, tarifas_data.tarifaSeleccionado.precio,
+                                                                                               tarifas_data.tarifaSeleccionado.descripcion,tarifas_data.tarifaSeleccionado.fechaInicio,tarifas_data.tarifaSeleccionado.fechaFin, 
+                                                                                               tarifas_data.tarifaSeleccionado.promocion, tarifas_data.tarifaSeleccionado.montoCargoAdicional)}" update=":formListado:tablaTarifas" oncomplete="PF('dialogoModificar').hide();"/>
+                                            <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
+                                        </p:dialog>
+                                    </h:form>
+
+                                    <h:form id="formEliminar">
+                                        <p:dialog id="dlgEliminar" header="Eliminar Tarifas" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <h:outputText value="Desea eliminar este registro con el id: #{tarifas_data.tarifaSeleccionado.id} ?"/>
+                                            <br/> <br/>
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <p:commandButton  value="Si" update=":formListado:tablaTarifas" oncomplete="PF('dialogoEliminar').hide();">
+                                                    <p:ajax listener="#{tarifas_data.eliminarUsuario(tarifas_data.tarifaSeleccionado.id, event)}"/>
+                                                </p:commandButton>
+                                                <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
+                                            </div>
+                                        </p:dialog>
+                                    </h:form>                        
+
                                 </div>
                             </div>
                         </div>
