@@ -71,10 +71,12 @@
                             </ul>
                             <!--/.widget-nav-->
                             <ul class="widget widget-menu unstyled">
-                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/usuariosadmin.xhtml"><i class="icon-user" style="margin-right: 10px;"></i>Usuarios</a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/usuariosadmin.xhtml"><i class="icon-user"></i>Usuarios</a></li>
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/avionesAdmin.xhtml"><i class="menu-icon icon-book"></i>Aviones</a></li>
-                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Vuelos </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/vuelosAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Vuelos </a></li>
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/rutasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Rutas </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/clienteAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Clientes </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/escalasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Escalas </a></li>
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/tarifasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Tarifas </a></li>
                             </ul>
                             <!--/.widget-nav-->
@@ -201,10 +203,10 @@
 
                                             </p:panelGrid>
                                             <p:commandButton value="Guardar" actionListener="#{cliente_data.actualizarCliente(cliente_data.clienteSeleccionado.id,cliente_data.clienteSeleccionado.nombre, 
-                                                                                                cliente_data.clienteSeleccionado.apellido, cliente_data.clienteSeleccionado.dni, 
-                                                                                                cliente_data.clienteSeleccionado.telefono, cliente_data.clienteSeleccionado.genero, 
-                                                                                                cliente_data.clienteSeleccionado.fechaNacimiento, cliente_data.clienteSeleccionado.nacionalidad, 
-                                                                                                cliente_data.clienteSeleccionado.correoElectronico)}" update=":formListado:tablaCliente" oncomplete="PF('dialogoModificar').hide();"/>
+                                                                                               cliente_data.clienteSeleccionado.apellido, cliente_data.clienteSeleccionado.dni, 
+                                                                                               cliente_data.clienteSeleccionado.telefono, cliente_data.clienteSeleccionado.genero, 
+                                                                                               cliente_data.clienteSeleccionado.fechaNacimiento, cliente_data.clienteSeleccionado.nacionalidad, 
+                                                                                               cliente_data.clienteSeleccionado.correoElectronico)}" update=":formListado:tablaCliente" oncomplete="PF('dialogoModificar').hide();"/>
                                             <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
                                         </p:dialog>
                                     </h:form>
@@ -214,7 +216,7 @@
                                             <br/> <br/>
                                             <div style="display: flex; justify-content: space-between;">
                                                 <p:commandButton  value="Si" update=":formListado:tablaCliente" oncomplete="PF('dialogoEliminar').hide();">
-                                                    <p:ajax listener="#{cliente_data.eliminarUsuario(cliente_data.clienteSeleccionado.id, event)}"/>
+                                                    <p:ajax listener="#{cliente_data.eliminarCliente(cliente_data.clienteSeleccionado.id, event)}"/>
                                                 </p:commandButton>
                                                 <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
                                             </div>
@@ -227,18 +229,5 @@
                 </div>
             </div>
         </div>       
-
-
-
-
-
-
-
-
-
-
-
-
-
     </h:body>
 </html>

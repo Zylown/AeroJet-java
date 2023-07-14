@@ -9,6 +9,7 @@ beans\modelo\pruebaConexion.class
 beans\controlador\usuariosPrueba_data.class
 beans\modelo\Comentarios.class
 beans\controlador\tarifas_data.class
+beans\controlador\ControladorRutas.class
 beans\modelo\aeropuertoPrueba.class
 beans\modelo\Conexion.class
 beans\modelo\Tarifas.class
@@ -23,6 +24,7 @@ bean\dao\VuelosService.class
 beans\modelo\Asientos.class
 beans\modelo\Aviones.class
 beans\controlador\ControladorAvion.class
+bean\dao\RutaDao.class
 beans\controlador\vuelos_data.class
 bean\dao\AeropuertoService.class
 beans\modelo\usuariosPrueba.class

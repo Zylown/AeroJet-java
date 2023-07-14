@@ -22,7 +22,6 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 public class tarifas_data implements Serializable {
     private SimpleDateFormat dateFormato = new SimpleDateFormat("yyyy-MM-dd");
-    
     private List<Tarifas> tarifas;
     private TarifasService tarifaService;
     private Tarifas TarifaSeleccionado; // Nueva propiedad para almacenar el usuario seleccionado
@@ -186,64 +185,6 @@ public class tarifas_data implements Serializable {
         FacesContext.getCurrentInstance().addMessage("formListado", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado exitosamente", null));
 
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-  public void registrar(String strPrecio, String descripcion, String strFechaInicio, String strFechaFin, String strPromocion, String strMontoCargoAdicional) throws IOException, ParseException {
-    Tarifas nuevoTarifa = new Tarifas();
-    
-    BigDecimal precio = new BigDecimal(strPrecio);
-    Date fechaInicio = dateFormato.parse(strFechaInicio);
-    Date fechaFin = dateFormato.parse(strFechaFin);
-    Boolean promocion = Boolean.valueOf(strPromocion);
-    BigDecimal montoCargoAdicional = new BigDecimal(strMontoCargoAdicional);
-
-    
-    nuevoTarifa.setPrecio(precio);
-    nuevoTarifa.setDescripcion(descripcion);
-    nuevoTarifa.setFechaInicio(fechaInicio);
-    nuevoTarifa.setFechaFin(fechaFin);
-    nuevoTarifa.setPromocion(promocion);
-    nuevoTarifa.setMontoCargoAdicional(montoCargoAdicional);
-
-    // Aquí puedes llamar a tu servicio de UsuarioService y utilizar un método para insertar el nuevo usuario en la base de datos
-    tarifaService.insertarTarifa(precio, descripcion, fechaInicio, fechaFin, promocion, montoCargoAdicional);
-
-    // Obtener la lista de usuarios actualizada de la base de datos
-    tarifas = tarifaService.getAllTarifas();
-
-    // Otras acciones después del registro, como mostrar un mensaje de éxito o redirigir a otra página
-    FacesContext.getCurrentInstance().addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro exitoso", null));
-}
-    */
 public void registrarConsola() throws IOException, ParseException {
     try {
         Scanner scanner = new Scanner(System.in);

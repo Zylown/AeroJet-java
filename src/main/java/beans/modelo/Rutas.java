@@ -5,14 +5,11 @@
 package beans.modelo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -20,10 +17,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author Unknown
- */
 @Entity
 @Table(name = "rutas")
 @NamedQueries({
@@ -35,32 +28,34 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Rutas.findByDuracionEstimada", query = "SELECT r FROM Rutas r WHERE r.duracionEstimada = :duracionEstimada")})
 public class Rutas implements Serializable {
 
-    @Size(max = 50)
-    @Column(name = "PuntoOrigen")
-    private String puntoOrigen;
-    @Size(max = 50)
-    @Column(name = "PuntoDestino")
-    private String puntoDestino;
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 50)
+    @Column(name = "PuntoOrigen")
+    private String puntoOrigen;
+    @Size(max = 50)
+    @Column(name = "PuntoDestino")
+    private String puntoDestino;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Distancia")
-    private BigDecimal distancia;
+    private Integer distancia;
     @Column(name = "DuracionEstimada")
     private Integer duracionEstimada;
     @OneToMany(mappedBy = "rutaID")
     private Collection<Vuelos> vuelosCollection;
-    @JoinColumn(name = "AeropuertoDestino_ID", referencedColumnName = "ID")
-    @ManyToOne
-    private Aeropuerto aeropuertoDestinoID;
-    @JoinColumn(name = "AeropuertoOrigen_ID", referencedColumnName = "ID")
-    @ManyToOne
-    private Aeropuerto aeropuertoOrigenID;
+    
+    
+    public Rutas(Integer id, String puntoOrigen, String puntoDestino, Integer distancia, Integer duracionEstimada) {
+        this.id = id;
+        this.puntoOrigen = puntoOrigen;
+        this.puntoDestino = puntoDestino;
+        this.distancia = distancia;
+        this.duracionEstimada = duracionEstimada;
+    }
 
     public Rutas() {
     }
@@ -77,12 +72,27 @@ public class Rutas implements Serializable {
         this.id = id;
     }
 
+    public String getPuntoOrigen() {
+        return puntoOrigen;
+    }
 
-    public BigDecimal getDistancia() {
+    public void setPuntoOrigen(String puntoOrigen) {
+        this.puntoOrigen = puntoOrigen;
+    }
+
+    public String getPuntoDestino() {
+        return puntoDestino;
+    }
+
+    public void setPuntoDestino(String puntoDestino) {
+        this.puntoDestino = puntoDestino;
+    }
+
+    public Integer getDistancia() {
         return distancia;
     }
 
-    public void setDistancia(BigDecimal distancia) {
+    public void setDistancia(Integer distancia) {
         this.distancia = distancia;
     }
 
@@ -102,21 +112,6 @@ public class Rutas implements Serializable {
         this.vuelosCollection = vuelosCollection;
     }
 
-    public Aeropuerto getAeropuertoDestinoID() {
-        return aeropuertoDestinoID;
-    }
-
-    public void setAeropuertoDestinoID(Aeropuerto aeropuertoDestinoID) {
-        this.aeropuertoDestinoID = aeropuertoDestinoID;
-    }
-
-    public Aeropuerto getAeropuertoOrigenID() {
-        return aeropuertoOrigenID;
-    }
-
-    public void setAeropuertoOrigenID(Aeropuerto aeropuertoOrigenID) {
-        this.aeropuertoOrigenID = aeropuertoOrigenID;
-    }
 
     @Override
     public int hashCode() {
@@ -141,22 +136,6 @@ public class Rutas implements Serializable {
     @Override
     public String toString() {
         return "beans.conexion.Rutas[ id=" + id + " ]";
-    }
-
-    public String getPuntoOrigen() {
-        return puntoOrigen;
-    }
-
-    public void setPuntoOrigen(String puntoOrigen) {
-        this.puntoOrigen = puntoOrigen;
-    }
-
-    public String getPuntoDestino() {
-        return puntoDestino;
-    }
-
-    public void setPuntoDestino(String puntoDestino) {
-        this.puntoDestino = puntoDestino;
     }
     
 }

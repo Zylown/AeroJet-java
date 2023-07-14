@@ -9,7 +9,7 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean(name = "vuelos_data", eager = true)
 @ViewScoped
 public class vuelos_data implements Serializable{
-    
+   
    private Date fecha;
     
    public void onClick(Date fecha){

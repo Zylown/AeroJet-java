@@ -18,77 +18,80 @@
         <title>AeroJet: Admin Panel</title>
     </h:head>
     <h:body>
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                    <i class="icon-reorder shaded"></i></a><a class="brand" href="indexadmin.html">Admin Panel </a>
-                <div class="nav-collapse collapse navbar-inverse-collapse">
-                    <ul class="nav nav-icons">
-                        <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
-                        <li><a href="#"><i class="icon-eye-open"></i></a></li>
-                        <li><a href="#"><i class="icon-bar-chart"></i></a></li>
-                    </ul>
-                    <h:form class="navbar-search pull-left input-append">
-                        <!--<input type="text" class="span3">
-                        <button class="btn" type="button">
-                            <i class="icon-search"></i>
-                        </button>-->
-                    </h:form>
-                    <ul class="nav pull-right">
-                        <li><a href="#">Apoyo </a></li>
-                        <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="images/user.png" class="nav-avatar" />
-                                <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Your Profile</a></li>
-                                <li><a href="#">Edit Profile</a></li>
-                                <li><a href="#">Account Settings</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                        <i class="icon-reorder shaded"></i></a><a class="brand" href="indexadmin.html">Admin Panel </a>
+                    <div class="nav-collapse collapse navbar-inverse-collapse">
+                        <ul class="nav nav-icons">
+                            <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
+                            <li><a href="#"><i class="icon-eye-open"></i></a></li>
+                            <li><a href="#"><i class="icon-bar-chart"></i></a></li>
+                        </ul>
+                        <h:form class="navbar-search pull-left input-append">
+                            <!--<input type="text" class="span3">
+                            <button class="btn" type="button">
+                                <i class="icon-search"></i>
+                            </button>-->
+                        </h:form>
+                        <ul class="nav pull-right">
+                            <li><a href="#">Apoyo </a></li>
+                            <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="images/user.png" class="nav-avatar" />
+                                    <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Your Profile</a></li>
+                                    <li><a href="#">Edit Profile</a></li>
+                                    <li><a href="#">Account Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.nav-collapse -->
                 </div>
-                <!-- /.nav-collapse -->
             </div>
+            <!-- /navbar-inner -->
         </div>
-        <!-- /navbar-inner -->
-    </div>
         <div class="wrapper">
             <div class="container">
                 <div class="row">
                     <div class="span3">
                         <div class="sidebar">
-                        <ul class="widget widget-menu unstyled">
-                            <li class="active"><a href="indexadmin.xhtml"><i class="menu-icon icon-dashboard"></i>Panel
-                                </a></li>
-                            <li><a href="activity.html"><i class="menu-icon icon-bullhorn"></i>Comentarios </a>
-                            </li>
-                            <li><a href="message.html"><i class="menu-icon icon-inbox"></i>Mensajes <b
-                                        class="label green pull-right">
-                                        11</b> </a></li>
-                        </ul>
-                        <!--/.widget-nav-->
-                        <ul class="widget widget-menu unstyled">
-                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/usuariosadmin.xhtml"><i class="icon-user" style="margin-right: 10px;"></i>Usuarios</a></li>
+                            <ul class="widget widget-menu unstyled">
+                                <li class="active"><a href="indexadmin.xhtml"><i class="menu-icon icon-dashboard"></i>Panel
+                                    </a></li>
+                                <li><a href="activity.html"><i class="menu-icon icon-bullhorn"></i>Comentarios </a>
+                                </li>
+                                <li><a href="message.html"><i class="menu-icon icon-inbox"></i>Mensajes <b
+                                            class="label green pull-right">
+                                            11</b> </a></li>
+                            </ul>
+                            <!--/.widget-nav-->
+                            <ul class="widget widget-menu unstyled">
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/usuariosadmin.xhtml"><i class="icon-user"></i>Usuarios</a></li>
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/avionesAdmin.xhtml"><i class="menu-icon icon-book"></i>Aviones</a></li>
-                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Vuelos </a></li>
-                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Rutas </a></li>
-                        </ul>
-                        <!--/.widget-nav-->
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/vuelosAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Vuelos </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/rutasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Rutas </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/clienteAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Clientes </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/escalasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Escalas </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/tarifasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Tarifas </a></li>
+                            </ul>
+                            <!--/.widget-nav-->
                         </div>
                     </div>
                     <div class="span9">
                         <div class="content">
                             <div class="btn-controls">
                                 <div class="btn-box-row row-fluid">
-                                <a href="#" class="btn-box big span4"><i class=" icon-random"></i><b>65%</b>
-                                    <p class="text-muted">Crecimiento</p></a>
-                                <a href="#" class="btn-box big span4"><i class="icon-user"></i><b>15</b>
-                                    <p class="text-muted">Nuevos Usuarios</p></a>
-                                <a href="#" class="btn-box big span4"><i class="icon-money"></i><b>15,152</b>
-                                    <p class="text-muted">Ganancias</p></a>
+                                    <a href="#" class="btn-box big span4"><i class=" icon-random"></i><b>65%</b>
+                                        <p class="text-muted">Crecimiento</p></a>
+                                    <a href="#" class="btn-box big span4"><i class="icon-user"></i><b>15</b>
+                                        <p class="text-muted">Nuevos Usuarios</p></a>
+                                    <a href="#" class="btn-box big span4"><i class="icon-money"></i><b>15,152</b>
+                                        <p class="text-muted">Ganancias</p></a>
                                 </div>
                             </div>
                         </div>

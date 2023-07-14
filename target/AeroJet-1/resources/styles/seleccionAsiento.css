@@ -1,0 +1,325 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    background-color: #FF6600;
+    border-bottom: 2px solid white;
+    z-index: 1;
+}
+
+.logo {
+    width: 300px;
+    height: 220px;
+    margin-left: -15px;
+}
+
+.login {
+    position: relative;
+    display: block;
+    margin-right: 10px;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.login::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: white;
+    border-radius: 5px;
+    left: 0;
+    bottom: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.login:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.h1-seleccion-asiento {
+    display: flex;
+    margin: 8px 0px 20px 0%;
+    justify-content: center;
+    background: white;
+    padding: 1.3rem;
+    position: relative;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgb(225, 225, 225);
+}
+
+.h1-seleccion-asiento h1 {
+    font-weight: lighter;
+    color: #ff6600;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 1.75rem;
+    line-height: 100%;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 0px;
+    position: relative;
+    display: block;
+}
+
+.contenedor-all {
+    display: flex;
+}
+
+.contenedor-ida-a-vuelta {
+    position: sticky;
+    top: 0;
+    display: flex;
+    z-index: 2;
+    width: 100%;
+    overflow: hidden;
+    background: white;
+    box-shadow: rgba(19, 41, 104, 0.1) 0px 4px 7px;
+}
+
+.contenedor-interno {
+    font-style: italic;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-align: center;
+    color: #ff6600;
+    opacity: 0.7;
+    font-weight: bold;
+    margin-left: 140px;
+    padding-bottom: 10px;
+    line-height: 1.3;
+    border-bottom: 3px solid #ba4d05;
+    width: 20%;
+}
+
+.contenedor-imagen {
+    background-image: url(../img/avion_asientos-09.91e1f144.png);
+    background-size: 150rem;
+    background-position: center;
+    width: 100%;
+    height: 200vh;
+}
+
+.container-avion {
+    width: 500px;
+    height: 230vh;
+    background-color: #E6E5E5;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 50px;
+}
+
+.avion {
+    width: 400px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.fila {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    overflow: auto;
+}
+
+.indice-izquierda,
+.indice-derecha,
+.asientos-izquierda,
+.asientos-derecha {
+    display: flex;
+}
+
+.indice {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.indice-pasillo {
+    width: 10px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.asiento-delanteros {
+    background-image: url(https://s.latamairlines.com/images/web-ancillaries/seat-map-icons/p-economy-more-space.svg);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 40px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.asiento-emergencia {
+    background-image: url(https://s.latamairlines.com/images/web-ancillaries/seat-map-icons/p-economy-exit.svg);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 40px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+}
+
+.asiento-estandar {
+    background-image: url(https://s.latamairlines.com/images/web-ancillaries/seat-map-icons/p-economy-standard.svg);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 40px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+
+.pasillo {
+    width: 10px;
+    height: 50px;
+    background-color: #ccc;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+.asiento-delanteros.seleccionado {
+    background-image: url(https://s.latamairlines.com/images/web-ancillaries/seat-map-icons/disabled.svg) !important;
+}
+
+.asiento-emergencia.seleccionado {
+    background-image: url(https://s.latamairlines.com/images/web-ancillaries/seat-map-icons/disabled.svg) !important;
+}
+
+.asiento-estandar.seleccionado {
+    background-image: url(https://s.latamairlines.com/images/web-ancillaries/seat-map-icons/disabled.svg) !important;
+}
+
+/*contenedor derecha*/
+.contenedor-confirmacion {
+    float: right;
+    width: 500px;
+    /* Ajusta el ancho según tus necesidades */
+    height: 190vh;
+    /* Ajusta la altura según tus necesidades */
+    background-color: white;
+}
+
+.contenedor-seccion {
+    max-height: calc(100vh - 170px);
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 4.5rem;
+}
+
+.contenedor-confirmacion-h2 {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+}
+
+.contenedor-selecccion {
+    margin-bottom: 1.5rem;
+    box-shadow: rgba(16, 0, 79, 0.12) 0px 2px 8px 0px;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    border-left: 3px solid #FF6600;
+}
+
+.contenedor-seleccion-interno {
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.contenedor-boton-confirmacion {
+    display: flex;
+    align-items: flex-end;
+}
+
+.btn-confirmarcompra {
+    background: #FF6600;
+    width: 100%;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: none;
+    transition: none 0s ease 0s;
+    border: 0.0625rem solid transparent;
+    color: rgb(255, 255, 255);
+    font-size: 1.125rem;
+    height: 3.5rem;
+    padding: 1rem 2rem;
+    cursor: pointer;
+}
+
+.contenedor-seccion-abajo {
+    margin-top: auto;
+    background: rgb(255, 255, 255);
+    box-shadow: none;
+    border-radius: unset;
+    border-top: 1px solid rgb(225, 225, 225);
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    bottom: 0px;
+    z-index: 2;
+}
+
+.contenedor-precio-final{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    
+    margin-top: 20px;
+}
+

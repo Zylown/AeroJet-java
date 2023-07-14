@@ -1,0 +1,179 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+main {
+    height: 115vh;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    background-color: #FF6600;
+    border-bottom: 2px solid white;
+    z-index: 999;
+}
+
+.logo {
+    width: 300px;
+    height: 220px;
+    margin-left: -15px;
+}
+
+.login {
+    position: relative;
+    display: block;
+    margin-right: 10px;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.login::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: white;
+    border-radius: 5px;
+    left: 0;
+    bottom: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.login:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+body {
+    background: #F3F2F6;
+}
+
+.contenedorh1-elegir-vuelo {
+    display: flex;
+    margin: 30px 0px 30px 20%;
+}
+
+.elegir-vuelo {
+    font-size: 30px;
+    font-weight: lighter;
+    color: #ff6600;
+    font-style: italic;
+}
+
+/*TARJETAS*/
+.contenedor-tarjeta-vuelo {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    box-shadow: rgba(16, 0, 79, 0.12) 0px 2px 8px 0px;
+    background-color: rgb(255, 255, 255);
+    transition: background-color 0.4s ease 0s, box-shadow 0.4s ease 0s;
+    border-radius: 8px;
+    margin-top: 35px;
+}
+
+.contenedor-tarjeta-vuelo:hover {
+    box-shadow: rgba(16, 0, 79, 0.12) 5px 15px 20px 0px;
+    background-color: rgb(255, 255, 255);
+    transition: background-color 0.4s ease 0s, box-shadow 0.4s ease 0s;
+}
+
+.tarjeta-vuelo {
+    padding: 35px;
+}
+
+.interno-tarjeta-vuelo-arriba {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.vuelo-llegada-ida {
+    display: flex;
+    flex-direction: row;
+    font-size: 26px;
+    color: #FF6600;
+}
+
+.ciudad-abreviada {
+    font-size: 26px;
+    font-weight: 300;
+    opacity: 0.7;
+    margin-left: 10px;
+    color: black;
+}
+
+.duracion-tiempo {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.duracion-tiempo .duracion {
+    opacity: 0.7;
+    margin-bottom: 5px;
+}
+
+.tarifa-precio .tarifa {
+    font-size: 14px;
+}
+
+.tarifa-precio .precio {
+    font-size: 20px;
+}
+
+.interno-tarjeta-vuelo-abajo {
+    position: relative;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 16px;
+    margin: 16px -20px -15px;
+    border-top: 2px solid rgb(225, 225, 225);
+    flex-wrap: wrap;
+}
+
+.interno-tarjeta-vuelo-abajo .tramo {
+    display: inline-block;
+}
+
+.interno-tarjeta-vuelo-abajo .operado-aerojet {
+    display: inherit;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: rgb(92, 92, 92);
+    max-width: 70%;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    text-align: end;
+}
+
+.fecha-esquina {
+  margin-bottom: 1%;
+  width: 8%;
+  background: #FF6600;
+  color: white;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.fecha-esquina .fecha {
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0;
+}
+

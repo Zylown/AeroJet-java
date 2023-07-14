@@ -93,7 +93,7 @@ public class ClienteService {
         }
     }
     
-        public void eliminarTarifas(int id) {
+        public void eliminarCliente(int id) {
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD); 
                 PreparedStatement stmt = conn.prepareStatement("DELETE FROM cliente WHERE ID = ?")) {
             //stmt.setInt(1, user.getId());        
