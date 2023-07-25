@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-07-2023 a las 07:59:39
+-- Tiempo de generación: 25-07-2023 a las 03:22:25
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -86,7 +86,9 @@ CREATE TABLE `asientos` (
 --
 
 INSERT INTO `asientos` (`ID`, `Avion_ID`, `Vuelo_ID`, `Numero`, `Estado`, `Ubicacion`) VALUES
-(1, 1, 1, 1, 1, 'Rojo');
+(1, 1, 1, 1, 0, 'Rojo'),
+(2, 1, 1, 2, 0, 'Rojo'),
+(3, 1, 1, 3, 1, 'Rojo');
 
 -- --------------------------------------------------------
 
@@ -119,18 +121,19 @@ CREATE TABLE `boletos` (
   `Vuelo_ID` int(11) NOT NULL,
   `Tarifa_ID` int(11) DEFAULT NULL,
   `Asiento_ID` int(11) NOT NULL,
-  `NumeroBoleto` varchar(50) NOT NULL,
+  `tipo_vuelo` varchar(50) DEFAULT NULL,
+  `numero_boleto` varchar(50) NOT NULL,
   `Precio` decimal(10,2) NOT NULL,
   `Clase` varchar(50) NOT NULL,
-  `FechaEmision` date NOT NULL
+  `fecha_emision` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `boletos`
 --
 
-INSERT INTO `boletos` (`ID`, `Vuelo_ID`, `Tarifa_ID`, `Asiento_ID`, `NumeroBoleto`, `Precio`, `Clase`, `FechaEmision`) VALUES
-(1, 1, 1, 1, '1', '200.00', 'Clase Económica', '0000-00-00');
+INSERT INTO `boletos` (`ID`, `Vuelo_ID`, `Tarifa_ID`, `Asiento_ID`, `tipo_vuelo`, `numero_boleto`, `Precio`, `Clase`, `fecha_emision`) VALUES
+(1, 1, 1, 1, 'ida', 'AERLXP', '200.00', 'Clase Económica', '2023-08-01');
 
 -- --------------------------------------------------------
 
@@ -149,6 +152,13 @@ CREATE TABLE `cliente` (
   `Nacionalidad` varchar(100) DEFAULT NULL,
   `CorreoElectronico` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`ID`, `Nombre`, `Apellido`, `DNI`, `Telefono`, `Genero`, `Fecha_Nacimiento`, `Nacionalidad`, `CorreoElectronico`) VALUES
+(1, 'SEVASTIAN', 'CABALLERO', 72615920, 987654321, 'Masculino', '2002-04-20', 'Peruana', 'sevasxd@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -204,20 +214,26 @@ CREATE TABLE `escalas` (
 
 CREATE TABLE `rutas` (
   `ID` int(11) NOT NULL,
-  `PuntoOrigen` varchar(50) DEFAULT NULL,
-  `PuntoDestino` varchar(50) DEFAULT NULL,
+  `punto_origen` varchar(50) DEFAULT NULL,
+  `punto_destino` varchar(50) DEFAULT NULL,
   `Distancia` decimal(10,2) DEFAULT NULL,
-  `DuracionEstimada` int(11) DEFAULT NULL,
-  `AeropuertoOrigen_ID` int(11) DEFAULT NULL,
-  `AeropuertoDestino_ID` int(11) DEFAULT NULL
+  `duracion_estimada` int(11) DEFAULT NULL,
+  `aeropuerto_origen_ID` int(11) DEFAULT NULL,
+  `aeropuerto_destino_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `rutas`
 --
 
-INSERT INTO `rutas` (`ID`, `PuntoOrigen`, `PuntoDestino`, `Distancia`, `DuracionEstimada`, `AeropuertoOrigen_ID`, `AeropuertoDestino_ID`) VALUES
-(1, 'Arequipa', 'Lima', '1015.50', 57, 1, 10);
+INSERT INTO `rutas` (`ID`, `punto_origen`, `punto_destino`, `Distancia`, `duracion_estimada`, `aeropuerto_origen_ID`, `aeropuerto_destino_ID`) VALUES
+(1, 'Arequipa', 'Lima', '1015.50', 57, 1, 10),
+(2, 'Ayacucho', 'Lima', '155.00', 30, 2, 10),
+(3, 'Cajamarca', 'Lima', '560.74', 88, 3, 10),
+(4, 'Chiclayo', 'Lima', '664.00', 85, 4, 10),
+(5, 'Cusco', 'Lima', '575.00', 88, 5, 10),
+(6, 'Huanuco', 'Lima', '251.00', 39, 6, 10),
+(7, 'Ilo', 'Lima', '266.25', 60, 7, 10);
 
 -- --------------------------------------------------------
 
@@ -233,7 +249,7 @@ CREATE TABLE `tarifas` (
   `FechaInicio` date DEFAULT NULL,
   `FechaFin` date DEFAULT NULL,
   `MontoCargoAdicional` decimal(10,2) DEFAULT NULL,
-  `Compra_ID` int(11) DEFAULT NULL,
+  `Boleto_ID` int(11) DEFAULT NULL,
   `Vuelo_ID` int(11) DEFAULT NULL,
   `Asiento_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -242,9 +258,10 @@ CREATE TABLE `tarifas` (
 -- Volcado de datos para la tabla `tarifas`
 --
 
-INSERT INTO `tarifas` (`ID`, `Precio`, `Descripcion`, `Promocion`, `FechaInicio`, `FechaFin`, `MontoCargoAdicional`, `Compra_ID`, `Vuelo_ID`, `Asiento_ID`) VALUES
-(1, '200.00', 'De Arequipa a Lima', NULL, '2023-08-01', '2023-08-01', NULL, 1, 1, 1),
-(2, '100.00', 'De Lima a Arequipa', 0, '2023-08-01', '2023-08-01', '0.00', NULL, NULL, NULL);
+INSERT INTO `tarifas` (`ID`, `Precio`, `Descripcion`, `Promocion`, `FechaInicio`, `FechaFin`, `MontoCargoAdicional`, `Boleto_ID`, `Vuelo_ID`, `Asiento_ID`) VALUES
+(1, '49.99', 'De Arequipa a Lima', 0, '2023-07-20', '2023-08-01', '0.00', 1, 1, 1),
+(2, '50.00', 'De Lima a Arequipa', 0, '2023-07-23', '2023-08-02', '0.00', NULL, NULL, NULL),
+(3, '200.00', 'De Chiclayo a Lima', 0, '2023-07-17', '2023-07-18', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -255,7 +272,7 @@ INSERT INTO `tarifas` (`ID`, `Precio`, `Descripcion`, `Promocion`, `FechaInicio`
 CREATE TABLE `tipo_pago` (
   `ID` int(11) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
-  `Descripcion` varchar(100) DEFAULT NULL
+  `numero_transaccion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -266,8 +283,8 @@ CREATE TABLE `tipo_pago` (
 
 CREATE TABLE `usuario` (
   `ID` int(11) NOT NULL,
-  `NombreUsuario` varchar(50) DEFAULT NULL,
-  `Contraseña` varchar(50) DEFAULT NULL,
+  `nombre_usuario` varchar(255) DEFAULT NULL,
+  `contraseña` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -275,10 +292,9 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`ID`, `NombreUsuario`, `Contraseña`, `email`) VALUES
+INSERT INTO `usuario` (`ID`, `nombre_usuario`, `contraseña`, `email`) VALUES
 (1, 'admin', 'pass', 'admin@correo.com'),
-(2, 'sevas', 'sevas', 'sevas@correo.com'),
-(3, 'pepe', 'pepito', 'pepito@correo.com');
+(2, 'sevas', 'sevas', 'sevas@correo.com');
 
 -- --------------------------------------------------------
 
@@ -288,12 +304,12 @@ INSERT INTO `usuario` (`ID`, `NombreUsuario`, `Contraseña`, `email`) VALUES
 
 CREATE TABLE `vuelos` (
   `ID` int(11) NOT NULL,
-  `Fecha_Salida` date DEFAULT NULL,
-  `Hora_Salida` time DEFAULT NULL,
-  `Fecha_Llegada` date DEFAULT NULL,
-  `Hora_Llegada` time DEFAULT NULL,
-  `Fecha_Reprogramacion` date DEFAULT NULL,
-  `Estado` varchar(50) NOT NULL,
+  `fecha_salida` date DEFAULT NULL,
+  `hora_salida` time(6) DEFAULT NULL,
+  `fecha_llegada` date DEFAULT NULL,
+  `hora_llegada` time(6) DEFAULT NULL,
+  `fecha_reprogramacion` date DEFAULT NULL,
+  `estado` enum('disponible','en_curso','suspendido','') DEFAULT NULL,
   `Avion_ID` int(11) DEFAULT NULL,
   `Compra_ID` int(11) DEFAULT NULL,
   `Ruta_ID` int(11) DEFAULT NULL
@@ -303,8 +319,10 @@ CREATE TABLE `vuelos` (
 -- Volcado de datos para la tabla `vuelos`
 --
 
-INSERT INTO `vuelos` (`ID`, `Fecha_Salida`, `Hora_Salida`, `Fecha_Llegada`, `Hora_Llegada`, `Fecha_Reprogramacion`, `Estado`, `Avion_ID`, `Compra_ID`, `Ruta_ID`) VALUES
-(1, '2023-08-01', '09:00:00', '2023-08-01', '10:00:00', NULL, 'Operativo', 1, NULL, 1);
+INSERT INTO `vuelos` (`ID`, `fecha_salida`, `hora_salida`, `fecha_llegada`, `hora_llegada`, `fecha_reprogramacion`, `estado`, `Avion_ID`, `Compra_ID`, `Ruta_ID`) VALUES
+(1, '2023-08-01', '09:00:00.000000', '2023-08-01', '10:00:00.000000', NULL, 'disponible', 1, NULL, 1),
+(2, '2023-08-01', '10:00:00.000000', '2023-08-01', '11:00:00.000000', NULL, 'disponible', 1, NULL, 2),
+(3, '2023-07-24', '08:00:00.000000', '2023-07-24', '09:00:00.000000', NULL, 'disponible', 1, NULL, 3);
 
 --
 -- Índices para tablas volcadas
@@ -378,15 +396,15 @@ ALTER TABLE `escalas`
 --
 ALTER TABLE `rutas`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_Rutas_AeropuertosOrigen` (`AeropuertoOrigen_ID`),
-  ADD KEY `FK_Rutas_AeropuertosDestino` (`AeropuertoDestino_ID`);
+  ADD KEY `FK_Rutas_AeropuertosOrigen` (`aeropuerto_origen_ID`),
+  ADD KEY `FK_Rutas_AeropuertosDestino` (`aeropuerto_destino_ID`);
 
 --
 -- Indices de la tabla `tarifas`
 --
 ALTER TABLE `tarifas`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `Compra_ID` (`Compra_ID`),
+  ADD KEY `Compra_ID` (`Boleto_ID`),
   ADD KEY `Vuelo_ID` (`Vuelo_ID`),
   ADD KEY `Asiento_ID` (`Asiento_ID`);
 
@@ -444,7 +462,13 @@ ALTER TABLE `tipo_pago`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `vuelos`
+--
+ALTER TABLE `vuelos`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -466,17 +490,10 @@ ALTER TABLE `boletos`
   ADD CONSTRAINT `FK_Boletos_Vuelos` FOREIGN KEY (`Vuelo_ID`) REFERENCES `vuelos` (`ID`);
 
 --
--- Filtros para la tabla `cliente`
---
-ALTER TABLE `cliente`
-  ADD CONSTRAINT `FK_Cliente_Usuario` FOREIGN KEY (`ID`) REFERENCES `usuario` (`ID`);
-
---
 -- Filtros para la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`Cliente_ID`) REFERENCES `cliente` (`ID`),
-  ADD CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`Vuelo_ID`) REFERENCES `vuelos` (`ID`);
+  ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`Cliente_ID`) REFERENCES `cliente` (`ID`);
 
 --
 -- Filtros para la tabla `compras`
@@ -499,14 +516,14 @@ ALTER TABLE `escalas`
 -- Filtros para la tabla `rutas`
 --
 ALTER TABLE `rutas`
-  ADD CONSTRAINT `FK_Rutas_AeropuertosDestino` FOREIGN KEY (`AeropuertoDestino_ID`) REFERENCES `aeropuerto` (`ID`),
-  ADD CONSTRAINT `FK_Rutas_AeropuertosOrigen` FOREIGN KEY (`AeropuertoOrigen_ID`) REFERENCES `aeropuerto` (`ID`);
+  ADD CONSTRAINT `FK_Rutas_AeropuertosDestino` FOREIGN KEY (`aeropuerto_destino_ID`) REFERENCES `aeropuerto` (`ID`),
+  ADD CONSTRAINT `FK_Rutas_AeropuertosOrigen` FOREIGN KEY (`aeropuerto_origen_ID`) REFERENCES `aeropuerto` (`ID`);
 
 --
 -- Filtros para la tabla `tarifas`
 --
 ALTER TABLE `tarifas`
-  ADD CONSTRAINT `tarifas_ibfk_1` FOREIGN KEY (`Compra_ID`) REFERENCES `boletos` (`ID`),
+  ADD CONSTRAINT `tarifas_ibfk_1` FOREIGN KEY (`Boleto_ID`) REFERENCES `boletos` (`ID`),
   ADD CONSTRAINT `tarifas_ibfk_3` FOREIGN KEY (`Vuelo_ID`) REFERENCES `vuelos` (`ID`),
   ADD CONSTRAINT `tarifas_ibfk_4` FOREIGN KEY (`Asiento_ID`) REFERENCES `asientos` (`ID`);
 
