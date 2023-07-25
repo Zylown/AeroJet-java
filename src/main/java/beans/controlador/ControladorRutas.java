@@ -1,4 +1,3 @@
-
 package beans.controlador;
 
 import bean.dao.RutaDao;
@@ -10,14 +9,18 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.validator.ValidatorException;
 
 @ManagedBean(name = "ruta_controlador", eager = true)
 @ViewScoped
 public class ControladorRutas implements Serializable{
+    
     private List<Rutas> rutas;
     private RutaDao rutadao;
+    
     private String puntoOrigen;
     private String puntoDestino;
     private int distancia;
@@ -96,6 +99,31 @@ public class ControladorRutas implements Serializable{
         rutas = rutadao.getAllRutas();
 
     }
+    
+    public void Cuentaval(String puntoOrigen) throws IOException {
+        boolean validacue = false;
+
+        rutadao = new RutaDao();
+        rutas = rutadao.getAllRutas();
+
+        for (Rutas ruta : rutas) {
+            if (ruta.getPuntoOrigen().equals(puntoOrigen)) {
+                validacue = true;
+                break;
+            }
+        }
+
+        if (validacue) {
+            if (puntoOrigen.equals("Arequipa")) {
+                FacesContext.getCurrentInstance().addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Checkin confirmado", null));
+            } 
+        } else {
+            FacesContext.getCurrentInstance().addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Checkin no confirmado", null));
+        }
+    }
+    
+    
+    
     public void agregarRuta(String puntoOrigen, String puntoDestino, int distancia, int duracionEstimada) throws IOException {
         Rutas nuevoRuta = new Rutas();
         nuevoRuta.setPuntoOrigen(puntoOrigen);
@@ -104,7 +132,10 @@ public class ControladorRutas implements Serializable{
         nuevoRuta.setDuracionEstimada(duracionEstimada);
 
         // Aquí puedes llamar a tu servicio de AvionDao y utilizar el método agregarAvion() para insertar el nuevo avión en la base de datos
-        rutadao.agregarRuta(nuevoRuta.getPuntoOrigen(), nuevoRuta.getPuntoDestino(), nuevoRuta.getDistancia(), nuevoRuta.getDuracionEstimada());
+        rutadao.agregarRuta(puntoOrigen, puntoDestino, distancia, duracionEstimada);
+        
+        // Obtener la lista de usuarios actualizada de la base de datos
+        rutas = rutadao.getAllRutas();
 
         // Otras acciones después del registro, como mostrar un mensaje de éxito o redirigir a otra página
         FacesContext.getCurrentInstance().addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro exitoso", null));
@@ -113,29 +144,24 @@ public class ControladorRutas implements Serializable{
     }
 
     public void actualizarRuta(Integer id, String puntoOrigen, String puntoDestino, Integer distancia, Integer duracionEstimada) throws IOException {
-        Rutas rutaExistente = rutadao.obtenerRutaPorId(id);
-
-        // Verificar si el avión existe
-        if (rutaExistente == null) {
-            FacesContext.getCurrentInstance().addMessage("form", new FacesMessage(FacesMessage.SEVERITY_ERROR, "El RUTAS no existe", null));
-            return;
-        }
-
-        // Asignar los nuevos valores al avión existente
-        rutaExistente.setPuntoOrigen(puntoOrigen);
-        rutaExistente.setPuntoDestino(puntoDestino);
-        rutaExistente.setDistancia(distancia);
-        rutaExistente.setDuracionEstimada(duracionEstimada);
-
-        // Llamar al método de actualización en el avionDao
-        rutadao.actualizarRuta(rutaExistente.getId(), rutaExistente.getPuntoOrigen(), rutaExistente.getPuntoDestino(), rutaExistente.getDistancia(), rutaExistente.getDuracionEstimada());
-
-        FacesContext.getCurrentInstance().addMessage("form", new FacesMessage(FacesMessage.SEVERITY_INFO, "Ruta actualizado correctamente", null));
+        Rutas nuevoRuta = new Rutas();
+        nuevoRuta.setId(id);
+        nuevoRuta.setPuntoOrigen(puntoOrigen);
+        nuevoRuta.setPuntoDestino(puntoDestino);
+        nuevoRuta.setDistancia(distancia);
+        nuevoRuta.setDuracionEstimada(duracionEstimada);
+        
+        rutadao.actualizarRuta(id, puntoOrigen, puntoDestino, distancia, duracionEstimada);
+        FacesContext.getCurrentInstance().addMessage("form", new FacesMessage(FacesMessage.SEVERITY_INFO, "comentarios actualizado correctamente", null));
     }
 
-    public void eliminarRuta(int id, AjaxBehaviorEvent event) {
-        rutadao.eliminarRuta(id);
-        FacesContext.getCurrentInstance().addMessage("formEliminar", new FacesMessage(FacesMessage.SEVERITY_INFO, "Ruta eliminado correctamente", null));
-    }
+    public void eliminarRuta(int idn, AjaxBehaviorEvent event) {
+        RutaDao serviceRutas = new RutaDao();
+        serviceRutas.eliminarRuta(idn);
+        
+        // Obtener la lista de usuarios actualizada de la base de datos
+        rutas = rutadao.getAllRutas();
+        FacesContext.getCurrentInstance().addMessage("formEliminar", new FacesMessage(FacesMessage.SEVERITY_INFO, "comentarios eliminado correctamente", null));
+}
     
 }

@@ -130,7 +130,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                                 <p:outputLabel value="Capacidad: "/>
                                                 <p:inputText value="#{avion_controlador.capacidad}"/>                                
                                                 <p:outputLabel value="Estado: "/>
-                                                <p:inputText value="#{avion_controlador.estado}"/>
+                                                <h:selectOneMenu id="seleccion-estado" value="#{avion_controlador.estado}">
+                                                    <f:selectItem itemValue="Operativo" itemLabel="Operativo" />
+                                                    <f:selectItem itemValue="Inoperativo" itemLabel="Inoperativo" />
+                                                </h:selectOneMenu>
                                             </p:panelGrid>
                                             <p:commandButton  value="Guardar" actionListener="#{avion_controlador.agregar(avion_controlador.modelo, avion_controlador.capacidad, avion_controlador.estado)}" update=":formListado:tablaBancos" oncomplete="PF('dialogoAgregar').hide();"/>
                                             <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>

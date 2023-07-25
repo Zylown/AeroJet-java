@@ -25,7 +25,7 @@ public class UsuarioService {
             while (rs.next()) {
                 
             int id = rs.getInt("id");
-            String nombreUsuario = rs.getString("nombreUsuario");
+            String nombreUsuario = rs.getString("nombre_usuario");
             String password = rs.getString("Contraseña");
             String correo = rs.getString("email");
             
@@ -54,7 +54,7 @@ public void insertarUsuario(String nombreUsuario, String contraseña, String ema
         int ultimoID = rs.next() ? rs.getInt(1) : 0;
         int nuevoID = ultimoID + 1;
         
-        PreparedStatement pstmt = conn.prepareStatement("INSERT INTO usuario (ID, nombreUsuario, Contraseña, email) VALUES (?, ?, ?, ?)");
+        PreparedStatement pstmt = conn.prepareStatement("INSERT INTO usuario (ID, nombre_usuario, Contraseña, email) VALUES (?, ?, ?, ?)");
         pstmt.setInt(1, nuevoID);
         pstmt.setString(2, nombreUsuario);
         pstmt.setString(3, contraseña);
@@ -71,7 +71,7 @@ public void insertarUsuario(String nombreUsuario, String contraseña, String ema
 
 public void actualizarUsuario(int id, String nombreUsuario, String contraseña, String email) {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-         PreparedStatement pstmt = conn.prepareStatement("UPDATE usuario SET nombreUsuario = ?, Contraseña = ?, email = ? WHERE ID = ?")) {
+         PreparedStatement pstmt = conn.prepareStatement("UPDATE usuario SET nombre_usuario = ?, Contraseña = ?, email = ? WHERE ID = ?")) {
         
         
         pstmt.setString(1, nombreUsuario);

@@ -49,7 +49,18 @@ public class Escalas implements Serializable {
     private int duracion;
     @JoinColumn(name = "Vuelo_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Vuelos vueloID;
+    private int vueloID;
+
+    public Escalas(int vueloID) {
+        this.vueloID = vueloID;
+    }
+
+    public Escalas(Integer id, String ciudad, int duracion, int vueloID) {
+        this.id = id;
+        this.ciudad = ciudad;
+        this.duracion = duracion;
+        this.vueloID = vueloID;
+    }
 
     public Escalas() {
     }
@@ -88,11 +99,11 @@ public class Escalas implements Serializable {
         this.duracion = duracion;
     }
 
-    public Vuelos getVueloID() {
+    public int getVueloID() {
         return vueloID;
     }
 
-    public void setVueloID(Vuelos vueloID) {
+    public void setVueloID(int vueloID) {
         this.vueloID = vueloID;
     }
 

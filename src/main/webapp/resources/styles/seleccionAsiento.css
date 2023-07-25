@@ -1,3 +1,7 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
 * {
     box-sizing: border-box;
     margin: 0;
@@ -222,6 +226,7 @@ header {
     background-color: #ccc;
     margin-right: 10px;
     border-radius: 3px;
+    
 }
 
 .asiento-delanteros.seleccionado {
@@ -235,6 +240,25 @@ header {
 .asiento-estandar.seleccionado {
     background-image: url(https://s.latamairlines.com/images/web-ancillaries/seat-map-icons/disabled.svg) !important;
 }
+.color-por-defecto {
+  background-color: #ffffff; /* Color por defecto (blanco) */
+}
+
+.asiento-no-disponible {
+     background-image: url(https://s.latamairlines.com/images/web-ancillaries/seat-map-icons/disabled.svg) ;
+     background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 40px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+ /*background-color: #ff0000; /* Color para asientos no disponibles (rojo) */
+}
+
 
 /*contenedor derecha*/
 .contenedor-confirmacion {

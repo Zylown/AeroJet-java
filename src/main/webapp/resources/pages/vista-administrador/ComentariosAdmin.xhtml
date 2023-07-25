@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>     
         <link rel="stylesheet" type="text/css" href="css/theme.css"/>
         <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
         <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/>
@@ -17,7 +14,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <link rel="shortcut icon" href="../../../resources/img/airplane-black-glyph-icon-flight-2239097-transformed.ico"/>
-        <title>AeroJet: Rutas Panel</title>
+        <title>AeroJet: Tarifas Panel</title>   
     </h:head>
     <h:body>
         <div class="navbar navbar-fixed-top">
@@ -57,6 +54,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
             </div>
             <!-- /navbar-inner -->
         </div>
+
         <div class="wrapper">
             <div class="container">
                 <div class="row">
@@ -82,104 +80,88 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/tarifasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Tarifas </a></li>
                             </ul>
                             <!--/.widget-nav-->
-
-                        </div>
+                        </div>                        
                     </div>
+
                     <div class="span9">
                         <div class="content">
                             <div class="btn-controls">
                                 <div class="btn-box-row row-fluid">
-                                    <!-- #{ruta_controlador.init()} -->
+                                    #{comentario_controlador.init()}
                                     <h:form>
-                                        <p:commandButton value="Agregar Ruta" actionListener="#{ruta_controlador.init()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+                                        <p:commandButton value="Agregar Comentarios" actionListener="#{comentario_controlador.init()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
                                         <p:separator/>
-                                    </h:form>
+                                    </h:form> 
 
                                     <h:form id="formListado">
-                                        <p:dataTable id="tablaRutas" paginator="true" paginatorPosition="bottom" rows="10" var="Rutas" value="#{ruta_controlador.rutas}" emptyMessage="No existen Rutas">
-                                            <p:column headerText="ID">
-                                                <h:outputText value="#{Rutas.id}" />
+                                        <p:dataTable id="tablaComentarios" paginator="true" paginatorPosition="bottom" rows="10" var="comentarios" value="#{comentario_controlador.comentarios}" emptyMessage="No existen comentarios">
+                                            <p:column headerText="Id">
+                                                <h:outputText value="#{comentarios.id}" />
                                             </p:column>
-                                            <p:column headerText="PuntoOrigen">
-                                                <h:outputText value="#{Rutas.puntoOrigen}" />
+                                            <p:column headerText="comentario">
+                                                <h:outputText value="#{comentarios.comentario}" />
                                             </p:column>
-                                            <p:column headerText="PuntoDestino">
-                                                <h:outputText value="#{Rutas.puntoDestino}" />
+                                            <p:column headerText="fecha">
+                                                <h:outputText value="#{comentarios.fecha}" >
+                                                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                                                </h:outputText>
                                             </p:column>
-                                            <p:column headerText="Distancia">
-                                                <h:outputText value="#{Rutas.distancia}" />
-                                            </p:column>
-                                            <p:column headerText="DuracionEstimada">
-                                                <h:outputText value="#{Rutas.duracionEstimada}" />
-                                            </p:column>
-
-                                            <p:column headerText="Editar" style="text-align: center">
+                                            <p:column headerText="EDITAR" style="text-align: center">
                                                 <p:commandButton icon="pi pi-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
-                                                    <f:setPropertyActionListener target="#{ruta_controlador.rutaSeleccionada}" value="#{Rutas}"/>
+                                                    <f:setPropertyActionListener target="#{comentario_controlador.comentariosSeleccionada}" value="#{comentarios}"/>
                                                 </p:commandButton>
                                             </p:column>
-                                            <p:column headerText="Borrar" style="text-align: center">
+                                            <p:column headerText="BORRAR" style="text-align: center">
                                                 <p:commandButton icon="pi pi-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
-                                                    <f:setPropertyActionListener target="#{ruta_controlador.rutaSeleccionada}" value="#{Rutas}"/>
+                                                    <f:setPropertyActionListener target="#{comentario_controlador.comentariosSeleccionada}" value="#{comentarios}" />
                                                 </p:commandButton>
                                             </p:column>
                                         </p:dataTable>
                                     </h:form>
 
-
                                     <h:form id="formAgregar">
-                                        <p:dialog id="dlgAgregar" header="Agregar rutas" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
-                                            <p:panelGrid columns="2" style="margin: 0 auto;">                              
-                                                <p:outputLabel value="PuntoOrigen: "/>
-                                                <p:inputText value="#{ruta_controlador.puntoOrigen}"/>                                
-                                                <p:outputLabel value="PuntoDestino: "/>
-                                                <p:inputText value="#{ruta_controlador.puntoDestino}"/>
-                                                <p:outputLabel value="Distancia: "/>
-                                                <p:inputText value="#{ruta_controlador.distancia}"/>
-                                                <p:outputLabel value="DuracionEstimada: "/>
-                                                <p:inputText value="#{ruta_controlador.duracionEstimada}"/>
+                                        <p:dialog id="dlgAgregar" header="Agregar Comentarios" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <p:panelGrid columns="2" style="margin: 0 auto;">                                
+                                                <p:outputLabel value="comentario "/>
+                                                <p:inputText value="#{comentario_controlador.comentario}"/>                             
+                                                <p:outputLabel value="fecha "/>
+                                                <p:datePicker value="#{comentario_controlador.fecha}"/>
                                             </p:panelGrid>
-                                            <p:commandButton  value="Guardar" actionListener="#{ruta_controlador.agregarRuta(ruta_controlador.puntoOrigen, ruta_controlador.puntoDestino, ruta_controlador.distancia, ruta_controlador.duracionEstimada)}" update=":formListado:tablaRutas" oncomplete="PF('dialogoAgregar').hide();"/>
+                                            <p:commandButton  value="Guardar" actionListener="#{comentario_controlador.agregarComentarios(comentario_controlador.comentario,comentario_controlador.fecha)}" update=":formListado:tablaComentarios" oncomplete="PF('dialogoAgregar').hide();"/>    
                                             <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
                                         </p:dialog>
-                                    </h:form>
+                                    </h:form>   
+
                                     <h:form id="formModificar">
-                                        <p:dialog id="dlgModificar" header="Modificar rutas" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
-                                            <p:panelGrid columns="2" style="margin: 0 auto;">
+                                        <p:dialog id="dlgModificar" header="Modificar Comentarios" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <p:panelGrid columns="2" style="margin: 0 auto;">         
 
-                                                <p:outputLabel value="PuntoOrigen:"/>
-                                                <p:inputText value="#{ruta_controlador.rutaSeleccionada.puntoOrigen}"/>
-
-                                                <p:outputLabel value="PuntoDestino:"/>
-                                                <p:inputText value="#{ruta_controlador.rutaSeleccionada.puntoDestino}"/>
-
-                                                <p:outputLabel value="Distancia:"/>
-                                                <p:inputText value="#{ruta_controlador.rutaSeleccionada.distancia}"/>
-
-                                                <p:outputLabel value="DuracionEstimada:"/>
-                                                <p:inputText value="#{ruta_controlador.rutaSeleccionada.duracionEstimada}"/>
-
-                                                <p:outputLabel value="Id:"/>
-                                                <p:inputText value="#{ruta_controlador.rutaSeleccionada.id}"/>
+                                                <p:outputLabel value="comentario "/>
+                                                <p:inputText value="#{comentario_controlador.comentariosSeleccionada.comentario}">
+                                                </p:inputText>     
+                                                <p:outputLabel value="fecha "/>
+                                                <p:datePicker value="#{comentario_controlador.comentariosSeleccionada.fecha}">
+                                                </p:datePicker>     
                                             </p:panelGrid>
-                                            <p:commandButton value="Guardar" action="#{ruta_controlador.actualizarRuta(ruta_controlador.rutaSeleccionada.id, ruta_controlador.rutaSeleccionada.puntoOrigen, ruta_controlador.rutaSeleccionada.puntoDestino, ruta_controlador.rutaSeleccionada.distancia, ruta_controlador.rutaSeleccionada.duracionEstimada)}" update=":formListado:tablaRutas" oncomplete="PF('dialogoModificar').hide();"/>
+                                            <p:commandButton value="Guardar" actionListener="#{comentario_controlador.actualizarComentarios( comentario_controlador.comentariosSeleccionada.id, comentario_controlador.comentariosSeleccionada.comentario, comentario_controlador.comentariosSeleccionada.fecha)}" update=":formListado:tablaComentarios" oncomplete="PF('dialogoModificar').hide();"/>
                                             <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
                                         </p:dialog>
                                     </h:form>
 
-
                                     <h:form id="formEliminar">
-                                        <p:dialog id="dlgEliminar" header="Eliminar Rutas" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
-                                            <h:outputText value="Desea eliminar este registro con el id: #{ruta_controlador.rutaSeleccionada.id} ?"/>
-                                            <p:commandButton  value="Si" update=":formListado:tablaRutas" oncomplete="PF('dialogoEliminar').hide();">
-                                                <p:ajax listener="#{ruta_controlador.eliminarRuta(id, event)}" />
-                                            </p:commandButton>
-                                            <p:commandButton value="No" onclick="PF('dialogoEliminar').hide();"/>
+                                        <p:dialog id="dlgEliminar" header="Eliminar Comentarios" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <h:outputText value="Desea eliminar este registro con el id: #{comentario_controlador.comentariosSeleccionada.id} ?"/>
+                                            <br/> <br/>
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <p:commandButton  value="Si" update=":formListado:tablaComentarios" oncomplete="PF('dialogoEliminar').hide();">
+                                                    <p:ajax listener="#{comentario_controlador.eliminarComentarios(comentario_controlador.comentariosSeleccionada.id, event)}"/>
+                                                </p:commandButton>
+                                                <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
+                                            </div>
                                         </p:dialog>
-                                    </h:form>
+                                    </h:form>                        
 
                                 </div>
-
                             </div>
                         </div>
                     </div>

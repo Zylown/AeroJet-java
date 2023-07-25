@@ -61,6 +61,15 @@ public class Asientos implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "asientoID")
     private Collection<Boletos> boletosCollection;
 
+    public Asientos(String ubicacion, Integer id, Integer numero, Boolean estado, Aviones avionID, Vuelos vueloID) {
+        this.ubicacion = ubicacion;
+        this.id = id;
+        this.numero = numero;
+        this.estado = estado;
+        this.avionID = avionID;
+        this.vueloID = vueloID;
+    }
+
     public Asientos() {
     }
 
@@ -132,6 +141,19 @@ public class Asientos implements Serializable {
     public void setBoletosCollection(Collection<Boletos> boletosCollection) {
         this.boletosCollection = boletosCollection;
     }
+    public boolean isEstado() {
+    return estado;
+    
+}
+    public String getColor() {
+    if (estado) {
+        return "color-por-defecto"; // Define aquí el color por defecto para asientos disponibles
+    } else {
+        return "color-no-disponible"; // Define aquí el color para asientos no disponibles
+    }
+}
+
+
 
     @Override
     public int hashCode() {
@@ -165,5 +187,7 @@ public class Asientos implements Serializable {
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
     }
+
+   
     
 }

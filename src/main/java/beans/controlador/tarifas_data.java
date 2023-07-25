@@ -22,6 +22,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 public class tarifas_data implements Serializable {
     private SimpleDateFormat dateFormato = new SimpleDateFormat("yyyy-MM-dd");
+    
     private List<Tarifas> tarifas;
     private TarifasService tarifaService;
     private Tarifas TarifaSeleccionado; // Nueva propiedad para almacenar el usuario seleccionado
@@ -183,7 +184,6 @@ public class tarifas_data implements Serializable {
         //FacesContext.getCurrentInstance().addMessage("form", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado correctamente", null));
         // Otras acciones después de la eliminación, como mostrar un mensaje de éxito
         FacesContext.getCurrentInstance().addMessage("formListado", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado exitosamente", null));
-
     }
 public void registrarConsola() throws IOException, ParseException {
     try {

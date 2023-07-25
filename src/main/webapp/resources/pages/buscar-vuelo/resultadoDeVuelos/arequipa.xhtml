@@ -10,7 +10,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <link rel="shortcut icon" href="../../../img/airplane-black-glyph-icon-flight-2239097-transformed.ico"/>
-        <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
         <title>AeroJet: Selección Vuelo</title>
     </h:head>
     <h:body>
@@ -32,7 +31,9 @@
                             <a class="link-arequipa-lima" href="../seleccionAsiento.html" style="text-decoration: none;color: black;">
                                 <div class="tarjeta-vuelo">
                                     <div class="fecha-esquina">
-                                        <p class="fecha">13 Jul</p>
+                                        <h:outputLabel id="targetDate" class="fecha" value="#{tarifas.fechaInicio}">
+                                            <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                        </h:outputLabel>
                                     </div>
                                     <div class="interno-tarjeta-vuelo-arriba">
                                         <div class="vuelo-llegada-ida">
@@ -54,6 +55,8 @@
                                     </div>
                                     <div class="interno-tarjeta-vuelo-abajo">
                                         <p class="tramo">Directo</p>
+                                        <img class="weather-image" height="50" width="50" src=""/>
+                                        <p class="weather-description"></p>
                                         <p class="operado-aerojet">Operado por AeroJet</p>
                                     </div>
                                 </div>
@@ -62,7 +65,45 @@
                     </h:column>
                 </h:dataTable>
             </h:form>
-
         </main>
+        <h:outputScript>
+            window.onload = function () {
+            var dates = document.querySelectorAll(".fecha");
+            dates.forEach(function (date) {
+            var targetDate = date.innerHTML;
+            getWeather(targetDate, date);
+            });
+            };
+
+            function getWeather(date, dateElement) {
+            // Construir la URL de la API con la fecha proporcionada
+            var apiUrl = "https://api.weatherbit.io/v2.0/forecast/daily?city=chimbote&amp;country=peru&amp;key=adf025e7bf7f4ed8b605ac4c6fc4c02b&amp;lang=es&amp;start_date=" + date + "&amp;end_date=" + date;
+
+            // Realizar la solicitud a la API utilizando fetch
+            fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+            // Buscar el objeto correspondiente a la fecha en los datos recibidos
+            var weatherData = data.data.find(item => item.valid_date === date);
+
+            // Acceder a la descripción y el ícono del clima
+            var description = weatherData.weather.description;
+            var icon = weatherData.weather.icon;
+
+            // Actualizar los elementos de la tarjeta con los datos del clima
+            var weatherImage = dateElement.closest(".contenedor-tarjeta-vuelo").querySelector(".weather-image");
+            weatherImage.src = "https://www.weatherbit.io/static/img/icons/" + icon + ".png";
+            weatherImage.alt = description;
+
+            var weatherDescription = dateElement.closest(".contenedor-tarjeta-vuelo").querySelector(".weather-description");
+            weatherDescription.innerHTML = description;
+            })
+            .catch(error => {
+            console.log(error);
+            });
+            }
+
+        </h:outputScript>
+
     </h:body>
 </html>

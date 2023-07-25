@@ -156,6 +156,28 @@ public class usuario_data implements Serializable {
     }
 
     public void registrar(String nombreUsuario, String contraseña, String email) throws IOException {
+        Usuario nuevoUsuario = new Usuario();
+        nuevoUsuario.setNombreUsuario(nombreUsuario);
+        nuevoUsuario.setContraseña(contraseña);
+        nuevoUsuario.setEmail(email);
+
+        // Aquí puedes llamar a tu servicio de UsuarioService y utilizar un método para insertar el nuevo usuario en la base de datos
+        usuarioService.insertarUsuario(nombreUsuario, contraseña, email);
+
+        // Obtener la lista de usuarios actualizada de la base de datos
+        usuarios = usuarioService.getAllUsuario();
+
+        // Restablecer los campos del formulario
+        nombreUsuario = "";
+        contraseña = "";
+        email = "";
+        // Otras acciones después del registro, como mostrar un mensaje de éxito o redirigir a otra página
+        FacesContext.getCurrentInstance().addMessage("loginForm", new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro exitoso", null));
+        // Redirigir a otra página
+        // FacesContext.getCurrentInstance().getExternalContext().redirect("otra_pagina.xhtml");
+    }
+
+    public void registrarVista(String nombreUsuario, String contraseña, String email) throws IOException {
         if (!terminosAceptados) { // es igual a: terminosAceptados == false 
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe aceptar los términos y condiciones", null);
             FacesContext.getCurrentInstance().addMessage(null, message);

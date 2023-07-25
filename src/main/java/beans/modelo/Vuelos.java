@@ -5,6 +5,7 @@
 package beans.modelo;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -13,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -39,12 +41,11 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Vuelos.findByFechaReprogramacion", query = "SELECT v FROM Vuelos v WHERE v.fechaReprogramacion = :fechaReprogramacion"),
     @NamedQuery(name = "Vuelos.findByEstado", query = "SELECT v FROM Vuelos v WHERE v.estado = :estado")})
 public class Vuelos implements Serializable {
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "Descripcion")
+    private String descripcion;
 
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "Estado")
-    private String estado;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,21 +53,26 @@ public class Vuelos implements Serializable {
     @NotNull
     @Column(name = "ID")
     private Integer id;
-    @Column(name = "Fecha_Salida")
+    @Column(name = "fecha_salida")
     @Temporal(TemporalType.DATE)
     private Date fechaSalida;
-    @Column(name = "Hora_Salida")
+    @Column(name = "hora_salida")
     @Temporal(TemporalType.TIME)
-    private Date horaSalida;
-    @Column(name = "Fecha_Llegada")
+    private Time horaSalida;
+    @Column(name = "fecha_llegada")
     @Temporal(TemporalType.DATE)
     private Date fechaLlegada;
-    @Column(name = "Hora_Llegada")
+    @Column(name = "hora_llegada")
     @Temporal(TemporalType.TIME)
-    private Date horaLlegada;
-    @Column(name = "Fecha_Reprogramacion")
+    private Time horaLlegada;
+    @Column(name = "fecha_reprogramacion")
     @Temporal(TemporalType.DATE)
     private Date fechaReprogramacion;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "Estado")
+    private String estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vueloID")
     private Collection<Escalas> escalasCollection;
     @OneToMany(mappedBy = "vueloID")
@@ -89,18 +95,23 @@ public class Vuelos implements Serializable {
     @OneToMany(mappedBy = "vueloID")
     private Collection<Comentarios> comentariosCollection;
 
+    public Vuelos(Integer id, Date fechaSalida, Time horaSalida, Date fechaLlegada, Time horaLlegada, Date fechaReprogramacion, String estado) {
+        this.id = id;
+        this.fechaSalida = fechaSalida;
+        this.horaSalida = horaSalida;
+        this.fechaLlegada = fechaLlegada;
+        this.horaLlegada = horaLlegada;
+        this.fechaReprogramacion = fechaReprogramacion;
+        this.estado = estado;
+    }
+
+    
     public Vuelos() {
     }
 
     public Vuelos(Integer id) {
         this.id = id;
     }
-
-    public Vuelos(Integer id, String estado) {
-        this.id = id;
-        this.estado = estado;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -117,11 +128,11 @@ public class Vuelos implements Serializable {
         this.fechaSalida = fechaSalida;
     }
 
-    public Date getHoraSalida() {
+    public Time getHoraSalida() {
         return horaSalida;
     }
 
-    public void setHoraSalida(Date horaSalida) {
+    public void setHoraSalida(Time horaSalida) {
         this.horaSalida = horaSalida;
     }
 
@@ -133,11 +144,11 @@ public class Vuelos implements Serializable {
         this.fechaLlegada = fechaLlegada;
     }
 
-    public Date getHoraLlegada() {
+    public Time getHoraLlegada() {
         return horaLlegada;
     }
 
-    public void setHoraLlegada(Date horaLlegada) {
+    public void setHoraLlegada(Time horaLlegada) {
         this.horaLlegada = horaLlegada;
     }
 
@@ -149,6 +160,13 @@ public class Vuelos implements Serializable {
         this.fechaReprogramacion = fechaReprogramacion;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     public Collection<Escalas> getEscalasCollection() {
         return escalasCollection;
@@ -221,7 +239,7 @@ public class Vuelos implements Serializable {
     public void setComentariosCollection(Collection<Comentarios> comentariosCollection) {
         this.comentariosCollection = comentariosCollection;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -246,13 +264,11 @@ public class Vuelos implements Serializable {
     public String toString() {
         return "beans.conexion.Vuelos[ id=" + id + " ]";
     }
-
-    public String getEstado() {
-        return estado;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
-    
 }

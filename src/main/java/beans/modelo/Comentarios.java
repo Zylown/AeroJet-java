@@ -34,6 +34,11 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Comentarios.findByFecha", query = "SELECT c FROM Comentarios c WHERE c.fecha = :fecha")})
 public class Comentarios implements Serializable {
 
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "Descripcion")
+    private String descripcion;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +58,12 @@ public class Comentarios implements Serializable {
     @JoinColumn(name = "Vuelo_ID", referencedColumnName = "ID")
     @ManyToOne
     private Vuelos vueloID;
+
+    public Comentarios(Integer id, String comentario, Date fecha) {
+        this.id = id;
+        this.comentario = comentario;
+        this.fecha = fecha;
+    }
 
     public Comentarios() {
     }
@@ -125,5 +136,13 @@ public class Comentarios implements Serializable {
     public String toString() {
         return "beans.conexion.Comentarios[ id=" + id + " ]";
     }
-    
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
 }

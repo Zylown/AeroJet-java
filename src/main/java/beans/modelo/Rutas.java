@@ -35,15 +35,15 @@ public class Rutas implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Size(max = 50)
-    @Column(name = "PuntoOrigen")
+    @Column(name = "punto_origen")
     private String puntoOrigen;
     @Size(max = 50)
-    @Column(name = "PuntoDestino")
+    @Column(name = "punto_destino")
     private String puntoDestino;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Distancia")
     private Integer distancia;
-    @Column(name = "DuracionEstimada")
+    @Column(name = "duracion_estimada")
     private Integer duracionEstimada;
     @OneToMany(mappedBy = "rutaID")
     private Collection<Vuelos> vuelosCollection;

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>     
+        <link rel="stylesheet" type="text/css" href="css/theme.css"/>
+        <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/>
+        <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet"/>
+        <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
+        <link rel="shortcut icon" href="../../../resources/img/airplane-black-glyph-icon-flight-2239097-transformed.ico"/>
+        <title>AeroJet: Tarifas Panel</title>   
+    </h:head>
+    <h:body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                        <i class="icon-reorder shaded"></i></a><a class="brand" href="indexadmin.html">Admin Panel </a>
+                    <div class="nav-collapse collapse navbar-inverse-collapse">
+                        <ul class="nav nav-icons">
+                            <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
+                            <li><a href="#"><i class="icon-eye-open"></i></a></li>
+                            <li><a href="#"><i class="icon-bar-chart"></i></a></li>
+                        </ul>
+                        <h:form class="navbar-search pull-left input-append">
+                            <!--<input type="text" class="span3">
+                            <button class="btn" type="button">
+                                <i class="icon-search"></i>
+                            </button>-->
+                        </h:form>
+                        <ul class="nav pull-right">
+                            <li><a href="#">Apoyo </a></li>
+                            <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="images/user.png" class="nav-avatar" />
+                                    <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Your Profile</a></li>
+                                    <li><a href="#">Edit Profile</a></li>
+                                    <li><a href="#">Account Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.nav-collapse -->
+                </div>
+            </div>
+            <!-- /navbar-inner -->
+        </div>
+
+        <div class="wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="span3">
+                        <div class="sidebar">
+                            <ul class="widget widget-menu unstyled">
+                                <li class="active"><a href="indexadmin.xhtml"><i class="menu-icon icon-dashboard"></i>Panel
+                                    </a></li>
+                                <li><a href="activity.html"><i class="menu-icon icon-bullhorn"></i>Comentarios </a>
+                                </li>
+                                <li><a href="message.html"><i class="menu-icon icon-inbox"></i>Mensajes <b
+                                            class="label green pull-right">
+                                            11</b> </a></li>
+                            </ul>
+                            <!--/.widget-nav-->
+                            <ul class="widget widget-menu unstyled">
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/usuariosadmin.xhtml"><i class="icon-user"></i>Usuarios</a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/avionesAdmin.xhtml"><i class="menu-icon icon-book"></i>Aviones</a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/vuelosAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Vuelos </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/rutasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Rutas </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/clienteAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Clientes </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/escalasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Escalas </a></li>
+                                <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/tarifasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Tarifas </a></li>
+                            </ul>
+                            <!--/.widget-nav-->
+                        </div>                        
+                    </div>
+
+                    <div class="span9">
+                        <div class="content">
+                            <div class="btn-controls">
+                                <div class="btn-box-row row-fluid">
+                                    #{vuelos_controlador.init()}
+                                    <h:form>
+                                        <p:commandButton value="Agregar Vuelos" actionListener="#{vuelos_controlador.init()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+                                        <p:separator/>
+                                    </h:form> 
+
+                                    <h:form id="formListado">
+                                        <p:dataTable id="tablaVuelos" paginator="true" paginatorPosition="bottom" rows="10" var="vuelos" value="#{vuelos_controlador.vuelos}" emptyMessage="No existen comentarios">
+                                            <p:column headerText="Id">
+                                                <h:outputText value="#{vuelos.id}" />
+                                            </p:column>
+                                            <p:column headerText="fechaSalida">
+                                                <h:outputText value="#{vuelos.fechaSalida}" >
+                                                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column headerText="horaSalida">
+                                                <h:outputText value="#{vuelos.horaSalida}" >
+                                                   <f:convertDateTime pattern="HH:mm" timeZone="America/Lima" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column headerText="fechaLlegada">
+                                                <h:outputText value="#{vuelos.fechaLlegada}" >
+                                                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column headerText="horaLlegada">
+                                                <h:outputText value="#{vuelos.horaLlegada}" >
+                                                    <f:convertDateTime pattern="HH:mm" timeZone="America/Lima"/>
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column headerText="fechaReprogramacion">
+                                                <h:outputText value="#{vuelos.fechaReprogramacion}" >
+                                                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column headerText="estado">
+                                                <h:outputText value="#{vuelos.estado}" />
+                                            </p:column>
+                                            
+                                            <p:column headerText="EDITAR" style="text-align: center">
+                                                <p:commandButton icon="pi pi-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
+                                                    <f:setPropertyActionListener target="#{vuelos_controlador.vuelosSeleccionada}" value="#{vuelos}"/>
+                                                </p:commandButton>
+                                            </p:column>
+                                            <p:column headerText="BORRAR" style="text-align: center">
+                                                <p:commandButton icon="pi pi-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
+                                                    <f:setPropertyActionListener target="#{vuelos_controlador.vuelosSeleccionada}" value="#{vuelos}" />
+                                                </p:commandButton>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </h:form>
+
+                                    <h:form id="formAgregar">
+                                        <p:dialog id="dlgAgregar" header="Agregar Comentarios" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <p:panelGrid columns="2" style="margin: 0 auto;">      
+                                                <p:outputLabel value="fechaSalida "/>
+                                                <p:datePicker value="#{vuelos_controlador.fechaSalida}"/>
+                                                <p:outputLabel value="horaSalida "/>
+                                                <p:datePicker timeOnly="true" value="#{vuelos_controlador.horaSalida}"/>
+                                                <p:outputLabel value="fechaLlegada "/>
+                                                <p:datePicker value="#{vuelos_controlador.fechaLlegada}"/>
+                                                <p:outputLabel value="horaLlegada "/>
+                                                <p:datePicker timeOnly="true" value="#{vuelos_controlador.horaLlegada}"/>
+                                                <p:outputLabel value="fechaReprogramacion "/>
+                                                <p:datePicker value="#{vuelos_controlador.fechaReprogramacion}"/>
+                                                <p:outputLabel value="estado "/>
+                                                <p:inputText value="#{vuelos_controlador.estado}"/>                             
+                                                
+                                            </p:panelGrid>
+                                            <p:commandButton  value="Guardar" actionListener="#{vuelos_controlador.agregarVuelos(vuelos_controlador.fechaSalida,vuelos_controlador.horaSalida, vuelos_controlador.fechaLlegada, vuelos_controlador.horaLlegada, vuelos_controlador.fechaReprogramacion,vuelos_controlador.estado)}" update=":formListado:tablaVuelos" oncomplete="PF('dialogoAgregar').hide();"/>    
+                                            <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
+                                        </p:dialog>
+                                    </h:form>   
+
+                                    <h:form id="formModificar">
+                                        <p:dialog id="dlgModificar" header="Modificar Comentarios" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <p:panelGrid columns="2" style="margin: 0 auto;">         
+
+                                                <p:outputLabel value="fechaSalida "/>
+                                                <p:datePicker value="#{vuelos_controlador.vuelosSeleccionada.fechaSalida}">
+                                                </p:datePicker>  
+                                                <p:outputLabel value="horaSalida "/>
+                                                <p:datePicker value="#{vuelos_controlador.vuelosSeleccionada.horaSalida}">
+                                                </p:datePicker> 
+                                                <p:outputLabel value="fechaLlegada "/>
+                                                <p:datePicker value="#{vuelos_controlador.vuelosSeleccionada.fechaLlegada}">
+                                                </p:datePicker> 
+                                                <p:outputLabel value="horaLlegada "/>
+                                                <p:datePicker value="#{vuelos_controlador.vuelosSeleccionada.horaLlegada}">
+                                                </p:datePicker> 
+                                                <p:outputLabel value="fechaReprogramacion "/>
+                                                <p:datePicker value="#{vuelos_controlador.vuelosSeleccionada.fechaReprogramacion}">
+                                                </p:datePicker> 
+                                                <p:outputLabel value="estado "/>
+                                                <p:inputText value="#{vuelos_controlador.vuelosSeleccionada.estado}">
+                                                </p:inputText> 
+                                                
+                                            </p:panelGrid>
+                                            <p:commandButton value="Guardar" actionListener="#{vuelos_controlador.actualizarVuelos(vuelos_controlador.vuelosSeleccionada.id, vuelos_controlador.vuelosSeleccionada.fechaSalida, vuelos_controlador.vuelosSeleccionada.horaSalida, vuelos_controlador.vuelosSeleccionada.fechaLlegada,vuelos_controlador.vuelosSeleccionada.horaLlegada, vuelos_controlador.vuelosSeleccionada.fechaReprogramacion, vuelos_controlador.vuelosSeleccionada.estado)}" update=":formListado:tablaVuelos" oncomplete="PF('dialogoModificar').hide();"/>
+                                            <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
+                                        </p:dialog>
+                                    </h:form>
+
+                                    <h:form id="formEliminar">
+                                        <p:dialog id="dlgEliminar" header="Eliminar Vuelos" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <h:outputText value="Desea eliminar este registro con el id: #{vuelos_controlador.vuelosSeleccionada.id} ?"/>
+                                            <br/> <br/>
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <p:commandButton  value="Si" update=":formListado:tablaVuelos" oncomplete="PF('dialogoEliminar').hide();">
+                                                    <p:ajax listener="#{vuelos_controlador.eliminarVuelos(vuelos_controlador.vuelosSeleccionada.id, event)}"/>
+                                                </p:commandButton>
+                                                <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
+                                            </div>
+                                        </p:dialog>
+                                    </h:form>                        
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>

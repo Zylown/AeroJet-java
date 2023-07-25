@@ -17,7 +17,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
         <link rel="shortcut icon" href="../../../resources/img/airplane-black-glyph-icon-flight-2239097-transformed.ico"/>
-        <title>AeroJet: Rutas Panel</title>
+        <title>AeroJet: Escalas Panel</title>
     </h:head>
     <h:body>
         <div class="navbar navbar-fixed-top">
@@ -82,45 +82,41 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                 <li><a href="/AeroJet-Java/faces/resources/pages/vista-administrador/tarifasAdmin.xhtml"><i class="menu-icon icon-bar-chart"></i>Tarifas </a></li>
                             </ul>
                             <!--/.widget-nav-->
-
                         </div>
                     </div>
                     <div class="span9">
                         <div class="content">
                             <div class="btn-controls">
                                 <div class="btn-box-row row-fluid">
-                                    <!-- #{ruta_controlador.init()} -->
+                                    <!-- #{escala_controlador.init()} -->
                                     <h:form>
-                                        <p:commandButton value="Agregar Ruta" actionListener="#{ruta_controlador.init()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+                                        <p:commandButton value="Agregar Escala" actionListener="#{escala_controlador.init()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
                                         <p:separator/>
                                     </h:form>
 
                                     <h:form id="formListado">
-                                        <p:dataTable id="tablaRutas" paginator="true" paginatorPosition="bottom" rows="10" var="Rutas" value="#{ruta_controlador.rutas}" emptyMessage="No existen Rutas">
+                                        <p:dataTable id="tablaEscalas" paginator="true" paginatorPosition="bottom" rows="10" var="Escalas" value="#{escala_controlador.escalas}" emptyMessage="No existen Escalas">
                                             <p:column headerText="ID">
-                                                <h:outputText value="#{Rutas.id}" />
+                                                <h:outputText value="#{Escalas.id}" />
                                             </p:column>
-                                            <p:column headerText="PuntoOrigen">
-                                                <h:outputText value="#{Rutas.puntoOrigen}" />
+                                            <p:column headerText="Ciudad">
+                                                <h:outputText value="#{Escalas.ciudad}" />
                                             </p:column>
-                                            <p:column headerText="PuntoDestino">
-                                                <h:outputText value="#{Rutas.puntoDestino}" />
+                                            <p:column headerText="Duracion">
+                                                <h:outputText value="#{Escalas.duracion}" />
                                             </p:column>
-                                            <p:column headerText="Distancia">
-                                                <h:outputText value="#{Rutas.distancia}" />
+                                            <p:column headerText="VueloId">
+                                                <h:outputText value="#{Escalas.vueloID}" />
                                             </p:column>
-                                            <p:column headerText="DuracionEstimada">
-                                                <h:outputText value="#{Rutas.duracionEstimada}" />
-                                            </p:column>
-
-                                            <p:column headerText="Editar" style="text-align: center">
+                                            
+                                            <p:column headerText="Modificar" style="text-align: center">
                                                 <p:commandButton icon="pi pi-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
-                                                    <f:setPropertyActionListener target="#{ruta_controlador.rutaSeleccionada}" value="#{Rutas}"/>
+                                                    <f:setPropertyActionListener target="#{escala_controlador.escalaSeleccionada}" value="#{Escalas}"/>
                                                 </p:commandButton>
                                             </p:column>
-                                            <p:column headerText="Borrar" style="text-align: center">
+                                            <p:column headerText="Eliminar" style="text-align: center">
                                                 <p:commandButton icon="pi pi-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
-                                                    <f:setPropertyActionListener target="#{ruta_controlador.rutaSeleccionada}" value="#{Rutas}"/>
+                                                    <f:setPropertyActionListener target="#{escala_controlador.escalaSeleccionada}" value="#{Escalas}"/>
                                                 </p:commandButton>
                                             </p:column>
                                         </p:dataTable>
@@ -128,55 +124,50 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
 
                                     <h:form id="formAgregar">
-                                        <p:dialog id="dlgAgregar" header="Agregar rutas" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
-                                            <p:panelGrid columns="2" style="margin: 0 auto;">                              
-                                                <p:outputLabel value="PuntoOrigen: "/>
-                                                <p:inputText value="#{ruta_controlador.puntoOrigen}"/>                                
-                                                <p:outputLabel value="PuntoDestino: "/>
-                                                <p:inputText value="#{ruta_controlador.puntoDestino}"/>
-                                                <p:outputLabel value="Distancia: "/>
-                                                <p:inputText value="#{ruta_controlador.distancia}"/>
-                                                <p:outputLabel value="DuracionEstimada: "/>
-                                                <p:inputText value="#{ruta_controlador.duracionEstimada}"/>
+                                        <p:dialog id="dlgAgregar" header="Agregar Escala" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <p:panelGrid columns="2" style="margin: 0 auto;">                                
+                                                <p:outputLabel value="Ciudad: "/>
+                                                <p:inputText value="#{escala_controlador.ciudad}"/>                                
+                                                <p:outputLabel value="Duracion: "/>
+                                                <p:inputText value="#{escala_controlador.duracion}"/>                                
+                                                <p:outputLabel value="Vuelo_ID: "/>
+                                                <p:inputText value="#{escala_controlador.vueloid}"/>
                                             </p:panelGrid>
-                                            <p:commandButton  value="Guardar" actionListener="#{ruta_controlador.agregarRuta(ruta_controlador.puntoOrigen, ruta_controlador.puntoDestino, ruta_controlador.distancia, ruta_controlador.duracionEstimada)}" update=":formListado:tablaRutas" oncomplete="PF('dialogoAgregar').hide();"/>
+                                            <p:commandButton  value="Guardar" actionListener="#{escala_controlador.agregar(escala_controlador.ciudad, escala_controlador.duracion, escala_controlador.vueloid)}" update=":formListado:tablaEscalas" oncomplete="PF('dialogoAgregar').hide();"/>
                                             <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
                                         </p:dialog>
                                     </h:form>
+
                                     <h:form id="formModificar">
-                                        <p:dialog id="dlgModificar" header="Modificar rutas" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                        <p:dialog id="dlgModificar" header="Modificar Escala" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
                                             <p:panelGrid columns="2" style="margin: 0 auto;">
+                                                <p:outputLabel value="Ciudad:"/>
+                                                <p:inputText value="#{escala_controlador.escalaSeleccionada.ciudad}"/>
 
-                                                <p:outputLabel value="PuntoOrigen:"/>
-                                                <p:inputText value="#{ruta_controlador.rutaSeleccionada.puntoOrigen}"/>
+                                                <p:outputLabel value="Duracion:"/>
+                                                <p:inputText value="#{escala_controlador.escalaSeleccionada.duracion}"/>
 
-                                                <p:outputLabel value="PuntoDestino:"/>
-                                                <p:inputText value="#{ruta_controlador.rutaSeleccionada.puntoDestino}"/>
+                                                <p:outputLabel value="VueloID:"/>
+                                                <p:inputText value="#{escala_controlador.escalaSeleccionada.vueloID}"/>
 
-                                                <p:outputLabel value="Distancia:"/>
-                                                <p:inputText value="#{ruta_controlador.rutaSeleccionada.distancia}"/>
-
-                                                <p:outputLabel value="DuracionEstimada:"/>
-                                                <p:inputText value="#{ruta_controlador.rutaSeleccionada.duracionEstimada}"/>
-
-                                                <p:outputLabel value="Id:"/>
-                                                <p:inputText value="#{ruta_controlador.rutaSeleccionada.id}"/>
+                                                <p:outputLabel value="id:"/>
+                                                <p:inputText value="#{escala_controlador.escalaSeleccionada.id}"/>
                                             </p:panelGrid>
-                                            <p:commandButton value="Guardar" action="#{ruta_controlador.actualizarRuta(ruta_controlador.rutaSeleccionada.id, ruta_controlador.rutaSeleccionada.puntoOrigen, ruta_controlador.rutaSeleccionada.puntoDestino, ruta_controlador.rutaSeleccionada.distancia, ruta_controlador.rutaSeleccionada.duracionEstimada)}" update=":formListado:tablaRutas" oncomplete="PF('dialogoModificar').hide();"/>
+                                            <p:commandButton value="Guardar" action="#{escala_controlador.actualizarEscala(escala_controlador.escalaSeleccionada.id, escala_controlador.escalaSeleccionada.ciudad, escala_controlador.escalaSeleccionada.duracion, escala_controlador.escalaSeleccionada.vueloID)}" update=":formListado:tablaEscalas" oncomplete="PF('dialogoModificar').hide();"/>
                                             <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
                                         </p:dialog>
                                     </h:form>
 
 
                                     <h:form id="formEliminar">
-                                        <p:dialog id="dlgEliminar" header="Eliminar Rutas" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
-                                            <h:outputText value="Desea eliminar este registro con el id: #{ruta_controlador.rutaSeleccionada.id} ?"/>
-                                            <p:commandButton  value="Si" update=":formListado:tablaRutas" oncomplete="PF('dialogoEliminar').hide();">
-                                                <p:ajax listener="#{ruta_controlador.eliminarRuta(id, event)}" />
-                                            </p:commandButton>
+                                        <p:dialog id="dlgEliminar" header="Eliminar Avión" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                                            <h:outputText value="¿Desea eliminar esta escala?"/>
+                                            <p:commandButton value="Eliminar" action="#{escala_controlador.eliminarEscala(escala_controlador.escalaSeleccionada.id)}" update=":formListado:tablaEscalas" oncomplete="PF('dialogoEliminar').hide();" />
+
                                             <p:commandButton value="No" onclick="PF('dialogoEliminar').hide();"/>
                                         </p:dialog>
                                     </h:form>
+
 
                                 </div>
 

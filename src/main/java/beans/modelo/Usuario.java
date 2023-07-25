@@ -25,7 +25,7 @@ import javax.validation.constraints.Size;
 public class Usuario implements Serializable {
 
     @Size(max = 50)
-    @Column(name = "NombreUsuario")
+    @Column(name = "nombre_usuario")
     private String nombreUsuario;
     @Size(max = 50)
     @Column(name = "Contrase\u00f1a")

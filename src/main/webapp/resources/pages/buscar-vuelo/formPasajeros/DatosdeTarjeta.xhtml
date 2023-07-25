@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <link rel="stylesheet" href="../../../styles/StyleTarjeta.css"/>
+        <link rel="stylesheet" href="../../../styles/formPasajero.css"/>
+        <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
+        <h:outputScript library="scripts" name="calendar_es.js" />
+        <link rel="shortcut icon" href="../../../img/airplane-black-glyph-icon-flight-2239097-transformed.ico"/>
+        <title>AeroJet: Formulario Datos de Tarjeta</title>
+    </h:head>
+    <h:body>
+        <header>
+            <a href="../../../../index.xhtml">
+                <img src="../../../img/logo.png" alt="Logo" class="logo"/></a>
+            <nav id="menu-inicio">
+            </nav>
+            <a href="../../../pages/loginregister.xhtml" class="login">Iniciar sesión / Registrarse</a>
+        </header>
+        <main>
+            <div class="container">
+                <h2 style="text-align: center">Datos de Tarjeta</h2><br></br>
+                <h:form>
+                    <h:outputLabel for="nombre" value="Nombre del titular:" />
+                    <p:inputText  value="#{tarjetaBean.nombre}" required="true" id="nombre" placeholder="Ingrese su Nombre y Apellidos" /><br />
+                    <br></br>
+                    <h:outputLabel for="numeroTarjeta" value="Número de tarjeta:" />
+                    <p:inputText id="numeroTarjeta" value="#{tarjetaBean.numeroTarjeta}" placeholder="YYSA-ADAD-ADDW-DAWD" required="true" /><br />
+                    <br></br>
+                    <h:outputLabel for="fechaVencimiento" value="Fecha de vencimiento:" />
+                    <p:inputText id="fechaVencimiento" value="#{tarjetaBean.fechaVencimiento}" placeholder="MM/AA" required="true" /><br />
+                    <br></br>
+                    <h:outputLabel for="codigoSeguridad" value="Código de seguridad:" />
+                    <p:inputText id="codigoSeguridad" value="#{tarjetaBean.codigoSeguridad}" placeholder="---" required="true" /><br />
+                    <br></br> 
+                    <h:commandButton value="Finalizar Compra" action="#{tarjetaBean.procesarFormulario}" />
+                    <br></br>
+                </h:form>
+            </div>
+        </main>
+        <div class="footer" >
+            <div class="footer-logo" >
+                <img src="../../../img/logo-black.png" alt="Logo"/>
+            </div>
+            <div class="footer-direccion" >
+                <p style="color: white;">Dirección Electrónica: AeroJet@gmail.com</p>
+            </div>
+        </div>
+    </h:body>
+</html>

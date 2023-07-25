@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package beans.modelo;
 
 import java.io.Serializable;
@@ -44,7 +40,7 @@ public class Boletos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "NumeroBoleto")
+    @Column(name = "numero_boleto")
     private String numeroBoleto;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
@@ -61,9 +57,15 @@ public class Boletos implements Serializable {
     @Column(name = "FechaEmision")
     @Temporal(TemporalType.DATE)
     private Date fechaEmision;
-    @OneToMany(mappedBy = "compraID")
-    private List<Tarifas> tarifasList;
+    /*@OneToMany(mappedBy = "compraID")
+    private List<Tarifas> tarifasList;*/
 
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "tipo_vuelo")
+    private String tipo_vuelo;
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -89,13 +91,43 @@ public class Boletos implements Serializable {
         this.id = id;
     }
 
-    public Boletos(Integer id, String numeroBoleto, BigDecimal precio, String clase, Date fechaEmision) {
+    public Boletos(String numeroBoleto, BigDecimal precio, String clase, Date fechaEmision, String tipo_vuelo, Integer id) {
+        this.numeroBoleto = numeroBoleto;
+        this.precio = precio;
+        this.clase = clase;
+        this.fechaEmision = fechaEmision;
+        this.tipo_vuelo = tipo_vuelo;
+        this.id = id;
+    }
+
+    
+    
+    
+    /*
+    
+    TODO
+    public Boletos(String numeroBoleto, BigDecimal precio, String clase, Date fechaEmision, String tipo_vuelo, Integer id, Asientos asientoID, Tarifas tarifaID, Vuelos vueloID) {
+        this.numeroBoleto = numeroBoleto;
+        this.precio = precio;
+        this.clase = clase;
+        this.fechaEmision = fechaEmision;
+        this.tipo_vuelo = tipo_vuelo;
+        this.id = id;
+        this.asientoID = asientoID;
+        this.tarifaID = tarifaID;
+        this.vueloID = vueloID;
+    }
+*/
+
+    
+
+/*    public Boletos(Integer id, String numeroBoleto, BigDecimal precio, String clase, Date fechaEmision) {
         this.id = id;
         this.numeroBoleto = numeroBoleto;
         this.precio = precio;
         this.clase = clase;
         this.fechaEmision = fechaEmision;
-    }
+    }*/
 
     public Integer getId() {
         return id;
@@ -194,13 +226,13 @@ public class Boletos implements Serializable {
     public void setFechaEmision(Date fechaEmision) {
         this.fechaEmision = fechaEmision;
     }
-
+/*
     public List<Tarifas> getTarifasList() {
         return tarifasList;
     }
 
     public void setTarifasList(List<Tarifas> tarifasList) {
         this.tarifasList = tarifasList;
-    }
+    }*/
     
 }

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+    <h:head>
+        <h:outputStylesheet library="styles" name="style.css"></h:outputStylesheet>
+        <h:outputStylesheet library="styles" name="destinos.css"></h:outputStylesheet>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta> 
+        <link rel="shortcut icon" href="../../resources/img/airplane-black-glyph-icon-flight-2239097-transformed.ico"/>
+
+        <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+        <title>AeroJet: Administrar vuelo</title>
+    </h:head>
+
+    <h:body>
+        <header>
+            <img src="../img/logo.png" alt="Logo" class="logo"></img>
+            <nav id="menu-inicio">
+                <a href="../../index.xhtml">Inicio</a>
+                <a href="destinos.xhtml">Destinos</a>
+                <a href="checkin.xhtml">Check-in</a>
+                <a href="../../pages/vista-administrador/admvuelo.xhtml">Administra tus viajes</a>
+                <a href="#contact">Contacto</a>
+            </nav>
+            <a href="/AeroJet-Java/faces/resources/pages/loginregister.xhtml" class="login">Iniciar sesión / Registrarse</a>
+        </header>
+        <main>
+            <img src="../../img/31181.png" width="100%" height="300px"></img>
+
+            <div  style="text-align: center">
+                <h1 style="font-style: italic;color: #ff6600; font-weight: lighter;">Modifica
+                    <strong>Tu Vuelo</strong>
+                </h1>
+                
+            </div>
+            <div class="btn-box-row row-fluid">
+                #{vuelos_controlador.init()}
+                
+
+                <h:form id="formListado">
+                    <p:dataTable id="tablaVuelos" paginator="true" paginatorPosition="bottom" rows="10" var="vuelos" value="#{vuelos_controlador.vuelos}" emptyMessage="No existen comentarios">
+                        
+                        <p:column headerText="fechaSalida">
+                            <h:outputText value="#{vuelos.fechaSalida}" >
+                                <f:convertDateTime pattern="dd-MM-yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="horaSalida">
+                            <h:outputText value="#{vuelos.horaSalida}" >
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="fechaLlegada">
+                            <h:outputText value="#{vuelos.fechaLlegada}" >
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="horaLlegada">
+                            <h:outputText value="#{vuelos.horaLlegada}" >
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="fechaReprogramacion">
+                            <h:outputText value="#{vuelos.fechaReprogramacion}" >
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="estado">
+                            <h:outputText value="#{vuelos.estado}" />
+                        </p:column>
+
+                        <p:column headerText="EDITAR" style="text-align: center">
+                            <p:commandButton icon="pi pi-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
+                                <f:setPropertyActionListener target="#{vuelos_controlador.vuelosSeleccionada}" value="#{vuelos}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+
+                <h:form id="formAgregar">
+                    <p:dialog id="dlgAgregar" header="Agregar Comentarios" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+
+                    </p:dialog>
+                </h:form>   
+
+                <h:form id="formModificar">
+                    <p:dialog id="dlgModificar" header="Modificar Comentarios" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="fade" modal="true">
+                        <p:panelGrid columns="2" style="margin: 0 auto;">         
+
+                            
+                            <p:outputLabel value="fechaReprogramacion "/>
+                            <p:datePicker value="#{vuelos_controlador.vuelosSeleccionada.fechaReprogramacion}">
+                            </p:datePicker> 
+                        </p:panelGrid>
+                        <p:commandButton value="Guardar" actionListener="#{vuelos_controlador.actualizarVuelos(vuelos_controlador.vuelosSeleccionada.id, vuelos_controlador.vuelosSeleccionada.fechaSalida, vuelos_controlador.vuelosSeleccionada.horaSalida, vuelos_controlador.vuelosSeleccionada.fechaLlegada,vuelos_controlador.vuelosSeleccionada.horaLlegada, vuelos_controlador.vuelosSeleccionada.fechaReprogramacion, vuelos_controlador.vuelosSeleccionada.estado)}" update=":formListado:tablaVuelos" oncomplete="PF('dialogoModificar').hide();"/>
+                        <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
+                    </p:dialog>
+                </h:form>
+                       
+
+            </div>
+
+        </main>
+
+
+        <footer class="pie-pagina">
+            <div class="grupo-1">
+                <div class="box">
+
+                    <a href="../../img/logo-black.png"></a>
+                </div>
+                <div class="box">
+                    <h2>Con Nosotros</h2>
+                    <p>Tu mejor opción para vuelos nacionales en Perú, con calidad y atención inigualables.</p>
+                    <p>Vuelos nacionales en Perú con estilo, seguridad y servicio excepcional.</p>
+                </div>
+                <div class="box">
+                    <h2>Síguenos</h2>
+                    <div class="red-social">
+                        <a href="#"></a>
+                        <a href="#"></a>
+                        <a href="#"></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </h:body>
+</html>

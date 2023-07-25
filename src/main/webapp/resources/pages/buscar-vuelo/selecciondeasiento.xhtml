@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <head>
+        <title>AeroJet: Selección de Asiento</title>
+        <link type="text/css" href="../../styles/seleccionAsiento.css" rel="stylesheet" ></link>
+
+    </head>
+
+    <h:body>
+        <h:form>
+            <header>
+                <a href="../../../index.xhtml">
+                    <h:graphicImage value="../../img/logo.png" alt="Logo" styleClass="logo" />
+                </a>
+
+                <a href="loginregister.xhtml" class="login">Iniciar sesión / Registrarse</a>
+            </header>
+            <div class="h1-seleccion-asiento">
+                <h1>Elige tu asiento</h1>
+            </div>
+            <div class="contenedor-ida-a-vuelta">
+                <div class="contenedor-interno">
+                    <p class="arequipa-lima">Arequipa a Lima</p>
+                    <p class="vuelo-ida">Vuelo de Ida</p>
+                </div>
+            </div>
+            <div class="contenedor-all">
+
+                <div class="contenedor-imagen">
+                    <div class="container-avion">
+                        <div class="avion">
+                            <div class="fila">
+                                <div class="indice-izquierda" >
+                                    <div class="indice">A</div>
+                                    <div class="indice">B</div>
+                                    <div class="indice">C</div>
+                                </div>
+                                <div class="indice-pasillo"></div>
+                                <div class="indice-derecha">
+                                    <div class="indice">D</div>
+                                    <div class="indice">E</div>
+                                    <div class="indice">F</div>
+                                </div>
+                            </div>
+                            #{controlador_asiento.init()}
+                            <br>ASIENTOS DELANTEROS</br>
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 1-2-3 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-delanteros' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 3 and (status.index % 114 ge 0) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 4-5-6-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-delanteros' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 3 and (status.index % 114) lt 6 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 7-8-9 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-delanteros' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 9 and (status.index % 114 ge 6) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 10-11-12-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-delanteros' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 9 and (status.index % 114) lt 12 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 13-14-15 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-delanteros' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 15 and (status.index % 114 ge 12) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 16-17-18-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-delanteros' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 15 and (status.index % 114) lt 18 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <div class="pasillo" style="width: 350px;height: 10px"></div>
+                            <br>ASIENTOS DE EMERGENCIA</br>
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 19-20-21 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-emergencia' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 21 and (status.index % 114 ge 18) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 22-23-24-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-emergencia' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 21 and (status.index % 114) lt 24 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <div class="pasillo" style="width: 350px;height: 10px"></div>
+                            <br>ASIENTOS ESTANDAR</br>
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 25-26-27 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 27 and (status.index % 114 ge 24) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 28-29-30-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 27 and (status.index % 114) lt 30 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 31-32-33 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 33 and (status.index % 114 ge 30) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 34-35-36-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 33 and (status.index % 114) lt 36 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 37-38-39 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 39 and (status.index % 114 ge 36) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 40-41-42-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 39 and (status.index % 114) lt 42 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 43-44-45 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 45 and (status.index % 114 ge 42) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 46-47-48-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 45 and (status.index % 114) lt 48 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 49-50-51 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 51 and (status.index % 114 ge 48) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 52-53-54-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 51 and (status.index % 114) lt 54 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 55-56-57 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 57 and (status.index % 114 ge 54) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 58-59-60-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 57 and (status.index % 114) lt 60 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 61-62-63 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 63 and (status.index % 114 ge 60) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 64-65-66-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 63 and (status.index % 114) lt 66 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 67-68-69 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 69 and (status.index % 114 ge 66) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 70-71-72-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 69 and (status.index % 114) lt 72 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 73-74-75 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 75 and (status.index % 114 ge 72) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 76-77-78-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 75 and (status.index % 114) lt 78 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 79-80-81 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 81 and (status.index % 114 ge 78) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 82-83-884-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 81 and (status.index % 114) lt 84 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+
+                            <div class="fila">
+                                <div class="asientos-izquierda">
+                                    <!-- FILAS DEL 85-86-87 -->
+
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) lt 87 and (status.index % 114 ge 84) and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento }">
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+
+                                <div class="pasillo"></div>
+                                <div class="asientos-derecha"><!-- FILAS DEL 88-89-90-->
+                                    <ui:repeat value="#{controlador_asiento.asientos}" var="asiento" varStatus="status">
+                                        <h:commandButton value="#{asiento.numero}" styleClass="#{asiento.estado ? 'asiento-estandar' : 'asiento-no-disponible'}"
+                                                         rendered="#{(status.index % 114) ge 87 and (status.index % 114) lt 90 and asiento.avionID.id eq 1}"
+                                                         action="#{controlador_asiento.toggleAsiento(asiento)}"
+                                                         disabled="#{controlador_asiento.asientoseleccionado eq asiento}">
+
+                                            <f:ajax render="@this" />
+                                        </h:commandButton>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contenedor-confirmacion">
+                    <section class="contenedor-seccion">
+                        <div class="contenedor-confirmacion-interno" style="height: 100%;">
+                            <div class="contenedor-confirmacion-h2">
+                                <h2>Pasajeros</h2>
+                            </div>
+                            <div class="contenedor-selecccion">
+                                <div class="contenedor-seleccion-interno">
+                                    <p>Adulto 1</p>
+                                    <small>Sin seleccción</small>
+                                </div>
+                            </div>
+                        </div>
+                        <section class="contenedor-seccion-abajo">
+                            <div class="contenedor-boton-confirmacion">
+                                <h:commandButton id="btn-siguiente-vuelo" value="Confirmar Compra" action="#{controlador_asiento.confirmarCompra()}" styleClass="btn-confirmarcompra"/>
+                                
+                            </div>
+                            <div class="contenedor-precio-final">
+                                <p class="precio-final">Precio Final</p>
+                                <p class="precio-final">USD #{tarifas_data.precio}</p>
+                            </div>
+                        </section>
+                    </section>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+
+
+
+</html>

@@ -27,15 +27,16 @@ public class RutaDao {
     public List<Rutas> getAllRutas() {
         List<Rutas> ruta = new ArrayList<>();
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD); PreparedStatement stmt = conn.prepareStatement("SELECT * FROM rutas"); ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD); 
+                PreparedStatement stmt = conn.prepareStatement("SELECT * FROM rutas"); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
 
                 int id = rs.getInt("ID");
-                String puntoOrigen = rs.getString("PuntoOrigen");
-                String puntoDestino = rs.getString("PuntoDestino");
+                String puntoOrigen = rs.getString("punto_origen");
+                String puntoDestino = rs.getString("punto_destino");
                 int distancia = rs.getInt("Distancia");
-                int duracionEstimada = rs.getInt("DuracionEstimada");
+                int duracionEstimada = rs.getInt("duracion_estimada");
 
                
                 Rutas rutas = new Rutas(id, puntoOrigen, puntoDestino, distancia, duracionEstimada);
@@ -59,7 +60,7 @@ public void agregarRuta(String puntoOrigen, String puntoDestino, Integer distanc
         int ultimoid = rs.next() ? rs.getInt(1) : 0;
         int nuevoid = ultimoid + 1;
         
-        PreparedStatement pstmt = conn.prepareStatement("INSERT INTO rutas (id, puntoOrigen, puntoDestino, distancia, duracionEstimada) VALUES (?, ?, ?, ?, ?)");
+        PreparedStatement pstmt = conn.prepareStatement("INSERT INTO rutas (id, punto_origen, punto_destino, distancia, duracion_estimada) VALUES (?, ?, ?, ?, ?)");
         pstmt.setInt(1, nuevoid);
         pstmt.setString(2, puntoOrigen);
         pstmt.setString(3, puntoDestino);
@@ -75,7 +76,7 @@ public void agregarRuta(String puntoOrigen, String puntoDestino, Integer distanc
 }
 public void actualizarRuta(Integer id, String puntoOrigen, String puntoDestino, Integer distancia, Integer duracionEstimada) {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-         PreparedStatement pstmt = conn.prepareStatement("UPDATE rutas SET id = ?, puntoOrigen = ?, puntoDestino = ?, distancia = ?, duracionEstimada = ?  WHERE ID = ?")) {
+         PreparedStatement pstmt = conn.prepareStatement("UPDATE rutas SET id = ?, punto_origen = ?, punto_destino = ?, distancia = ?, duracion_estimada = ?  WHERE ID = ?")) {
         
         
         pstmt.setInt(1, id);
